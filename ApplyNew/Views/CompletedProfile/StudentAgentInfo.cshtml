@@ -1,0 +1,735 @@
+﻿@model ApplyNew.ViewModel.Completeprofiledt
+@using ApplyNew.Models
+@{ ViewBag.Title = "StudentAgentInfo"; }
+<style>
+    .iti {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .select2-container {
+        font-size: 1.1rem;
+    }
+
+    .select2-selection__rendered {
+        line-height: 32px !important;
+    }
+
+    .select2-selection {
+        height: 44px !important;
+        padding: 7px;
+    }
+
+    .lblbold {
+        font-weight: bold;
+    }
+
+    .uploadbuttonst {
+        /*outline: 2px dashed #92b0b3;*/
+        outline-offset: -10px;
+        -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        padding: 25px 5% 25px 5%;
+        text-align: center !important;
+        margin: 0;
+        width: 100% !important;
+    }
+
+    input[type="radio"] {
+        margin: 0 10px 0 10px;
+    }
+</style>
+<div class="container body-content">
+    <br />
+    <h2 style="text-align:center;font-weight:bold;color:#d32020;" class="mb-3">Completed Application</h2>
+    <div style="text-align:right;">
+        <button type="button" class="btn btn-primary" id="prntbtn" name="prntbtn">Print</button>
+    </div>
+    @using (Html.BeginForm("", "", FormMethod.Post, new { id = "CompletedProfile" }))
+    {
+<br />
+                <fieldset>
+                    <legend style="color:#1c3764;font-weight: bold; border-bottom: 1px solid #1c3764;">Personal Information</legend>
+                    <br />
+                    <div class="container">
+                        <div class="row mb-4">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <label for="Fprogram">
+                                    I am applying for
+                                </label>
+                                <select id="ddlgpatype" name="ddlgpatype" style="font-size: 1.1rem;padding: 7px;" onchange="javascript:GetProgram(this.value);" class="form-control form-control-lg">
+                                    <option value="">Applicant Type</option>
+                                    <option value="3">Bachelors</option>
+                                    <option value="1">Masters</option>
+                                    <option value="11">Short courses</option>
+                                </select>
+                            </div>
+                            @*<div class="col-lg-2 col-md-2 col-sm-12"></div>*@
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <label for="FAgency">
+                                    Are you transfering from other Institution *
+                                </label>
+                                <select id="ddltransferstatus" name="ddltransferstatus" style="font-size: 1.1rem;padding: 7px;" class="form-control form-control-lg">
+                                    <option value="">Options</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-lg-6">
+                                <label for="Fprogram">
+                                    Program Choice *
+                                </label>
+                                <select id="Fprogram" name="Fprogram" class="chosen chzn-select" value="@Model.LeadInfo.program1"></select>
+                            </div>
+                            @*<div class="col-lg-2"></div>*@
+                            <div class="col-lg-6">
+                                <label for="FAgency">
+                                    How did you hear about us? *
+                                </label>
+                                @Html.DropDownListFor(m => m.LeadInfo.leadsource, new SelectList(Model.Agencylst.AgencyList, "Elementno", "DisplayText"), "How did you hear about us? *", new { @class = "form-control form-control-lg", @id = "FAgency", @Name = "FAgency", @value = Model.LeadInfo.leadsource })
+
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-lg-6">
+                                <label for="ddlgender">
+                                    Select Gender *
+                                </label>
+                                <select id="ddlgender" name="ddlgender" style="font-size: 1.1rem;padding: 7px;" class="form-control form-control-lg" value="@Model.LeadInfo.Gender">
+                                    <option value="">Gender</option>
+                                    @if (Model.LeadInfo.Gender == "Male")
+                                    {
+                    <option selected="selected" value="Male">Male</option>
+                                        <option value="Female">Female</option> }
+                                                        else if (Model.LeadInfo.Gender == "Female")
+                                                        {
+                                        <option value="Male">Male</option>
+                                                            <option selected="selected" value="Female">Female</option> }
+                                                                            else
+                                                                            {
+                                                            <option value="Male">Male</option>
+                                                                                <option value="Female">Female</option>}
+                                </select>
+                            </div>
+                            @*<div class="col-lg-2"></div>*@
+                            <div class="col-lg-6">
+                                <label for="Phone2">
+                                    Expected Entrance Term
+                                </label>
+                                @Html.DropDownListFor(m => m.LeadInfo.TermcalendarID, new SelectList(Model.Termlst.TermList, "TermCalendarID", "TextTerm"), "Entrance Term *", new { @class = "form-control form-control-lg", @style = "font-size: 1.1rem;padding: 7px;", @id = "ETerm", @Name = "ETerm", @value = Model.LeadInfo.TermcalendarID })
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-lg-6">
+                                <label for="FName">First Name*</label>
+                                @Html.TextBoxFor(x => x.LeadInfo.Firstname, new { id = "FName", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                            </div>
+                            @*<div class="col-lg-2"></div>*@
+                            <div class="col-lg-6">
+                                <label for="MName">
+                                    Middle Name
+                                </label>
+                                @Html.TextBoxFor(x => x.LeadInfo.Middlename, new { id = "MName", @class = "form-control form-control-lg" })
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-lg-6">
+                                <label for="LName">
+                                    Last Name*
+                                </label>
+                                @Html.TextBoxFor(x => x.LeadInfo.Lastname, new { id = "LName", @class = "form-control form-control-lg" })
+                            </div>
+                            @*<div class="col-lg-2"></div>*@
+                            <div class="col-lg-6">
+                                <label for="Country">
+                                    Nationality*
+                                </label>
+                                @Html.DropDownListFor(m => m.LeadInfo.CountryID, new SelectList(Model.Countrylist.CountryList, "UniqueId", "DisplayText"), "Country*", new { @class = "form-control form-control-lg", @id = "Country", @Name = "Country", @value = Model.LeadInfo.CountryID })
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-lg-6">
+                                <label for="Phone1">
+                                    Phone 1*
+                                </label>
+                                @Html.TextBoxFor(x => x.LeadInfo.phone1, new { type = "tel", id = "Phone1", @class = "form-control form-control-lg" })
+                            </div>
+                            @*<div class="col-lg-2"></div>*@
+                            <div class="col-lg-6">
+                                <label for="DOB">
+                                    Date OF Birth*
+                                </label>
+                                @Html.TextBoxFor(model => model.LeadInfo.Birdthdate, new { id = "DOB", @type = "text", @class = "form-control form-control-lg", @autocomplete = "Off", @value = "" })
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-lg-6">
+                                <label for="Email">
+                                    Email *
+                                </label>
+                                @Html.TextBoxFor(x => x.LeadInfo.Email, new { type = "email", id = "Email", @class = "form-control form-control-lg" })
+                            </div>
+                            @*<div class="col-lg-2"></div>*@
+                            <div class="col-lg-6">
+                                <label for="Email1">
+                                    Verify Email *
+                                </label>
+                                @Html.TextBoxFor(x => x.LeadInfo.verifyEmail, new { type = "email", id = "Email1", @class = "form-control form-control-lg" })
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                                <fieldset>
+                                    <legend style="color:#1c3764;font-weight: bold; border-bottom: 1px solid #1c3764;">Optional Information</legend>
+                                    <div class="card-body">
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Do you plan on transferring or completing your studies in a partner univeristy / college in Canada?</label>
+
+                                            </div>
+                                            <div class="col-lg-2">
+                                                @if (Model.OptionalData.TransferToCanada == "True")
+                                                {
+                                <label class="radio-inline radiolabel"><input type="radio" value="Yes" name="IntentToTransferToCanada" checked="checked">Yes</label>
+                                                    <label class="radio-inline radiolabel"><input type="radio" value="No" name="IntentToTransferToCanada">No</label> }
+                                                                    else
+                                                                    {
+                                                    <label class="radio-inline radiolabel"><input type="radio" value="Yes" name="IntentToTransferToCanada">Yes</label>
+                                                                        <label class="radio-inline radiolabel"><input type="radio" value="No" name="IntentToTransferToCanada" checked="checked">No</label>}
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <label>
+                                                    Do you wish to transfer credits? *
+                                                </label>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                @if (Model.OptionalData.TransferCredit == "1")
+                                                {
+                                <label class="radio-inline"><input type="radio" value="Yes" name="TransferFromHigherInstitutionCredit" checked="checked">Yes</label>
+                                                    <label class="radio-inline"><input type="radio" value="No" name="TransferFromHigherInstitutionCredit">No</label> }
+                                                                    else
+                                                                    {
+                                                    <label class="radio-inline"><input type="radio" value="Yes" name="TransferFromHigherInstitutionCredit">Yes</label>
+                                                                        <label class="radio-inline"><input type="radio" value="No" name="TransferFromHigherInstitutionCredit" checked="checked">No</label>}
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Do you require housing accommodation?</label>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                @if (Model.OptionalData.NeededHousing == "True")
+                                                {
+                                <label class="radio-inline"><input type="radio" value="Yes" name="HousingAccommodation" checked="checked">Yes</label>
+                                                    <label class="radio-inline"><input type="radio" value="No" name="HousingAccommodation">No</label> }
+                                                                    else
+                                                                    {
+                                                    <label class="radio-inline"><input type="radio" value="Yes" name="HousingAccommodation">Yes</label>
+                                                                        <label class="radio-inline"><input type="radio" value="No" name="HousingAccommodation" checked="checked">No</label>}
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <label>Do you need transportation?</label>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                @if (Model.OptionalData.NeededTransportation == "1")
+                                                {
+                                <label class="radio-inline"><input type="radio" value="Yes" name="Transportation" checked="checked">Yes</label>
+                                                    <label class="radio-inline"><input type="radio" value="No" name="Transportation">No</label> }
+                                                                    else
+                                                                    {
+                                                    <label class="radio-inline"><input type="radio" value="Yes" name="Transportation">Yes</label>
+                                                                        <label class="radio-inline"><input type="radio" value="No" name="Transportation" checked="checked">No</label>}
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Do you have any special needs? This information is voluntary and confidential</label>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                @if (Model.OptionalData.NeededSpecial == "1")
+                                                {
+                                <label class="radio-inline"><input type="radio" value="Yes" onchange="popuateSPfield(this.value)" name="SpecialNeeds" checked="checked">Yes</label>
+                                                    <label class="radio-inline"><input type="radio" value="No" onchange="popuateSPfield(this.value)" name="SpecialNeeds">No</label> }
+                                                                    else
+                                                                    {
+                                                    <label class="radio-inline"><input type="radio" value="Yes" onchange="popuateSPfield(this.value)" name="SpecialNeeds">Yes</label>
+                                                                        <label class="radio-inline"><input type="radio" value="No" onchange="popuateSPfield(this.value)" name="SpecialNeeds" checked="checked">No</label>}
+
+                                            </div>
+                                            <div class="col-lg-2" id="spneedlbl" style="display:none">
+                                                <label>Please specify your special needs</label>
+                                            </div>
+                                            <div class="col-lg-4" id="spneedtxt" style="display:none">
+                                                <div>
+                                                    @*<textarea id="reasonSpecialNeeds" class="md-textarea form-control" rows="3" value="@Model.OptionalData.NeededSpecialNotes"></textarea>*@
+                                                    @Html.TextAreaFor(x => x.OptionalData.NeededSpecialNotes, new { @id = "reasonSpecialNeeds", @class = "textarea form-control", @maxlength = "50", @style = "resize: none;" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <fieldset>
+                                            <legend style="color:#1c3764;font-weight: bold; border-bottom: 1px solid #1c3764;">UAE Residency Status</legend>
+                                            <div class="row">
+                                                <div class="col-lg-4 mt-lg-2">
+                                                    <label>UAE Resident</label>
+                                                </div>
+                                                <div class="col-lg-2 mt-lg-2">
+                                                    @if (Model.OptionalData.UsCitizen == "Yes")
+                                                    {
+                                    <label class="radio-inline"><input type="radio" value="Yes" onchange="populateUAEID(this.value)" name="PermanentUAEResident" checked="checked">Yes</label>
+                                                        <label class="radio-inline"><input type="radio" value="No" onchange="populateUAEID(this.value)" name="PermanentUAEResident">No</label> }
+                                                                        else
+                                                                        {
+                                                        <label class="radio-inline"><input type="radio" value="Yes" onchange="populateUAEID(this.value)" name="PermanentUAEResident">Yes</label>
+                                                                            <label class="radio-inline"><input type="radio" value="No" onchange="populateUAEID(this.value)" name="PermanentUAEResident" checked="checked">No</label>}
+                                                </div>
+                                                <div class="col-lg-3" id="UAEIDlbl" style="display:none">
+                                                    <label>
+                                                        Expiry Date
+                                                    </label>
+                                                    <div class="dates" style="color: #2471a3;">
+                                                        @Html.TextBoxFor(model => model.TestScoreList.TestDate, new { @type = "text", @id = "Expdate-input", @name = "Expdate-input", @class = "form-control form-control-lg datepicker", @Value = "" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3" id="UAEIDtxt" style="display:none">
+                                                    <label>
+                                                        UAE ID
+                                                    </label>
+                                                    @Html.TextBoxFor(x => x.OptionalData.UAEID, new { @type = "number", @id = "UAEID", @name = "UAEID", @class = "form-control form-control-lg", placeholder = "", @autocpmplete = "off", @maxlength = "15" })
+                                                </div>
+                                            </div><br />
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label>Do you need a student visa?</label>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    @if (Model.OptionalData.NeededVisa == "1")
+                                                    {
+                                    <label class="radio-inline"><input type="radio" value="Yes" name="NeedStudentVisa" checked="checked">Yes</label>
+                                                        <label class="radio-inline"><input type="radio" value="No" name="NeedStudentVisa">No</label> }
+                                                                        else
+                                                                        {
+                                                        <label class="radio-inline"><input type="radio" value="Yes" name="NeedStudentVisa">Yes</label>
+                                                                            <label class="radio-inline"><input type="radio" value="No" name="NeedStudentVisa" checked="checked">No</label>}
+
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <br />
+                                        <fieldset>
+                                            <legend style="color:#1c3764;font-weight: bold; border-bottom: 1px solid #1c3764;">Current Address</legend>
+                                            <div class="row mb-4" style="display:none;">
+                                                <div class="col-lg-5">
+                                                    <label class="lblbold" for="Address1">Address 1</label>
+                                                    @Html.TextBoxFor(x => x.HomeAddressFields.Address1, new { @id = "Address1", @name = "Address1", @class = "form-control form-control-lg", @autocpmplete = "off", @maxlength = "50" })
+                                                </div>
+                                                <div class="col-lg-2">
+                                                </div>
+                                                <div class="col-lg-5">
+                                                    <label class="lblbold" for="Address2">Address 2</label>
+                                                    @Html.TextBoxFor(x => x.HomeAddressFields.Address2, new { @id = "Address2", @name = "Address2", @class = "form-control form-control-lg", @autocpmplete = "off", @maxlength = "50" })
+                                                </div>
+                                            </div>
+                                            <div class="row mb-4">
+                                                <div class="col-lg-5">
+                                                    <label class="lblbold" for="CountryHmadrss">Select Country</label>
+                                                    @Html.DropDownListFor(m => m.HomeAddressFields.CountryID, new SelectList(Model.Countrylist.CountryList, "UniqueId", "DisplayText"), "Select Country", new { @style = "font-size: 1.1rem;padding: 7px;", @class = "form-control form-control-lg", @id = "CountryHmadrss", @Name = "CountryHmadrss", @value = Model.HomeAddressFields.CountryID, @onchange = "javascript:populatestate(this.value);" })
+                                                </div>
+                                                <div class="col-lg-2">
+                                                </div>
+                                                <div class="col-lg-5">
+                                                    <div id="Emirates" style="display:none;">
+                                                        <label class="lblbold" for="ddlstate">Emirates</label>
+                                                        @Html.DropDownListFor(m => m.HomeAddressFields.StateID, new SelectList(Model.statelst.stateList, "UniqueId", "DisplayText"), "Select Emirates", new { style = "font-size: 1.1rem;padding: 7px;", @class = "form-control form-control-lg", @id = "ddlstate", @Name = "ddlstate" })
+                                                    </div>
+                                                    <div id="State">
+                                                        <label class="lblbold" for="txtstate">State</label>
+                                                        @Html.TextBoxFor(x => x.HomeAddressFields.state, new { @id = "txtstate", @name = "txtstate", @maxlength = "50", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        @if (Model.OptionalData.Gpagroupdid == "1")
+                                        {
+                        <fieldset>
+                            <legend style="color:#1c3764;font-weight: bold; border-bottom: 1px solid #1c3764;">
+                                Employer Details
+                            </legend>
+                            <div class="row mb-4">
+                                <div class="col-lg-5 col-md-5 col-sm-12">
+                                    <label class="lblbold" for="txtstate">Company</label>
+                                    @Html.TextBoxFor(x => x.GuardianData.Company, new { @id = "txtEmplCompany", @name = "txtEmplCompany", @maxlength = "50", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-12"></div>
+                                <div class="col-lg-5 col-md-5 col-sm-12">
+                                    <label class="lblbold" for="txtstate">Position</label>
+                                    @Html.TextBoxFor(x => x.GuardianData.Position, new { @id = "txtEmplPosition", @name = "txtEmplPosition", @maxlength = "50", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                                </div>
+                            </div>
+                        </fieldset>                }
+                                        @if (Model.HomeAddressFields.age < 21)
+                                        {
+                        <fieldset>
+                            <legend style="color:#1c3764;font-weight: bold; border-bottom: 1px solid #1c3764;">
+                                Guardian Information
+                            </legend>
+                            <div class="row mb-4">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label class="lblbold" for="txtstate">First Name</label>
+                                    @Html.TextBoxFor(x => x.GuardianData.FirstName, new { @id = "txtGaudianFname", @name = "txtGaudianFname", @maxlength = "50", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                                </div>
+                                @*<div class="col-lg-2 col-md-2 col-sm-12"></div>*@
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label class="lblbold" for="txtstate">Last Name</label>
+                                    @Html.TextBoxFor(x => x.GuardianData.LastName, new { @id = "txtGaudianLname", @name = "txtGaudianLname", @maxlength = "50", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label class="lblbold" for="txtstate">Phone</label>
+                                    @Html.TextBoxFor(x => x.GuardianData.Phone, new { type = "tel", @id = "txtGaudianphone", @name = "txtGaudianphone", @maxlength = "50", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                                </div>
+                                @*<div class="col-lg-2 col-md-2 col-sm-12"></div>*@
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label class="lblbold" for="txtstate">Relationship</label>
+                                    @Html.TextBoxFor(x => x.GuardianData.Relationship, new { @id = "txtEmplRelationship", @name = "txtEmplRelationship", @maxlength = "50", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label class="lblbold" for="txtstate">Phone</label>
+                                    @Html.TextBoxFor(x => x.GuardianData.Gemail, new { @type = "email", @id = "txtGaudianEmail", @name = "txtGaudianEmail", @maxlength = "50", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                                </div>
+                            </div>
+                        </fieldset>                }
+                                    </div>
+                                </fieldset>
+
+                                                <fieldset>
+                                                    <legend style="color:#1c3764;font-weight: bold; border-bottom: 1px solid #1c3764;">
+                                                        English Language Requirement
+                                                    </legend>
+                                                    <table id="myTable" class="table">
+                                                        <thead class="thead-light" style="text-align:center;">
+                                                            <tr>
+                                                                <th scope="col" style="width:30%">Test Selection</th>
+                                                                <th scope="col" style="width:30%">Scores</th>
+                                                                <th scope="col" style="width:30%">Test Date</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @if (Model.TestScoreList.Scorelist.Any())
+                                                            {
+                                                                var count = 2;
+                                                                foreach (var item in Model.TestScoreList.Scorelist)
+                                                                {
+                                            <tr>
+                                                <td>
+                                                    @Html.DropDownList(item.CAMS_TestRefID.ToString(), new SelectList(Model.Examlist.Cams_testlist, "CAMS_TestRefID", "TestName", item.CAMS_TestRefID), "Select Exam", new { @style = "font-size: 1.1rem;padding: 7px;", @class = "form-control form-control-lg", @id = "Searchexam", @Name = "ExamSelection" })
+                                                </td>
+                                                <td>
+                                                    <input type="text" value="@item.Score" maxlength="5" class="form-control form-control-lg" />
+                                                </td>
+                                                <td>
+                                                    <div class="dates" style="color: #2471a3;">
+                                                        @Html.TextBoxFor(model => model.TestScoreList.TestDate, new { @type = "text", @id = "date-input_" + count + "", @name = "date-input", @class = "form-control form-control-lg datepicker", @Value = @item.TestDate })
+                                                        @*<input type="date" class="form-control" value="@item.TestDate" id="date-input" name="event_date" autocomplete="off" />*@
+                                                        @*@Html.TextBox("txtJoiningDate", @item.TestDate, new { @type = "date", @class = "form-control datepicker" })*@
+                                                    </div>
+                                                </td>
+                                            </tr>count = count + 1;
+                                                                }
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </fieldset> if (Model.OptionalData.Gpagroupdid == "3")
+                                                                {
+                                                <fieldset>
+                                                    <legend style="color:#1c3764;font-weight: bold; border-bottom: 1px solid #1c3764;">High School Information</legend>
+                                                    <div style="display:none;"><p><input id="Addschool" type="button" value="Add New High School" class="btn btn-primary"></p></div>
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <label class="lblbold">Select High School country</label>
+                                                            @Html.DropDownListFor(m => m.HighSData.Highschoolcountry, new SelectList(Model.Countrylist.CountryList, "UniqueId", "DisplayText"), "Select Country", new { @class = "form-control", @id = "CountryLst", @Name = "CountryLst", @onchange = "javascript:GetHighSchool(this.value);" })
+                                                        </div>
+                                                    </div><br />
+                                                    <div id="Highschooldiv" class="mb-4" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <label class="lblbold">Select High School</label>
+                                                                <select id="ddlHighSchool" name="ddlHighSchool" class="form-control"></select>
+                                                            </div>
+                                                            <div class="col-lg-1">
+                                                            </div>
+                                                            <div class="col-lg-4" id="divcustomschool" style="display:none;">
+                                                                <label class="lblbold">Enter School Name</label>
+                                                                @Html.TextBoxFor(x => x.HighSData.Customhschool, new { @id = "txtCustomHighSchool", @maxlength = "50", @name = "txtCustomHighSchool", @class = "form-control form-control-lg", placeholder = " ", @autocpmplete = "off" })
+                                                            </div>
+                                                        </div><br />
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <label class="lblbold">Select curriculum type</label>
+                                                                @Html.DropDownListFor(m => m.HighSData.Type, new SelectList(Model.Typelist.TypeList, "UniqueId", "DisplayText"), "Select Type", new { @style = "font-size: 1.1rem;padding: 7px;", @class = "form-control form-control-lg", @id = "HSType", @Name = "HSType" })
+                                                            </div>
+                                                            <div class="col-lg-1"></div>
+                                                            <div class="col-lg-2">
+                                                                <label class="lblbold">Score</label>
+                                                                @Html.TextBoxFor(x => x.HighSData.Score, new { @id = "Score", @name = "Score", @class = "form-control form-control-lg", @maxlength = "3", placeholder = " ", @autocpmplete = "off" })
+                                                            </div>
+                                                            <div class="col-lg-1"></div>
+                                                            <div class="col-lg-2">
+                                                                <label class="lblbold">Score out of</label>
+                                                                @Html.TextBoxFor(x => x.HighSData.Scoreoutof, new { @id = "Scoreoutof", @name = "Scoreoutof", @class = "form-control form-control-lg", @maxlength = "3", placeholder = " ", @autocpmplete = "off" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset> }
+                                                                else if (Model.OptionalData.Gpagroupdid == "1")
+                                                                {
+                                                <fieldset>
+                                                    <legend style="color:#1c3764;font-weight: bold; border-bottom: 1px solid #1c3764;">College Information</legend>
+                                                    <div style="display:none;"><p><input id="AddCollege" type="button" value="Add New College" class="btn btn-primary"></p></div>
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <label class="lblbold">Select College country</label>
+                                                            @*@Html.DropDownListFor(m => m.CollegeData.CollegeCountry, new SelectList(Model.Countrylist.CountryList, "UniqueId", "DisplayText"), "Select Country", new { @class = "form-control", @id = "CountryLstfrcollege", @Name = "CountryLstfrcollege", @onchange = "javascript:GetCollege(this.value);" })*@
+                                                            @Html.DropDownListFor(m => m.CollegeData.CollegeCountry, new SelectList(Model.Countrylist.CountryList, "UniqueId", "DisplayText"), "Select Country", new { @class = "form-control", @id = "CountryLstfrcollege", @Name = "CountryLstfrcollege", @onchange = "javascript:GetCollege(this.value);" })
+                                                        </div>
+                                                    </div><br />
+                                                    <div id="Collegediv" class="mb-4" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <label class="lblbold">Select College</label>
+                                                                <select id="ddlColleges" name="ddlColleges" class="chosen chzn-select" value="@Model.CollegeData.CollegeID"></select>
+                                                            </div>
+                                                            <div class="col-lg-4" id="divcustomcollege" style="display:none;">
+                                                                <label class="lblbold">Enter College Name</label>
+                                                                @Html.TextBoxFor(x => x.CollegeData.Grade, new { @id = "txtCustomCollegeName", @name = "txtCustomCollegeName", @maxlength = "50", @class = "form-control form-control-lg", placeholder = "College Name", @autocpmplete = "off" })
+                                                            </div>
+                                                            <div class="col-lg-2">
+                                                                <label class="lblbold">Grade</label>
+                                                                @Html.TextBoxFor(x => x.CollegeData.Grade, new { @id = "Grade", @name = "Grade", @class = "form-control form-control-lg", @maxlength = "3", placeholder = "Grade", @autocpmplete = "off" })
+                                                            </div>
+                                                            <div class="col-lg-2">
+                                                                <label class="lblbold">Grade out of</label>
+                                                                @Html.TextBoxFor(x => x.CollegeData.Gradeoutof, new { @id = "Gradeoutof", @name = "Gradeoutof", @class = "form-control form-control-lg", @maxlength = "3", placeholder = "Grade out of", @autocpmplete = "off" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset> }
+                                                                if (Model.OptionalData.TransferCredit == "1")
+                                                                {
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <label class="lblbold">Transfer Instution Information</label>
+                                                        @Html.TextBoxFor(x => x.CollegeData.TransferInstitute, new { @id = "txttransferinstitute", @maxlength = "50", @name = "txttransferinstitute", @class = "form-control form-control-lg", placeholder = " ", @autocpmplete = "off" })
+                                                    </div>
+                                                </div>}
+                                                            }
+</div>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+@section scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            window.history.forward();
+            function noback() {
+                window.history.forward();
+            }
+            $("#DOB").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true
+            });
+
+            $("#prntbtn").click(function () {
+                window.print();
+                return false;
+            });
+
+            //$("#Fprogram").select2({});
+            $("#FAgency").select2({});
+            $("#Country").select2({});
+
+            $("#ddlgpatype").val(@Model.LeadInfo.Gpagroupdid);
+            $("#ddltransferstatus").val('@Model.LeadInfo.Transferstatus');
+
+            $('#Fprogram').change(GetProgram(@Model.LeadInfo.Gpagroupdid));
+
+            $('#PermanentUAEResident').change(populateUAEID('@Model.OptionalData.UsCitizen'));
+            $('#SpecialNeeds').change(popuateSPfield(@Model.OptionalData.NeededSpecial));
+            $('#CountryHmadrss').change(populatestate(@Model.HomeAddressFields.CountryID));
+            $('#CountryLst').change(GetHighSchool(@Model.HighSData.Highschoolcountry));
+            $('#CountryLstfrcollege').change(GetCollege(@Model.CollegeData.CollegeCountry));
+
+            $("#savendextbtn").click(function () {
+                document.getElementById("hdnSaveandExit").value = "SaveandExit";
+                $("#sbmtbtn").click();
+            });
+            $("#ddlColleges").on("change", function () {
+                var slvalue = this.value;
+                if (slvalue == "Other")
+                    $("#divcustomcollege").show();
+                else
+                    $("#divcustomcollege").hide();
+            });
+
+            $("#ddlHighSchool").on("change", function () {
+                var slvalue = this.value;
+                if (slvalue == "Other")
+                    $("#divcustomschool").show();
+                else
+                    $("#divcustomschool").hide();
+            });
+
+            //$('#CompletedProfile input').attr('readonly', 'readonly');
+            //$('#CompletedProfile textarea').attr('readonly', 'readonly');
+            //$(':radio,:checkbox').click(function () { return false; });
+            $("#CompletedProfile *").prop("disabled", true);
+
+        });
+        function GetProgram(TypeID) {
+            if (TypeID != undefined && TypeID != "") {
+                var procemessage = "<option value='0'> Please wait...</option>";
+                $.ajax({
+                    url: '@Url.Action("GetProgramByTypeId", "CompletedProfile")',
+                    data: { Typeid: TypeID },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        var markup = "<option value='0'>Select Program</option>";
+                        for (var x = 0; x < data.length; x++) {
+                            if (data[x].Value == @Model.LeadInfo.program1) {
+                                markup += "<option selected='selected' value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                            } else {
+                                markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                            }
+                        }
+                        markup += "<option value='Other'>Other(Add Custom)</option>";
+                        $("#Fprogram").html(markup).show();
+                        $("#Fprogram").select2({width : '100%'});
+                    },
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
+            }
+        }
+
+        function populateUAEID(Para) {
+            if (Para != undefined) {
+                if (Para == "Yes") {
+                    $("#UAEIDlbl").show();
+                    $("#UAEIDtxt").show();
+                }
+                else {
+                    $("#UAEIDlbl").hide();
+                    $("#UAEIDtxt").hide();
+                }
+            }
+
+        }
+        function popuateSPfield(yes) {
+            //alert(yes);
+            if (yes != undefined) {
+                if (yes == "1") { yes = "Yes";}
+
+            if (yes == "Yes") {
+                $("#spneedlbl").show();
+                $("#spneedtxt").show();
+            }
+            else {
+                $("#spneedlbl").hide();
+                $("#spneedtxt").hide();
+                }
+            }
+        }
+        function populatestate(_CountrID) {
+            if (_CountrID != undefined) {
+            if (_CountrID == "2113") {
+                $("#Emirates").show();
+                $("#State").hide();
+            }
+            else {
+                $("#Emirates").hide();
+                $("#State").show();
+                }
+            }
+        }
+        function GetCollege(_CountryID) {
+            if (_CountryID != undefined && _CountryID != "") {
+                var procemessage = "<option value='0'> Please wait...</option>";
+                //$("#ddlColleges").html(procemessage).show();
+                //$("#ddlColleges").chosen();
+                $.ajax({
+                    url: '@Url.Action("GetCollegeByCountryId", "CompletedProfile")',
+                    data: { Countryid: _CountryID },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        var markup = "<option value='0'>Select College</option>";
+                        for (var x = 0; x < data.length; x++) {
+                            if (data[x].Value == @Model.CollegeData.CollegeID) {
+                                markup += "<option selected='selected' value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                            } else {
+                                markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                            }
+                        }
+                        markup += "<option value='Other'>Other(Add Custom)</option>";
+                        $("#ddlColleges").html(markup).show();
+                        $("#ddlColleges").select2({ width: '100%'});
+                    },
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
+                $("#Collegediv").show();
+            } else if (_CountryID == "") {
+                $("#Collegediv").hide();
+            }
+        }
+
+        function GetHighSchool(_stateId) {
+            if (_stateId != undefined && _stateId !="") {
+            var procemessage = "<option value='0'> Please wait...</option>";
+            $("#ddlHighSchool").html(procemessage).show();
+
+            $.ajax({
+                url:'@Url.Action("GetHighSchoolByCountryId", "CompletedProfile")',
+                data: { Countryid: _stateId },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    var markup = "<option value='0'>Select HighSchool</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        if (data[x].Value == @Model.HighSData.HighSchoolID) {
+                            markup += "<option selected='selected' value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                        } else {
+                            markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                        }
+                    }
+                    markup += "<option value='Other'>Other(Add Custom)</option>";
+                    $("#ddlHighSchool").html(markup).show();
+                    $("#ddlHighSchool").select2({ width: '100%'});
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+                });
+                $("#Highschooldiv").show();
+            } else if (_stateId == "") {
+                $("#Highschooldiv").hide();
+            }
+        }
+
+
+    </script>
+}
+

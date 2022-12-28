@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ApplyNew.Custom_Profileprogress_Result>
+<div class="progresscontainer col-lg-12 col-md-12 col-sm-12">
+    <ul class="progressbar">
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                if (item.ApplicationComplete == true)
+                {
+                    @*<li class="active">@Html.ActionLink("Start Application", "Index", "Lead", new { @style = "color:white;" })</li>*@
+                    //onclick = "document.location.href='@Url.Action("LeadUpdate", "Lead")'"
+                    <li class="active"><a href="@Url.Action("LeadUpdate", "Lead")"  style="text-decoration:none;color:white;font-weight:bold;">@ApplyNew.Resources.Resource.Start_Application</a></li>
+                }
+                else
+                {
+                    <li><a href="@Url.Action("Index", "Lead")" style="text-decoration:none;color:white;font-weight:bold;">@ApplyNew.Resources.Resource.Start_Application</a></li>
+                }
+                if (item.EducationComplete == true || item.ApplicationComplete == true)
+                {
+                    if (item.ApplicationComplete == true && item.EducationComplete == true)
+                    {
+                        <li class="active"><a href="@Url.Action("EducationDoc", "EducationandDocuments")" style="text-decoration:none;color:white;font-weight:bold;">@ApplyNew.Resources.Resource.Education_Info</a></li>
+                    }
+                    else if (item.ApplicationComplete == true)
+                    {
+                        <li><a href="@Url.Action("EducationDoc", "EducationandDocuments")" style="text-decoration:none;color:white;font-weight:bold;">@ApplyNew.Resources.Resource.Education_Info</a></li>
+                    }
+                }
+                else
+                {
+                    <li><span style="color:black;">@ApplyNew.Resources.Resource.Education_Info</span></li>
+                }
+                if (item.EducationComplete == true || item.ApplicationSubmitted == true)
+                {
+                    <li class="active"><a href="@Url.Action("CudPayment", "OnlinePayment")" style="text-decoration:none;color:white;font-weight:bold;">@ApplyNew.Resources.Resource.Payment</a></li>
+                }
+                else
+                {
+                    <li><span style="color:black;">@ApplyNew.Resources.Resource.Payment</span></li>
+                }
+            }
+        }
+        else
+        {
+            <li><a href="@Url.Action("Index", "Lead")" style="text-decoration:none;color:white;font-weight:bold;">@ApplyNew.Resources.Resource.Start_Application</a></li>
+            <li><span style="color:black;">@ApplyNew.Resources.Resource.Education_Info</span></li>
+            <li><span style="color:black;">@ApplyNew.Resources.Resource.Payment</span></li>
+        }
+    </ul>
+    </div>

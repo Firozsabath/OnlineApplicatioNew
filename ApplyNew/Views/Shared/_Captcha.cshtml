@@ -1,0 +1,5 @@
+﻿@using CaptchaMvc.HtmlHelpers;
+@{
+    @Html.Captcha("Refresh", "Enter Verification Code ", 5, "The Captcha is required", true)    
+    <br /> <p> @ViewBag.ErrMessage </p>
+}

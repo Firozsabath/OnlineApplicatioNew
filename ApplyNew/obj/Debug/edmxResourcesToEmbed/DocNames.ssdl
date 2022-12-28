@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CAMS_ExternalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Custom-DoctNametable">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DocNameID" Type="int" />
+    <Property Name="DocName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DegreeType" Type="nvarchar" MaxLength="20" />
+    <Property Name="TransferType" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityContainer Name="CAMS_ExternalModelStoreContainer">
+    <EntitySet Name="Custom-DoctNametable" EntityType="Self.Custom-DoctNametable" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

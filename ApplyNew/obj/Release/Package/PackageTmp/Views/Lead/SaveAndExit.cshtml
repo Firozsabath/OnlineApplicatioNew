@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "SaveAndExit";
+}
+<br />
+<div class="container">
+    <br />
+    <div class="jumbotron">
+        <div class="row" style="height:470px;">
+            <div class="col-lg-1 col-md-12 col-sm-12"></div>
+            <div class="col-lg-10 col-md-12 col-sm-12">
+                <h2>@ApplyNew.Resources.Resource.Thank_You_for_registering_with_canadian_university_Dubai</h2>
+                <br />
+                <p>@ApplyNew.Resources.Resource.Successful_registration_message</p>
+                <br />
+                <form action="http://10.10.200.104/applyNew/en-US/onlineApply/Index" method="post" id="Form16">
+                    <input type="hidden" name="prospectid" value="@ViewBag.Prospectid" id="prospectid" />
+                    <input type="hidden" name="EmailID" value="@ViewBag.EmailID" id="EmailID" />
+                    <input type="hidden" name="Origin" value="External" id="Origin" />
+                    <p>
+                        @*For UAT*@
+                        @*Please continue your appliction by clicking in the link <a href="http://10.10.200.104/onlineApply/Index" style="color:red;font-weight:bold"> Apply</a> with your account detail.*@
+                        @*For Dev*@
+                        @ApplyNew.Resources.Resource.Please_continue_your_appliction.
+                    </p>
+                    <input type="submit" class="btn btn-danger" id="sbmtbtn" style="width:230px;" value="@ApplyNew.Resources.Resource.Back_to_application" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            function DisableBackButtonAllBrowsers() {
+                window.history.forward()
+            };
+            DisableBackButtonAllBrowsers();
+            window.onload = DisableBackButtonAllBrowsers;
+            window.onpageshow = function (evts) { if (evts.persisted) DisableBackButtonAllBrowsers(); };
+            window.onunload = function () { void (0) };
+
+    </script>
+}

@@ -1,0 +1,555 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Acceptedformat_docuploads" xml:space="preserve">
+    <value>Accepted formats are .jpg, .jpeg, .doc, .docx, .pdf, .gif, .png</value>
+  </data>
+  <data name="Agree_condtion1" xml:space="preserve">
+    <value>I understand and agree that I must provide original versions of all relevant attestations and equivalency documentation within my first semester at Canadian University Dubai</value>
+  </data>
+  <data name="Agree_condtion2" xml:space="preserve">
+    <value>I certify that the information I have provided in this application is true and complete. I fully realize that omission or falsification of information will be sufficient reason for rejection and dismissal</value>
+  </data>
+  <data name="AmountPayable" xml:space="preserve">
+    <value>Amount Payable</value>
+  </data>
+  <data name="Amount_Paid_cudreceipt" xml:space="preserve">
+    <value>Amount Paid</value>
+  </data>
+  <data name="ApplicantBasicInfo" xml:space="preserve">
+    <value>Applicant Basic Information</value>
+  </data>
+  <data name="Applicantinfoh1" xml:space="preserve">
+    <value>Applicant Information</value>
+  </data>
+  <data name="Applyfor" xml:space="preserve">
+    <value>I am applying for</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="College_University_Information" xml:space="preserve">
+    <value>College/University Information</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="Continue_an_existing_Application" xml:space="preserve">
+    <value>Continue an existing Application</value>
+  </data>
+  <data name="Continue_to_make_Payment" xml:space="preserve">
+    <value>Continue to make Payment</value>
+  </data>
+  <data name="Create_a_new_Application" xml:space="preserve">
+    <value>Create a new Application</value>
+  </data>
+  <data name="CurrentAddress" xml:space="preserve">
+    <value>Current Address</value>
+  </data>
+  <data name="dob" xml:space="preserve">
+    <value>Date of Birth</value>
+  </data>
+  <data name="DocumentsUploads" xml:space="preserve">
+    <value>Documents Uploads</value>
+  </data>
+  <data name="Eanddoc" xml:space="preserve">
+    <value>Education and Documents</value>
+  </data>
+  <data name="EducationInfo" xml:space="preserve">
+    <value>Education Information</value>
+  </data>
+  <data name="ELR" xml:space="preserve">
+    <value>English Language Requirement</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Email_ID_cudreceipt" xml:space="preserve">
+    <value>Email ID</value>
+  </data>
+  <data name="Email_Onlinepayment" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Employer_Details" xml:space="preserve">
+    <value>Employer Details</value>
+  </data>
+  <data name="Enter_Your_EmailID" xml:space="preserve">
+    <value>Enter Your Email ID</value>
+  </data>
+  <data name="Enter_Your_ProspectID" xml:space="preserve">
+    <value>Enter Your Applicant ID</value>
+  </data>
+  <data name="Feedback_msg1_leadcomplete" xml:space="preserve">
+    <value>Thank You for submitting your application to canadian university Dubai</value>
+  </data>
+  <data name="Feedback_msg2_leadcomplete" xml:space="preserve">
+    <value>You should expect a response back from the admission team within 24 hours</value>
+  </data>
+  <data name="Feedback_msg3_leadcomplete" xml:space="preserve">
+    <value>If you have any question you may reach us by phone 04-321-9090 or by email at</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name (English)</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Select Gender</value>
+  </data>
+  <data name="GPA_Collegesection" xml:space="preserve">
+    <value>GPA</value>
+  </data>
+  <data name="GPA_out_of_Collegesection" xml:space="preserve">
+    <value>GPA out of</value>
+  </data>
+  <data name="GuardianEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="GuardianFirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="GuardianInfo" xml:space="preserve">
+    <value>Guardian Information</value>
+  </data>
+  <data name="GuardianLastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="GuardianPhone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="GuardianRelationship" xml:space="preserve">
+    <value>Relationship</value>
+  </data>
+  <data name="Guardianrequiredforcompletion" xml:space="preserve">
+    <value>Mark (*) is required for completion</value>
+  </data>
+  <data name="hearabtus" xml:space="preserve">
+    <value>How did you hear about us?</value>
+  </data>
+  <data name="HighSchoolcountry" xml:space="preserve">
+    <value>Select High School country</value>
+  </data>
+  <data name="HighSchoolInfo" xml:space="preserve">
+    <value>High School Information</value>
+  </data>
+  <data name="housingaccommodation" xml:space="preserve">
+    <value>Do you require housing accommodation?</value>
+  </data>
+  <data name="institution_you_are_transferring_from" xml:space="preserve">
+    <value>Please enter the institution you are transferring from</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name (English)</value>
+  </data>
+  <data name="list1" xml:space="preserve">
+    <value>Please provide all responses in English</value>
+  </data>
+  <data name="list2" xml:space="preserve">
+    <value>Required fields are indicated by a red asterisk (*)</value>
+  </data>
+  <data name="Message1_cudreceipt" xml:space="preserve">
+    <value>We will be processing your application and contacting you as needed.</value>
+  </data>
+  <data name="Message2_cudreceipt" xml:space="preserve">
+    <value>The following information is for your records. For your convenience, we have emailed you this information.</value>
+  </data>
+  <data name="MiddleName" xml:space="preserve">
+    <value>Middle Name (English)</value>
+  </data>
+  <data name="Name_cudreceipt" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Nationality" xml:space="preserve">
+    <value>Nationality</value>
+  </data>
+  <data name="needastudentvisa" xml:space="preserve">
+    <value>Do you need a student visa?</value>
+  </data>
+  <data name="Needtransportation" xml:space="preserve">
+    <value>Do you need transportation?</value>
+  </data>
+  <data name="Official_CUD_Online_Application" xml:space="preserve">
+    <value>Online Application</value>
+  </data>
+  <data name="Online_Application" xml:space="preserve">
+    <value>Online Application</value>
+  </data>
+  <data name="Online_Application_cudreceipt" xml:space="preserve">
+    <value>Online Application</value>
+  </data>
+  <data name="Online_Payment_Page" xml:space="preserve">
+    <value>Online Payment Page</value>
+  </data>
+  <data name="OptionalInformation" xml:space="preserve">
+    <value>Optional Information</value>
+  </data>
+  <data name="Other_Miscellaneous_fees" xml:space="preserve">
+    <value>Tuition or Other Miscellaneous fees</value>
+  </data>
+  <data name="Payment_Details" xml:space="preserve">
+    <value>Payment Details</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone 1</value>
+  </data>
+  <data name="Please_enter_the_below_data_to_retreieve_profile_info" xml:space="preserve">
+    <value>Please enter the below data to retrieve your application</value>
+  </data>
+  <data name="Please_provide_your_bachelor_information" xml:space="preserve">
+    <value>Please provide your bachelor information</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="Proceed_for_Payment" xml:space="preserve">
+    <value>Proceed for Payment</value>
+  </data>
+  <data name="Program" xml:space="preserve">
+    <value>Program Choice</value>
+  </data>
+  <data name="ProspectID_cudreceipt" xml:space="preserve">
+    <value>ProspectID</value>
+  </data>
+  <data name="Required_for_docuploads" xml:space="preserve">
+    <value>Mark (*) is required for completion</value>
+  </data>
+  <data name="reserve_my_seat" xml:space="preserve">
+    <value>I would like to reserve my seat for 2500 AED</value>
+  </data>
+  <data name="Retrieve_Application" xml:space="preserve">
+    <value>Retrieve Application</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Save and Exit</value>
+  </data>
+  <data name="Score_HSsection" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="Score_out_of_HSsection" xml:space="preserve">
+    <value>Score out of</value>
+  </data>
+  <data name="SelectCountry" xml:space="preserve">
+    <value>Select Country</value>
+  </data>
+  <data name="Select_College_Collegesection" xml:space="preserve">
+    <value>Select College</value>
+  </data>
+  <data name="Select_College_country_Collegesection" xml:space="preserve">
+    <value>Select College country</value>
+  </data>
+  <data name="Select_curriculum_type_HSsection" xml:space="preserve">
+    <value>Select curriculum type</value>
+  </data>
+  <data name="Specialneeds" xml:space="preserve">
+    <value>Do you have any special needs? This information is voluntary and confidential</value>
+  </data>
+  <data name="Student_Name" xml:space="preserve">
+    <value>Student Name</value>
+  </data>
+  <data name="Successful_msg_cudreceipt" xml:space="preserve">
+    <value>Success! Your application has been submitted.</value>
+  </data>
+  <data name="term" xml:space="preserve">
+    <value>Expected Entrance Term</value>
+  </data>
+  <data name="TestDate" xml:space="preserve">
+    <value>Test Date</value>
+  </data>
+  <data name="TestScore" xml:space="preserve">
+    <value>Test Score</value>
+  </data>
+  <data name="TestSelection" xml:space="preserve">
+    <value>Test Selection</value>
+  </data>
+  <data name="Transaction_Date_cudreceipt" xml:space="preserve">
+    <value>Transaction Date</value>
+  </data>
+  <data name="Transaction_num_cudreceipt" xml:space="preserve">
+    <value>Transaction number</value>
+  </data>
+  <data name="TransferInfo" xml:space="preserve">
+    <value>Transfer Information</value>
+  </data>
+  <data name="TransferInstitution" xml:space="preserve">
+    <value>Transfer Institution</value>
+  </data>
+  <data name="Transferstatus" xml:space="preserve">
+    <value>Are you transferring from another Institution</value>
+  </data>
+  <data name="Transfertocanada" xml:space="preserve">
+    <value>Do you plan on transferring or completing your studies in a partner university / college in Canada?</value>
+  </data>
+  <data name="Transfer_Institution_Country" xml:space="preserve">
+    <value>Transfer Institution Country</value>
+  </data>
+  <data name="Transfer_Program" xml:space="preserve">
+    <value>Transfer Program</value>
+  </data>
+  <data name="UAEresidencystatus" xml:space="preserve">
+    <value>UAE Residency Status</value>
+  </data>
+  <data name="UAEresident" xml:space="preserve">
+    <value>UAE Resident</value>
+  </data>
+  <data name="Unsuccessful_msg_cudreceipt" xml:space="preserve">
+    <value>Sorry, Your Payment Was Unsuccessful.Please Try Again.</value>
+  </data>
+  <data name="Uploadsingledoc_docuuploads" xml:space="preserve">
+    <value>Upload single documents at a time</value>
+  </data>
+  <data name="vemail" xml:space="preserve">
+    <value>Verify Email</value>
+  </data>
+  <data name="WelcomeMessage1_sc1" xml:space="preserve">
+    <value>Are you ready to apply to Canadian University Dubai (CUD)? Begin your educational journey by completing our simple 3 step application.</value>
+  </data>
+  <data name="WelcomeMessage2_sc1" xml:space="preserve">
+    <value>Follow along the application to apply to one of our undergraduate or graduate programs. To begin a new application, kindly click the 'Create A New Application' button below. If you have already started an application, but the application is incomplete, kindly proceed by clicking the 'Continue An Existing Application' button.</value>
+  </data>
+  <data name="Welcome_sc1" xml:space="preserve">
+    <value>Welcome to Canadian University Dubai!</value>
+  </data>
+  <data name="You_can_access_your_submitted_application_here" xml:space="preserve">
+    <value>You can access your submitted application here</value>
+  </data>
+  <data name="You_may_reach_us_cudreceipt" xml:space="preserve">
+    <value>You may reach us by phone at</value>
+  </data>
+  <data name="Back_to_application" xml:space="preserve">
+    <value>Back to application</value>
+  </data>
+  <data name="Education_Info" xml:space="preserve">
+    <value>Education Info</value>
+  </data>
+  <data name="Enter_College_Name" xml:space="preserve">
+    <value>Enter College Name</value>
+  </data>
+  <data name="Enter_School_Name" xml:space="preserve">
+    <value>Enter School Name</value>
+  </data>
+  <data name="Expiry_Date" xml:space="preserve">
+    <value>Expiry Date</value>
+  </data>
+  <data name="Payment" xml:space="preserve">
+    <value>Payment</value>
+  </data>
+  <data name="Please_continue_your_appliction" xml:space="preserve">
+    <value>Please continue your appliction by clicking in the below button.</value>
+  </data>
+  <data name="Please_specify_your_special_needs" xml:space="preserve">
+    <value>Please specify your special needs</value>
+  </data>
+  <data name="Select_High_School" xml:space="preserve">
+    <value>Select High School</value>
+  </data>
+  <data name="Start_Application" xml:space="preserve">
+    <value>Start Application</value>
+  </data>
+  <data name="Successful_registration_message" xml:space="preserve">
+    <value>You had successfully created an account. A detailed Email has been send to your registered Email about the account details.</value>
+  </data>
+  <data name="Thank_You_for_registering_with_canadian_university_Dubai" xml:space="preserve">
+    <value>Thank You for registering with canadian university Dubai!</value>
+  </data>
+  <data name="UAE_ID" xml:space="preserve">
+    <value>UAE ID</value>
+  </data>
+  <data name="Update_Personal_Information" xml:space="preserve">
+    <value>Update Personal Information</value>
+  </data>
+  <data name="Your_Application" xml:space="preserve">
+    <value>Your Application</value>
+  </data>
+  <data name="ApplicantType" xml:space="preserve">
+    <value>Applicant Type</value>
+  </data>
+  <data name="Aunt" xml:space="preserve">
+    <value>Aunt</value>
+  </data>
+  <data name="Bachelors" xml:space="preserve">
+    <value>Bachelors</value>
+  </data>
+  <data name="brother" xml:space="preserve">
+    <value>Brother</value>
+  </data>
+  <data name="Choose_a_relation" xml:space="preserve">
+    <value>Choose a Relation</value>
+  </data>
+  <data name="Father" xml:space="preserve">
+    <value>Father</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="FirstNamearabic" xml:space="preserve">
+    <value>First Name Arabic</value>
+  </data>
+  <data name="Guardian" xml:space="preserve">
+    <value>Guardian</value>
+  </data>
+  <data name="LastNamearabic" xml:space="preserve">
+    <value>Last Name Arabic</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="Masters" xml:space="preserve">
+    <value>Masters</value>
+  </data>
+  <data name="MiddleNamearabic" xml:space="preserve">
+    <value>Middle Name Arabic</value>
+  </data>
+  <data name="Mother" xml:space="preserve">
+    <value>Mother</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="sister" xml:space="preserve">
+    <value>Sister</value>
+  </data>
+  <data name="Uncle" xml:space="preserve">
+    <value>Uncle</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="WelcomeMessage3_sc1" xml:space="preserve">
+    <value>Step 1: Applicant Information</value>
+  </data>
+  <data name="WelcomeMessage4_sc1" xml:space="preserve">
+    <value>Step 2: Education Information &amp; Documentation</value>
+  </data>
+  <data name="WelcomeMessage5_sc1" xml:space="preserve">
+    <value>Step 3: Application Payment</value>
+  </data>
+  <data name="WelcomeMessage6_sc1" xml:space="preserve">
+    <value>If you require any assistance with your application or are facing technical difficulty, kindly contact</value>
+  </data>
+  <data name="WelcomeMessage7_sc1" xml:space="preserve">
+    <value>Thank you for your interest in CUD, we look forward to connecting with you!</value>
+  </data>
+  <data name="Agree_condtion3" xml:space="preserve">
+    <value>The application fee payment does not guarantee acceptance in Canadian University Dubai and is non-refundable. Tuition deposit/ Seat reservation fees of AED 2,500.00/- is non-refundable.</value>
+  </data>
+</root>

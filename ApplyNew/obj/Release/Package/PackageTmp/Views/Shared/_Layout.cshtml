@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/Images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <title>@ViewBag.Title - CUD Online App</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/Mdb/css/mdb.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    @Scripts.Render("~/bundles/jquery")
+    <style>
+        footer.page-footer a {
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar smart-scroll navbar-expand-lg navbar-dark fixed-top navbg">
+        <div class="container"> 
+            <a class="navbar-brand" href="#">
+                <img src="~/Content/Images/logo-sticky.png" style="width:250px;padding:10px;" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <div class="ml-auto">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="tel:+97147096890">
+                                <i class="fa fa-phone-square"></i> +971 4-709-6890
+                                @*<span class="sr-only">(current)</span>*@
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="mailto:apply@cud.ac.ae"><i class="fa fa-envelope-square"></i> apply@cud.ac.ae</a>
+                        </li>
+                        @if (Session["ProspectID"] != null)
+                        {
+                            if (!String.IsNullOrEmpty(Session["ProspectID"].ToString()))
+                            {
+                                <li class="nav-item text-white">
+                                    <a onclick="document.location.href='@Url.Action("LogOut", "Lead")'" class="nav-link"><i class="fa fa-sign-out"></i><strong>Logout</strong></a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item px-3">
+                            <a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), new { Language = "en-US" })" title="English" style="color:white;">
+                                <img alt="" src="~/Content/Images/canada-fa.png" />
+                                English
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <span style="color:white;">|</span>
+                        </li>
+                        <li class="nav-item px-3">
+                            <a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), new { Language = "ar-SA" })" title="عربى" style="color:white;">
+                                <img alt="" src="~/Content/Images/uae-fa.png" />
+                                عربى
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>            
+        </div>        
+    </nav>
+    @*<div id="divlanguage" class="row" style="background-color:#212529;">
+        <div class="col-lg-7 col-sm-1">
+        </div>
+        <div class="col-lg-1 col-sm-2">
+        </div>
+        <div class="col-lg-2 col-sm-6" style="padding: 12px 7px 7px 20px;">
+            <a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), new { Language = "en-US" })" title="English" style="color:white;">
+                <img alt="" src="~/Content/Images/canada-fa.png" />
+                English
+            </a>
+            &nbsp; <span style="color:white;">|</span> &nbsp;
+            <a href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), new { Language = "ar-SA" })" title="عربى" style="color:white;">
+                <img alt="" src="~/Content/Images/uae-fa.png" />
+                عربى
+            </a>          
+        </div>
+    </div>*@
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="hero-image" style="display:none;">
+
+            </div>
+        </div>
+    </div>
+    <div dir="@(System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft? "rtl" : "ltr")" class="@(System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft? "rtlcs" : "")">
+        @RenderBody()
+        <hr />
+
+        <!-- Footer -->
+        <footer class="page-footer font-medium special-color-dark pt-4">
+            <!-- Footer Links -->
+            <div class="container text-center text-md-left">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <a href="#">
+                            <div class="logo-image">
+                                @*<img src="~/Content/Images/logo-sticky.png" class="img-fluid">*@
+                                <img src="https://www.cud.ac.ae/themes/indicud/media/img/slogan-inspiring-minds-transforming-lives.png" class="img-fluid mb-4" />
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <ul class="list-unstyled list-inline social text-center">
+                            <li class="list-inline-item mr-3"> <a target="_blank" href="http://www.facebook.com/CanadianUniversityDubai" class="login100-social-item bg1"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item mr-3"> <a target="_blank" href="http://instagram.com/canadianuniversitydubai" class="login100-social-item bg3"><i class="fa fa-instagram"></i></a></li>
+                            <li class="list-inline-item mr-3"> <a target="_blank" href="http://www.linkedin.com/company/canadianuniversityofdubai" class="login100-social-item bg1"> <i class="fa fa-linkedin-square"></i></a></li>
+                            <li class="list-inline-item mr-3"><a target="_blank" href="http://www.youtube.com/user/webcud" class="login100-social-item bg3"><i class="fa fa-youtube-square"></i></a></li>
+                            <li class="list-inline-item mr-3"><a target="_blank" href="http://www.youtube.com/user/webcud" class="login100-social-item bg3"><i class="fa fa-twitter-square"></i></a></li>
+                        </ul>
+                    </div>
+                    <hr />
+                </div>
+
+            </div>
+            <!-- Footer Links -->
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">
+                © 2022 Copyright:
+                <a target="_blank" style="color:white;" href="https://cud.ac.ae/"> www.cud.ac.ae</a>
+            </div>
+            <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
+
+        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Multiple Windows</h5>
+                        @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>*@
+                    </div>
+                    <div class="modal-body">
+                        Application is open in another window. Please close the other tabs to continue. 
+                    </div>                   
+                </div>
+            </div>
+        </div>        
+
+    </div>
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Content/Mdb/js/popper.min.js"></script>
+    <script src="~/Content/Mdb/js/mdb.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+        localStorage.openpages = Date.now();
+        window.addEventListener('storage', function (e) {
+            if (e.key == "openpages") {
+                localStorage.page_available = Date.now();
+            }
+            if (e.key == "page_available") {
+                //this.alert("One more page already open.");
+                $('#staticBackdrop').modal('show');
+            }
+        }, false);        
+
+        $('body').css('padding-top', $('.navbar').outerHeight() + 'px')
+
+        // detect scroll top or down
+        if ($('.smart-scroll').length > 0) { // check if element exists
+            var last_scroll_top = 0;
+            $(window).on('scroll', function () {
+                scroll_top = $(this).scrollTop();
+                if (scroll_top < last_scroll_top) {
+                    $('.smart-scroll').removeClass('scrolled-down').addClass('scrolled-up');
+                }
+                else {
+                    $('.smart-scroll').removeClass('scrolled-up').addClass('scrolled-down');
+                }
+                last_scroll_top = scroll_top;
+            });
+
+        }
+    </script>
+</body>
+</html>

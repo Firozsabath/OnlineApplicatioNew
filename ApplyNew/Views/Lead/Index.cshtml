@@ -1,0 +1,715 @@
+﻿@model ApplyNew.ViewModel.LeadViewModel
+@using CaptchaMvc.HtmlHelpers
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_Layoutpage1.cshtml";
+}
+<style>
+    .iti {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .select2-container {
+        font-size: 1.1rem;
+    }
+
+    .select2-selection__rendered {
+        line-height: 32px !important;
+    }
+
+    .select2-selection {
+        height: 47px !important;
+        padding: 7px;
+    }
+
+    .field-validation-error {
+        color: red;
+    }
+
+    label {
+        /*color: #495057 !important;*/
+        font-weight: bold;
+    }
+
+    em {
+        color: red;
+    }
+
+    .hide {
+        display: none;
+    }
+</style>
+@Html.Partial("_ProgressBar", Model.ProfileProgress)
+<div class="container body-content">
+    <br />
+    <h4 style="text-align:center;font-weight:bold;color:#d32020;" class="mb-3">@ApplyNew.Resources.Resource.Applicantinfoh1</h4>
+    <div>
+        <ul>
+            <li>
+                @ApplyNew.Resources.Resource.list1
+            </li>
+            <li style="color:#d32020;">
+                @ApplyNew.Resources.Resource.list2
+            </li>
+        </ul>
+    </div>
+    <hr />
+    <div class="initialacc">
+        <div class="panel-group" id="accordion">
+            @using (Html.BeginForm("Index", "Lead", FormMethod.Post, new { id = "signupform", @class = "needs-validation", novalidate = "" }))
+            {
+                <fieldset>
+                    <legend style="color:#1c3764;font-weight: bold; border-bottom: 1px solid #1c3764;">@ApplyNew.Resources.Resource.ApplicantBasicInfo</legend>
+                    <br />
+                    <div class="px-5" @*style="padding: 10px 40px 0px 40px;"*@>
+                        <div class="row mb-4">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <label for="Fprogram">
+                                    @ApplyNew.Resources.Resource.Email <em>*</em>
+                                </label>
+                                @Html.TextBoxFor(x => x.Datalist.Email, new { type = "email", id = "Email", @class = "form-control form-control-lg", required = "required" })
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please provide a valid email.
+                                </div>
+                            </div>
+                            @*<div class="col-lg-2 col-md-2 col-sm-12"></div>*@
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <label for="Email1">
+                                    @ApplyNew.Resources.Resource.vemail <em>*</em>
+                                </label>
+                                @Html.TextBoxFor(x => x.Datalist.verifyEmail, new { type = "email", id = "Email1", @class = "form-control form-control-lg", required = "required" })
+                                @Html.ValidationMessageFor(model => model.Datalist.verifyEmail, "", new { @style = "color:red;" })
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-12 emailchk my-2">
+                                <button class="btn btn-danger" id="btn_emailcheck">Continue</button>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <img class="email-check-ld hide" src="~/Content/Images/LoadingN.gif" style="width:25%;" alt="Loading img" />
+                        </div>
+
+                        <div class="row">                           
+                            <div class="col-lg-12 col-md-10 col-sm-12 text-center" id="emailrs"><p></p></div>
+                        </div>
+
+                        <div class="hide prsnldetailsdiv">
+                            <div class="row mb-4">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label for="Fprogram">
+                                        @ApplyNew.Resources.Resource.Applyfor <em>*</em>
+                                    </label>
+                                    <select id="ddlgpatype" name="ddlgpatype" style="font-size: 1.2rem;padding: 7px;" onchange="javascript:GetProgram(this.value);" class="form-control form-control-lg" required>
+                                        <option value="">@ApplyNew.Resources.Resource.ApplicantType</option>
+                                        <option value="3"> @ApplyNew.Resources.Resource.Bachelors</option>
+                                        <option value="1"> @ApplyNew.Resources.Resource.Masters</option>
+                                        <!--<option value="11">Short courses</option>-->
+                                    </select>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">Please select a Applicant type</div>
+                                </div>
+                                @*<div class="col-lg-2 col-md-2 col-sm-12"></div>*@
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label for="FAgency">
+                                        @ApplyNew.Resources.Resource.Transferstatus <em>*</em>
+                                    </label>
+                                    <select id="ddltransferstatus" name="ddltransferstatus" style="font-size: 1.2rem;padding: 7px;" class="form-control form-control-lg" required>
+                                        <option value="">@ApplyNew.Resources.Resource.Options</option>
+                                        <option value="Yes">@ApplyNew.Resources.Resource.Yes</option>
+                                        <option value="No">@ApplyNew.Resources.Resource.No</option>
+                                    </select>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please select an option
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label for="Fprogram">
+                                        @ApplyNew.Resources.Resource.Program <em>*</em>
+                                    </label>
+                                    @*@Html.DropDownListFor(m => m.Datalist.program1, new SelectList(Model.Programex.ProgramlistDB, "Programid", "ProgramName"), "Select a Program *", new { @class = "form-control", @id = "Fprogram", @Name = "Fprogram", @value = Model.Datalist.program1 })*@
+                                    <select id="Fprogram" name="Fprogram" class="chosen chzn-select" value="@Model.Datalist.program1" required disabled="disabled"></select>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please select a Program
+                                    </div>
+                                </div>
+                                @*<div class="col-lg-2 col-md-2 col-sm-12"></div>*@
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label for="FAgency">
+                                        @ApplyNew.Resources.Resource.hearabtus <em>*</em>
+                                    </label>
+                                    @Html.DropDownListFor(m => m.Datalist.leadsource, new SelectList(Model.Agencylst.AgencyList, "Elementno", "DisplayText"), "How did you hear about us", new { @class = "form-control", @id = "FAgency", @Name = "FAgency", @value = Model.Datalist.leadsource, required = "required" })
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please select an option
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <label for="ddlgender">
+                                        @ApplyNew.Resources.Resource.Gender <em>*</em>
+                                    </label>
+                                    <select id="ddlgender" name="ddlgender" style="font-size: 1.2rem;padding: 7px;" class="form-control form-control-lg" required>
+                                        <option value="">@ApplyNew.Resources.Resource.Gender</option>
+                                        @if (Model.Datalist.Gender == "Male")
+                                        {
+                                            <option selected="selected" value="Male">@ApplyNew.Resources.Resource.Male</option>
+                                            <option value="Female">@ApplyNew.Resources.Resource.Female</option>
+                                        }
+                                        else if (Model.Datalist.Gender == "Female")
+                                        {
+                                            <option value="Male">@ApplyNew.Resources.Resource.Male</option>
+                                            <option selected="selected" value="Female">@ApplyNew.Resources.Resource.Female</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="Male">@ApplyNew.Resources.Resource.Male</option>
+                                            <option value="Female">@ApplyNew.Resources.Resource.Female</option>
+                                        }
+                                    </select>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please choose gender
+                                    </div>
+                                    @*@Html.DropDownListFor(m => m.Datalist.Gender, new SelectList(Model.Datalist.Genders, Model.Datalist.Gender), "Gender", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Datalist.Gender)*@
+                                </div>
+                                @*<div class="col-lg-2 col-md-2 col-sm-12"></div>*@
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <label for="ETerm">
+                                        @ApplyNew.Resources.Resource.term <em>*</em>
+                                    </label>
+                                    @Html.DropDownListFor(m => m.Datalist.TermcalendarID, new SelectList(Model.Termlst.TermList, "TermCalendarID", "TextTerm"), "Entrance Term", new { @class = "form-control form-control-lg", @style = "font-size: 1.2rem;padding: 7px;", @id = "ETerm", @Name = "ETerm", @value = "", @required = "required" })
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please choose a Term
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <label for="Country">
+                                        @ApplyNew.Resources.Resource.Nationality <em>*</em>
+                                    </label>
+                                    @Html.DropDownListFor(m => m.Datalist.CountryID, new SelectList(Model.Countrylst.CountryList, "UniqueId", "DisplayText"), "Country", new { @class = "form-control form-control-lg", @id = "Country", @Name = "Country", @value = Model.Datalist.CountryID, @required = "required" })
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please select a country.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <label for="FName">@ApplyNew.Resources.Resource.FirstName <em>*</em></label>
+                                    @Html.TextBoxFor(x => x.Datalist.Firstname, new { id = "Firstname", @class = "form-control form-control-lg", @autocpmplete = "off", required = "required" })
+                                    @*@Html.ValidationMessageFor(model => model.Datalist.Firstname, "", new { @style = "color:red;" })*@
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please enter first name.
+                                    </div>
+                                </div>
+                                @*<div class="col-lg-2 col-md-2 col-sm-12"></div>*@
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <label for="MName">
+                                        @ApplyNew.Resources.Resource.MiddleName
+                                    </label>
+                                    @Html.TextBoxFor(x => x.Datalist.Middlename, new { id = "MName", @class = "form-control form-control-lg" })
+                                    @Html.ValidationMessageFor(model => model.Datalist.Middlename, "", new { @style = "color:red;" })
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <label for="LName">
+                                        @ApplyNew.Resources.Resource.LastName <em>*</em>
+                                    </label>
+                                    @Html.TextBoxFor(x => x.Datalist.Lastname, new { id = "Lastname", @class = "form-control form-control-lg", required = "required" })
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please enter Last name.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <label for="FName">@ApplyNew.Resources.Resource.FirstNamearabic</label>
+                                    @Html.TextBoxFor(x => x.Datalist.Firstnamear, new { id = "Firstnamear", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                                    @*@Html.ValidationMessageFor(model => model.Datalist.Firstname, "", new { @style = "color:red;" })*@
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please enter first name.
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <label for="MName">
+                                        @ApplyNew.Resources.Resource.MiddleNamearabic
+                                    </label>
+                                    @Html.TextBoxFor(x => x.Datalist.Middlenamear, new { id = "MNamear", @class = "form-control form-control-lg" })
+                                    @Html.ValidationMessageFor(model => model.Datalist.Middlenamear, "", new { @style = "color:red;" })
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <label for="LName">
+                                        @ApplyNew.Resources.Resource.LastNamearabic
+                                    </label>
+                                    @Html.TextBoxFor(x => x.Datalist.Lastnamear, new { id = "Lastnamear", @class = "form-control form-control-lg" })
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please enter Last name.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label for="Phone1" style="color: #5264AE;top:-25px;">
+                                        @ApplyNew.Resources.Resource.Phone <em>*</em>
+                                    </label>
+                                    @Html.TextBoxFor(x => x.Datalist.phone1, new { type = "tel", id = "Phone1", @class = "form-control form-control-lg", @style = "padding-right: 6px;padding-left: 52px;", required = "required", @maxlength = "10", onkeypress = "return isNumberKey(event)" })
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please enter a valid phone number
+                                    </div>
+                                </div>
+                                @*<div class="col-lg-2 col-md-2 col-sm-12"></div>*@
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label for="DOB">
+                                        @ApplyNew.Resources.Resource.dob <em>*</em>
+                                    </label>
+                                    @Html.TextBoxFor(model => model.Datalist.Birdthdate, new { id = "DOB", @type = "text", @class = "form-control form-control-lg", @autocomplete = "Off", @value = "", required = "required" })
+                                    @*@Html.TextBoxFor(model => model.Datalist.Birdthdate, new { id = "DOB", @type = "text", @class = "form-control form-control-lg datepicker", @autocomplete = "Off", @value = "", required = "required", @readonly = "readonly", style = "background-color:white;" })*@
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please select a date
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center my-3 d-none">
+                                <div class="row">
+                                    <div class="col col-md-3 col-12"></div>
+                                    <div class="col col-md-3 col-12 mb-3">
+                                        <label class="mr-4"> Are you an agent :</label>
+                                        <label class="radio-inline radiolabel"><input type="radio" value="Yes" onchange="ShowagentField(this.value)" name="angentstatus"><span class="mx-1"> @ApplyNew.Resources.Resource.Yes</span></label>
+                                        <label class="radio-inline radiolabel"><input type="radio" value="No" onchange="ShowagentField(this.value)" name="angentstatus" checked="checked"><span class="mx-1">@ApplyNew.Resources.Resource.No </span></label>
+                                    </div>
+                                    <div class="col col-md-3 col-12 agentcodediv" style="display:none;">
+                                        @Html.TextBoxFor(x => x.Datalist.AgentCode, new { type = "tel", id = "AgentCode", name = "AgentCode", @placeholder = "Enter Agent Code", @maxlength = "10", @class = "form-control form-control-lg" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="padding:10px; border-bottom: 1px solid #ca0d4a;">
+                                <div class="col-lg-2 col-md-2 col-sm-12"></div>
+                                <div class="col-lg-4 col-md-4 col-sm-12"><button type="button" class="btn btn-light button" id="savendextbtn" style="width:330px;"><i class="loading-icon fa fa-spinner fa-spin hide"></i> <span class="btn-txt1">@ApplyNew.Resources.Resource.save &nbsp; <i class="fa fa-save"></i></span></button></div>
+                                <div class="col-lg-4 col-md-4 col-sm-12"><button type="button" class="btn btn-danger button" id="sbmtbtn" style="width:330px;"><i class="loading-icon fa fa-spinner fa-spin hide"></i> <span class="btn-txt2">@ApplyNew.Resources.Resource.Continue &nbsp; <i class="fa fa-forward"></i></span></button></div>
+                            </div>
+
+                        </div>
+
+                        
+
+                        @*<div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div id="CaptchaPartialview">
+                    @Html.Captcha("Refresh", "Enter Verification Code ", 4, "The Captcha is required", true)
+                    <br /> <p> @ViewBag.ErrMessage </p>
+                </div>
+                <div id="Captchaerror" style="color:red;"></div>
+            </div>
+        </div>*@
+                    </div>
+                </fieldset>
+                <fieldset style="display:none;">
+                    <legend style="color:#d32020;font-weight: bold;border-bottom: 1px solid #c41f56;">
+                        Login Information
+                    </legend>
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 mb-3">
+                            <div class="form-group">
+                                <label for="pwd">
+                                    Password *
+                                </label>
+                                @*<input type="password" class="form-control" name="pwd" id="pwd" />*@
+                                @Html.TextBoxFor(x => x.Datalist.password, new { type = "password", id = "pwd", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Datalist.password, "", new { @style = "color:red;" })
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 mb-3"></div>
+                        <div class="col-lg-5 col-md-5">
+                            <div class="form-group">
+                                <label for="pwd1">
+                                    Verify Password *
+                                </label>
+                                @*<input type="password" class="form-control" id="pwd1" name="pwd1" />*@
+                                @Html.TextBoxFor(x => x.Datalist.ConfirmPassword, new { type = "password", id = "pwd1", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Datalist.ConfirmPassword, "", new { @style = "color:red;" })
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <input type="hidden" id="selectedprogram" name="selectedprogram" />
+                <input type="hidden" id="selectedsource" name="selectedsource" />
+                <input type="hidden" id="selectedterm" name="selectedterm" />
+                <input type="hidden" id="selectedcountry" name="selectedcountry" />
+                <input type="hidden" id="selectedcountryname" name="selectedcountryname" />
+                <input type="hidden" id="hdngender" name="hdngender" />
+                <input type="hidden" id="hdnprogram" name="hdnprogram" />
+                <input type="hidden" id="hdnprogramType" name="hdnprogramType" />
+                <input type="hidden" id="hdnSaveandExit" name="hdnSaveandExit" />
+                <input type="hidden" id="selectedprogramID" name="selectedprogramID" />
+                <input type="hidden" id="hdnPhone1" name="hdnPhone1" />
+                <input type="hidden" id="hdnqs" name="hdnqs" value="@ViewBag.utms" />
+                <input type="hidden" id="hdnSource_type" name="hdnSource_type" value="@ViewBag.Source_type" />
+                <input type="hidden" id="hdnmedium" name="hdnmedium" value="@ViewBag.medium" />
+                @*<input type="hidden" id="hdnMarketing_channel" name="hdnMarketing_channel" value="@ViewBag.Marketing_channel" />
+                    <input type="hidden" id="hdnCommunication_channel" name="hdnCommunication_channel" value="@ViewBag.Communication_channel" />*@
+                <input type="hidden" id="hdnCampaig_name" name="hdnCampaig_name" value="@ViewBag.Campaign_name" />
+
+            }
+            
+            @*</div>*@
+
+        </div>
+    </div>
+</div>
+<link href="~/Scripts/intl-tel-input/css/intlTelInput.css" rel="stylesheet" />
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+@section scripts{
+    <script src="~/Scripts/intl-tel-input/js/intlTelInput.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var form = document.getElementById('signupform');
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            }, false);
+        })();
+
+        $(document).ready(function () {
+            window.history.forward();
+            function noback() {
+                window.history.forward();
+            }
+           // Statuscheck();
+            $("#CaptchaInputText").addClass('form-control form-control-lg');
+            $("#DOB").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '-70:+0'
+            });
+
+            var btns = $('#Firstname,#MName,#Lastname');
+            btns.on("keypress", function (event) {
+                var englishAlphabetAndWhiteSpace = /[A-Za-z ]/g;
+                var key = String.fromCharCode(event.which);
+                if (event.keyCode == 8 || event.keyCode == 37 || event.keyCode == 39 || englishAlphabetAndWhiteSpace.test(key)) {
+                    return true;
+                }
+                return false;
+            });
+
+            $("#Fprogram").select2({ width: '100%'});
+            $("#FAgency").select2({ width: '100%'});
+            $("#Country").select2({ width: '100%'});
+            //$("#Country > option:first-child").val(2113);
+            //$("#Country").val($("#Country option:first").val(2113));
+
+            var input = document.querySelector('#Phone1');
+            var input2 = document.querySelector('#Phone2');
+            var iti = intlTelInput(input, {
+                utilsScript: 'build/js/utils.js',
+                initialCountry: 'ae',
+                preferredCountries: ['ae', 'ca', 'ksa'],
+                autoPlaceholder: false,
+                separateDialCode: true,
+                preventInvalidNumbers: true,
+                autoPlaceholder: true,
+                autoHideDialCode: true,
+                autoFormat: false,
+            });
+
+            $('#Email1').on('paste', function (e) {
+                e.preventDefault();
+            });
+            //$("#ETerm").change(function () {
+                //$("#Email1").trigger("change");
+            //});
+
+            $("#btn_emailcheck").click(function () {
+
+                var Emailid = $("#Email1").val();
+                //var TErmID = $("#ETerm").val();
+                var TErmID = "";
+                //if (Emailid == '' || Emailid == undefined) { Emailid = "Nully" }
+                if (Emailid == '' || Emailid == undefined) {
+                    alert("Please enter a valid e-mail before proceed!");
+                    return false;
+                }
+                $('.email-check-ld').removeClass('hide');
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Checkprospectbyemail", "Lead")',
+                    data: "{ Emailid: '" + Emailid + "',Termid: '" + TErmID + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r) {
+                        var dt = r;
+                        if (dt != "") {
+                            $('.email-check-ld').addClass('hide');
+                            $('.prsnldetailsdiv').addClass('hide');
+                            $('#emailrs').find('h5').remove();
+                            $('#emailrs').find('p').remove();
+                            $("#emailrs").append("<h5 style='color:red;font-weight:bold;'>An open application already exists with this email address.</h5><p style='color:red;font-weight:bold;'>An email has been sent to your email address with instructions on how to continue your existing application.</p>");
+                            $("#savendextbtn").prop('disabled', true);
+                            $("#sbmtbtn").prop('disabled', true);
+                        }
+                        else {
+                            $('#Email').attr('readonly', true);
+                            $('#Email1').attr('readonly', true);
+                            $('.emailchk').addClass('hide');
+                            $('.email-check-ld').addClass('hide');
+                            $('.prsnldetailsdiv').removeClass('hide');
+                            $('#emailrs').find('h5').remove();
+                            $('#emailrs').find('p').remove();
+                            $("#savendextbtn").prop('disabled', false);
+                            $("#sbmtbtn").prop('disabled', false);
+                        }
+                    },
+                    error: function (r) {
+                        alert(r.responseText);
+                    },
+                    failure: function (r) {
+                        alert(r.responseText);
+                    }
+                });
+
+            });
+
+
+            @*$("#Email1").change(function () {
+                var Emailid = this.value;
+                var TErmID = $("#ETerm").val();
+                if (Emailid == '') { Emailid = "Nully" }
+                $('.email-check-ld').removeClass('hide');
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Checkprospectbyemail", "Lead")',
+                    data: "{ Emailid: '" + Emailid + "',Termid: '" + TErmID + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r) {
+                        var dt = r;
+                        if (dt != "") {
+                            $('.email-check-ld').addClass('hide');
+                            $('.prsnldetailsdiv').addClass('hide');
+                            $("#emailrs").append("<h5 style='color:red;font-weight:bold;'>An open application already exists with this email address.</h5><p>An email has been sent to your email address with instructions on how to continue your existing application.</p>");
+                            $("#savendextbtn").prop('disabled', true);
+                            $("#sbmtbtn").prop('disabled', true);
+                        }
+                        else {
+                            $('.emailchk').addClass('hide');
+                            $('.email-check-ld').addClass('hide');
+                            $('.prsnldetailsdiv').removeClass('hide');
+                            $('#emailrs').find('h5').remove();
+                            $("#savendextbtn").prop('disabled', false);
+                            $("#sbmtbtn").prop('disabled', false);
+                        }
+                    },
+                    error: function (r) {
+                        alert(r.responseText);
+                    },
+                    failure: function (r) {
+                        alert(r.responseText);
+                    }
+                });
+            });*@
+
+            $("#savendextbtn").click(function () {
+                document.getElementById("hdnSaveandExit").value = "SaveandExit";
+                 $("#sbmtbtn").click();
+            });
+
+            $("#sbmtbtn").click(function () {
+
+                $(".loading-icon").removeClass("hide");
+                $(".button").attr("disabled", true);
+                $(".btn-txt1").text("Sending Data to Server......");
+                $(".btn-txt2").text("Sending Data to Server......");
+                    //event.preventDefault();
+
+                //document.getElementById("hdnprogramType").value = $("#ddlgpatype option:selected").text().trim();
+                document.getElementById("hdnprogramType").value = $("#ddlgpatype option:selected").val;
+                    var prog = $("#Fprogram option:selected");
+                document.getElementById("selectedprogram").value = prog.text();
+                document.getElementById("selectedprogramID").value = prog.val();
+                    var source = $("#FAgency option:selected");
+                    document.getElementById("selectedsource").value = source.text();
+                    var source1 = $("#Country option:selected");
+                document.getElementById("selectedcountry").value = source1.val();
+                document.getElementById("selectedcountryname").value = source1.text();
+                    var source12 = $("#ETerm option:selected");
+                    document.getElementById("selectedterm").value = source12.text();
+                var gen = $("#ddlgender option:selected");
+                document.getElementById("hdngender").value = gen.val();
+                if ($("#Phone1").val() != "") {
+                var intlNumber = iti.selectedCountryData.dialCode + $("#Phone1").val();
+                    document.getElementById("hdnPhone1").value = intlNumber;
+                }
+
+                //var intlNumber1 = iti.selectedCountryData.dialCode + $("#Phone2").val();
+                //document.getElementById("Phone2").value = intlNumber1;
+
+               // $("#signupform").submit();
+                var form = $("#signupform")
+               // alert(form.prop('id')) //test to ensure calling form correctly
+
+                if (form[0].checkValidity() === false) {
+                    $(".loading-icon").addClass("hide");
+                    $(".button").attr("disabled", false);
+                    $(".btn-txt1").text("@ApplyNew.Resources.Resource.save");
+                    $(".btn-txt2").text("@ApplyNew.Resources.Resource.Continue");
+                    event.preventDefault();
+                    event.stopPropagation();
+                    //return false;
+                }
+                form.addClass('was-validated');
+
+                if (!form[0].checkValidity())
+                {
+                    return false;
+                }
+
+                var form = $("#signupform").serialize();
+                $.ajax({
+                url:'@Url.Action("Index", "Lead")',
+                    data: form,
+                    cache: false,
+                    type: "POST",
+                    //dataType: 'json',
+                    success: function (data) {
+                    if (data.Success) {
+                        window.location = data.newurl;
+                    }
+                    else {
+                         $(".loading-icon").addClass("hide");
+                    $(".button").attr("disabled", false);
+                    $(".btn-txt1").text("@ApplyNew.Resources.Resource.save");
+                    $(".btn-txt2").text("@ApplyNew.Resources.Resource.Continue");
+                       alert("error : " + data);
+                        }
+                    //    if (!data.Captcha) {
+                    //        $("#CaptchaPartialview").load(" #CaptchaPartialview");
+                    //        $("#CaptchaInputText").addClass('form-control form-control-lg');
+                    //        $("#Captchaerror").html('<p style="color:red;">Error: captcha is not valid.</p>');
+                    //}
+                },
+                error: function (reponse) {
+                     $(".loading-icon").addClass("hide");
+                    $(".button").attr("disabled", false);
+                    $(".btn-txt1").text("@ApplyNew.Resources.Resource.save");
+                    $(".btn-txt2").text("@ApplyNew.Resources.Resource.Continue");
+                    alert("error : " + reponse);
+                }
+                });
+
+            });
+
+        });
+
+
+        function ShowagentField(status) {
+            if (status == "Yes") {
+                $("#AgentCode").attr("required",true);
+                $(".agentcodediv").show();
+            }
+            else {
+                $("#AgentCode").attr("required", false);
+                $(".agentcodediv").hide();
+            }
+        }
+
+        function GetProgram(TypeID) {
+            if (TypeID != undefined && TypeID != "") {
+                var procemessage = "<option value=''> Please wait...</option>";
+                $.ajax({
+                    url: '@Url.Action("GetProgramByTypeId", "Lead")',
+                    data: { Typeid: TypeID },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        var markup = "<option value=''>Select Program</option>";
+                        for (var x = 0; x < data.length; x++) {
+                            @*if (data[x].Value == @Model.CollegeData.CollegeID) {
+                                markup += "<option selected='selected' value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                            } else {*@
+                            markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                            //}
+                        }
+                        $("#Fprogram").html(markup).show();
+                        $("#Fprogram").select2({ width: '100%' });
+                    },
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
+                $("#Fprogram").prop("disabled", false);
+            }
+            else {
+                var markup = "<option value=''>Select Program</option>";
+                $("#Fprogram").html(markup).show();
+                $("#Fprogram").select2({ width: '100%' });
+                $("#Fprogram").prop("disabled", true);
+            }
+        }
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode != 46 && charCode > 31
+                && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+
+    </script>
+}

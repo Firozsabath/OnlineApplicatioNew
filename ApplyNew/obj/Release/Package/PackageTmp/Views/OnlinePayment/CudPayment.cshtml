@@ -1,0 +1,212 @@
+﻿@model ApplyNew.Models.PaymentParameters
+@{
+    ViewBag.Title = "CudPayment";
+}
+<style type="text/css">
+    .center-block {
+        width: 880px;
+        padding: 10px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    label{
+        font-weight:bold
+    }
+    .hide{
+        display:none;
+    }
+</style>
+@Html.Partial("_ProgressBar", Model.ProfileProgress)
+<div class="container body-content">
+    @using (Html.BeginForm("Demo", "OnlinePayment", FormMethod.Post, new { id = "signupform" }))
+    {
+        <input type="hidden" name="access_key" value="@Model.accesskey">
+        <input type="hidden" name="profile_id" value="@Model.ProfileID">
+
+        @*<input type="hidden" name="access_key" value="1af02ab59d0c35df94dcbe62e15328f5">
+            <input type="hidden" name="profile_id" value="F8548BFB-8234-4468-86DB-0EEBBB588A40">*@
+
+        <input type="hidden" name="merchant_defined_data1" value="web">
+        <input type="hidden" name="merchant_defined_data2" value="YES">
+        <input type="hidden" name="merchant_defined_data3" value="Electrical">
+        <input type="hidden" name="merchant_defined_data4" value="Tv">
+
+        @*<input type="hidden" name="transaction_uuid" value="@Model.getUid">*@
+
+        <input type="hidden" name="customer_ip_address" value="@Model.getip">
+        <input type="hidden" name="device_fingerprint_id" value="@Model.getsessionid">
+        <input type="hidden" name="signed_field_names" value="access_key,profile_id,merchant_defined_data1,bill_to_forename,bill_to_surname,bill_to_email,bill_to_address_line1,bill_to_address_city,bill_to_address_postal_code,bill_to_address_state,merchant_defined_data2,merchant_defined_data3,merchant_defined_data4,transaction_uuid,customer_ip_address,bill_to_address_country,signed_field_names,unsigned_field_names,signed_date_time,locale,transaction_type,reference_number,amount,currency">
+        @*<input type="hidden" name="signed_field_names" value="access_key,profile_id,merchant_defined_data1,merchant_defined_data2,merchant_defined_data3,merchant_defined_data4,payment_token,transaction_uuid,customer_ip_address,signed_field_names,unsigned_field_names,signed_date_time,locale,transaction_type,reference_number,amount,currency">*@
+        <input type="hidden" name="unsigned_field_names">
+        <input type="hidden" name="signed_date_time" value="@Model.getUTCDateTime">
+        <input type="hidden" name="locale" value="@Model.locallang">
+        <h2 style="text-align: center;padding-top:10px;font-weight:bold;color:#d32020;" class="mb-3">@ApplyNew.Resources.Resource.Online_Payment_Page</h2>
+        <fieldset>
+            <legend style="text-align: center;padding:10px;"><u>@ApplyNew.Resources.Resource.Payment_Details</u></legend>
+            <div class="row">
+                <div id="maincont" class="center-block">
+                    <div id="paymentDetailsSection" class="section">
+
+                        <div class="form-group">
+                            <label for="bill_to_forename">
+                                @ApplyNew.Resources.Resource.Student_Name :
+                            </label>
+                            <input class="form-control" type='text' id="bill_to_forename" name='bill_to_forename' value="@Model.Firstname" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label for="bill_to_email">
+                                @ApplyNew.Resources.Resource.Email_Onlinepayment :
+                            </label>
+                            <input type='text' class="form-control" id="bill_to_email" name='bill_to_email' value="@Model.bill_to_email" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label for="amount" id="Label5" runat="server">
+                                @ApplyNew.Resources.Resource.AmountPayable :
+                            </label>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">AED</span>
+                                <input type="text" class="form-control" name="amount" id="amount" value="@ViewData["amount"]" size="25" readonly />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount" id="Label1" runat="server">
+                                @ApplyNew.Resources.Resource.Other_Miscellaneous_fees :
+                            </label>
+                            <div class="input-group-prepend">
+                                <label for="amountmiscelns" style="color: #d5202a;font-weight:bold;"><input type="checkbox" id="amountmiscelns" name="amountmiscelns" value="">  @ApplyNew.Resources.Resource.reserve_my_seat.</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="clear:both;display:block;margin-bottom:25px;width:100%;"><input type="checkbox" name="agreeOriginalVersions" id="agreeOriginalVersions" onclick="javascript:Enable();" /> @ApplyNew.Resources.Resource.Agree_condtion1.</label>
+                            <label style="clear:both;display:block;margin-bottom:25px;width:100%;">
+                                <input type="checkbox" name="agreeTermsAndCondition" id="agreeTermsAndCondition" onclick="javascript:Enable();" /> @ApplyNew.Resources.Resource.Agree_condtion2.
+                            </label>
+                            <label style="clear:both;display:block;margin-bottom:25px;width:100%;">
+                                <input type="checkbox" name="agreeTermsAndCondition2" id="agreeTermsAndCondition2" onclick="javascript:Enable();" /> @ApplyNew.Resources.Resource.Agree_condtion3.
+                            </label>
+                        </div>
+                        <div class="form-group" style="display:none;">
+                            <label for="reference_number" id="Label2" runat="server">
+                                Reference Number :
+                            </label>
+                            @*<input type="text" class="form-control" id="reference_number" name="reference_number" value="@Model.reference_number" size="25" />*@
+                        </div>
+
+                        <input type='hidden' id="bill_to_surname" name='bill_to_surname' value="@Model.lastname" />
+                        <input type='hidden' id="bill_to_address_city" name='bill_to_address_city' value="@Model.bill_to_address_city" />
+                        <input type='hidden' id="bill_to_address_postal_code" name='bill_to_address_postal_code' value="@Model.bill_to_address_postal_code" />
+                        <input type='hidden' id="bill_to_address_line1" name='bill_to_address_line1' value="@Model.bill_to_address_line1" />
+                        <input type='hidden' id="bill_to_address_state" name='bill_to_address_state' value="@Model.bill_to_address_state" />
+                        <input type='hidden' id="bill_to_address_country" name='bill_to_address_country' value="@Model.bill_to_address_country" />
+                        <input type="hidden" id="transaction_type" name="transaction_type" value="sale">
+                        <input type="hidden" id="hdnProspectID" value="@ViewBag.hdnprospectid" name="hdnProspectID" />
+
+                        <input type="hidden" name="currency" value="AED" size="25">
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div style="text-align: center;">
+            <!--<input type="submit" id="submit" name="submit" value="Continue to make payment" class="btn btn-danger" />-->
+            <!--<input type="button" id="submit" name="submit" value="Continue to make payment" class="btn btn-danger" onclick="onsubmit()"/>-->
+            <button id="btnsubmit" name="btnsubmit" class="btn btn-danger button" disabled onclick="onsubmit()">@ApplyNew.Resources.Resource.Continue_to_make_Payment</button>
+            <button id="btnCrypto" name="btnCrypto" class="btn btn-danger button1" disabled><i class="loading-icon fa fa-spinner fa-spin hide"></i> <span class="btn-txt1">Pay In Crypto</span></button>
+        </div>
+       
+        <div style="text-align: center;padding:15px;">
+            <a target="_blank" href="https://www.cud.ac.ae/fees/payment-and-bank-details" class="block" style="color: #d5202a;font-weight:bold;">For other payment option, please click here <i class="fa fa-forward"></i></a>
+        </div>
+    }
+
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Statuscheck();
+            $("#btnsubmit").click(function () {
+                var total;
+                var chargetotal = document.getElementById('amount').value;
+                //var chargetotal1 = document.getElementById('amountmiscelns').value;
+                var chargetotal1 = 2500;
+                if ($("#amountmiscelns").prop('checked') == true) {
+                    total = +chargetotal + +chargetotal1;
+                }
+                else { total = chargetotal }
+                document.getElementById('amount').value = total;
+                document.forms['payment_form'].submit();
+            });
+            Enable();
+
+            $("#btnCrypto").click(function (e) {
+                e.preventDefault();
+
+                $(".loading-icon").removeClass("hide");
+                $(".button1").attr("disabled", true);
+                $(".btn-txt1").text("Redirecting to Binance Pay......");
+
+                var total;
+                var chargetotal = document.getElementById('amount').value;
+                //var chargetotal1 = document.getElementById('amountmiscelns').value;
+                var chargetotal1 = 2500;
+                if ($("#amountmiscelns").prop('checked') == true) {
+                    total = +chargetotal + +chargetotal1;
+                }
+                else { total = chargetotal }
+
+                $.ajax({
+                    url: '@Url.Action("BinancePay", "OnlinePayment")',
+                    cache: false,
+                    data: {
+                        amount: total, fname: $("#bill_to_forename").val(), lname: $("#bill_to_surname").val(), prospect: $("#hdnProspectID").val(), EmailID: $("#bill_to_email").val() },
+                    type: "POST",
+                    success: function (data) {
+                        if (data.success) {
+                            window.location = data.redirectUrl;
+                            return false;
+                        }
+                    },
+                    error: function (response) {
+                        $(".loading-icon").addClass("hide");
+                        $(".button1").attr("disabled", false);
+                        $(".btn-txt1").text("Pay In Crypto");
+                        return false;
+                    }
+                });
+            });
+        });
+
+        function Enable() {
+            var lfckv = document.getElementById("agreeOriginalVersions").checked;
+            var lfckv2 = document.getElementById("agreeTermsAndCondition").checked;
+            var lfckv3 = document.getElementById("agreeTermsAndCondition2").checked;
+            if (lfckv == true && lfckv2 == true && lfckv3) {
+                $("#btnsubmit").prop('disabled', false);
+                $("#btnCrypto").prop('disabled', false);
+            }
+            else {
+                $("#btnsubmit").prop('disabled', true);
+                $("#btnCrypto").prop('disabled', true);
+            }
+        }
+        function Statuscheck() {
+            var _prospectid = $("#hdnProspectID").val();
+                 $.ajax({
+                url:'@Url.Action("ProspectStatusCheck", "OnlineApply")',
+                     data: { prospectid: _prospectid },
+                cache: false,
+                type: "POST",
+                     success: function (data) {
+                         if (data.Success) {
+                             window.location = '@Url.Action("LeadComplete", "Lead")';
+                         }
+                         else {
+                         }
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+                });
+        }
+
+    </script>
+}

@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "LeadComplete";
+}
+
+<br />
+<div class="container">   
+    <div class="jumbotron">
+        <h3 style="text-align:center;padding:10px;color:#d32020;font-weight:bold;">@ApplyNew.Resources.Resource.Online_Application</h3>
+        <div class="row">
+            <div class="col-lg-1 col-md-12 col-sm-12"></div>
+            <div class="col-lg-10 col-md-12 col-sm-12">
+                <p style="margin-left:10px;font-weight:bold;font-size:18px;">@ApplyNew.Resources.Resource.Feedback_msg1_leadcomplete.</p>
+                <p style="margin-left:10px;font-size:17px;">
+                    @ApplyNew.Resources.Resource.Feedback_msg2_leadcomplete.
+                </p>
+                <p style="margin-left:10px;font-size:17px;">@ApplyNew.Resources.Resource.Feedback_msg3_leadcomplete <a href="mailto:apply@cud.ac.ae">apply@cud.ac.ae</a></p>               
+                <p style="margin-left:10px;font-size:17px;">@ApplyNew.Resources.Resource.You_can_access_your_submitted_application_here: <button class="btn btn-light" onclick="document.location.href='@Url.Action("Index", "CompletedProfile")'">Your application</button> </p>
+                
+            </div>
+        </div>       
+        <div class="row">
+            <div class="col-lg-1 col-md-12 col-sm-12"></div>
+            <div class="col-lg-10 col-md-12 col-sm-12" style="margin-left:10px;">
+                <h4 style="color:#1c3764;">Next Steps</h4>
+                <ul style="font-size:17px;">
+                    <li style="line-height:1.5em">Review the <a style="font-weight:bold" href="http://www.cud.ac.ae/academic-calendar">CUD Academic Calendar</a></li>
+                    <li style="line-height:1.5em">[<a style="font-weight:bold" href="http://www.cud.ac.ae/downloads/new-student-attestation-information">Attestation Information</a>] | [<a style="font-weight:bold" href="http://www.cud.ac.ae/downloads/new-student-attestation-information-graduate">Attestation Information for Graduate Students</a>]</li>
+                    <li style="line-height:1.5em">Register for the <a style="font-weight:bold" href="http://www.cud.ac.ae/ielts">IELTS</a> or <a style="font-weight:bold" href="http://www.cud.ac.ae/events/toefl-test-dates">TOEFL</a> exam | <a style="font-weight:bold" href="http://www.cud.ac.ae/events/math-placement-test">Math Placement Test</a></li>
+                    <li style="line-height:1.5em"><a style="font-weight:bold" href="http://www.cud.ac.ae/prospective-students/transfer-of-credit">Transferring Credits to CUD</a></li>
+                    <li style="line-height:1.5em"><a style="font-weight:bold" href="http://www.cud.ac.ae/fees">CUD Fees Overview</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function noBack() { window.history.forward() }
+    noBack();
+    window.onload = noBack;
+    window.onpageshow = function (evt) { if (evt.persisted) noBack() }
+    window.onunload = function () { void (0) }
+</script>
+

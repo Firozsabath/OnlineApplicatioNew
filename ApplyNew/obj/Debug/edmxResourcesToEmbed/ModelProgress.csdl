@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CAMS_Enterprise_TestModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CAMS_ProfileProgressEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="Custom_Profileprogress" ReturnType="Collection(CAMS_Enterprise_TestModel1.Custom_Profileprogress_Result)">
+      <Parameter Name="prospectid" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="Custom_Profileprogress_Result">
+    <Property Type="Boolean" Name="ApplicationComplete" Nullable="false" />
+    <Property Type="Boolean" Name="EducationComplete" Nullable="false" />
+    <Property Type="Boolean" Name="ApplicationSubmitted" Nullable="false" />
+  </ComplexType>
+</Schema>

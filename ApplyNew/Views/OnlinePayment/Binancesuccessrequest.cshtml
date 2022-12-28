@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Binancesuccessrequest";
+}
+<div class="container">
+    <h2 class="p-3 text-success text-center">Payment was successful.</h2>
+    <p class="pb-3 text-success text-center"> You will recieve a receipt in your email.</p>
+
+    <div class="row">
+        <div class="col-lg-5 col-md-5 col-sm-12" style="margin-left:40px;">
+            @*<h4 style="color:#1c3764;">Next Steps</h4>*@
+            <ul class="list-group">
+                <li class="list-group-item active" style="background-color:rgb(216, 33, 44);border-color:rgb(216, 33, 44);font-size:18px;">Whats Next?</li>
+                <li class="list-group-item">Review the <a style="font-weight:bold" href="http://www.cud.ac.ae/academic-calendar">CUD Academic Calendar</a></li>
+                <li class="list-group-item">[<a style="font-weight:bold" href="http://www.cud.ac.ae/downloads/new-student-attestation-information">Attestation Information</a>] | [<a style="font-weight:bold" href="http://www.cud.ac.ae/downloads/new-student-attestation-information-graduate">Attestation Information for Graduate Students</a>]</li>
+                <li class="list-group-item">Register for the <a style="font-weight:bold" href="http://www.cud.ac.ae/ielts">IELTS</a> or <a style="font-weight:bold" href="http://www.cud.ac.ae/events/toefl-test-dates">TOEFL</a> exam | <a style="font-weight:bold" href="http://www.cud.ac.ae/events/math-placement-test">Math Placement Test</a></li>
+                <li class="list-group-item"><a style="font-weight:bold" href="http://www.cud.ac.ae/prospective-students/transfer-of-credit">Transferring Credits to CUD</a></li>
+                <li class="list-group-item"><a style="font-weight:bold" href="http://www.cud.ac.ae/fees">CUD Fees Overview</a></li>
+            </ul>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-12"></div>
+        <div class="col-lg-5 col-md-5 col-sm-12">
+            @*<h4 style="color:#1c3764;">Any questions or concerns?</h4>*@
+            <ul class="list-group">
+                <li class="list-group-item active" style="background-color:rgb(216, 33, 44);border-color:rgb(216, 33, 44);font-size:18px;"> Any questions or concerns? </li>
+                <li class="list-group-item"> You may reach us by phone at +971 4-321-9090 or email at <a href="mailto:apply@cud.ac.ae">apply@cud.ac.ae</a> </li>
+                <li class="list-group-item"> To review your application please click <a style="font-weight:bold" href='@Url.Action("Index", "CompletedProfile")'>here </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+

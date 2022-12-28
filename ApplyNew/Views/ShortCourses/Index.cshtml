@@ -1,0 +1,155 @@
+﻿@model ApplyNew.Models.CTGamedevelopment
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutExternal.cshtml";
+}
+<style>
+    .hide {
+        display: none;
+    }
+
+    label {
+        /*color: #495057 !important;*/
+        font-weight: bold;
+    }
+</style>
+<div class="container body-content">
+    <div class="p-2">
+        <h3 class="text-center my-3">Corporate Training</h3>
+        <h5 class="font-weight-bold mb-2">Game Development Porgram</h5>
+        @using (Html.BeginForm("Index", "ShortCourses", FormMethod.Post, new { id = "signupform", @class = "needs-validation", novalidate = "" }))
+        {
+    <div class="row">
+        <div class="col col-12 col-md-6">
+            <div class="form-group">
+                <label class="col-form-label" for="txtEmail">Email Address</label>
+                @Html.TextBoxFor(x => x.EmailID, new { type = "Email", @class = "form-control form-control-lg", @required = "required" })
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please enter a valid Email
+                </div>
+            </div>
+        </div>
+        <div class="col col-12 col-md-6">
+            <div class="form-group">
+                <label class="col-form-label">Confirm Email Address</label>
+                @Html.TextBoxFor(x => x.ConfirmEmailID, new { type = "Email", @class = "form-control form-control-lg", @required = "required" })
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please enter a valid Email
+                </div>
+            </div>
+        </div>
+        <div class="col col-12 col-md-6">
+            <div class="form-group">
+                <label class="col-form-label">First Name</label>
+                @Html.TextBoxFor(x => x.FirstName, new { type = "text", @class = "form-control form-control-lg" })
+            </div>
+        </div>
+        <div class="col col-12 col-md-6">
+            <div class="form-group">
+                <label class="col-form-label">Last Name</label>
+                @Html.TextBoxFor(x => x.LastName, new { type = "text", @class = "form-control form-control-lg" })
+            </div>
+        </div>
+        <div class="col col-12 col-md-6">
+            <div class="form-group">
+                <label class="col-form-label">Last Name</label>
+                @Html.TextBoxFor(x => x.Phone, new { type = "phone", @class = "form-control form-control-lg", @required = "required" })
+            </div>
+        </div>
+        <div class="col col-12 col-md-6">
+            <div class="form-group">
+                <label class="col-form-label">Gender</label>
+                @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.GenderList, "Value", "Text"), "Select Gender", new { @class = "form-control form-control-lg", @required = "required" })
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please choose a Gender.
+                </div>
+            </div>
+        </div>
+        <div class="col col-12 col-md-6">
+            <div class="form-group">
+                <label class="col-form-label">Level of Expertise</label>
+                @Html.DropDownListFor(m => m.ExpertLevel, new SelectList(ViewBag.LevelList, "Value", "Text"), "Level of Expertise", new { @class = "form-control form-control-lg", @required = "required" })
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please choose a Gender.
+                </div>
+            </div>
+        </div>
+        <div class="col col-12 col-md-6">
+            <div class="form-group">
+                <label class="col-form-label">Nationality</label>
+                @Html.DropDownListFor(m => m.Nationality, new SelectList(ViewBag.CountryList, "DisplayText", "DisplayText"), "Country", new { @class = "form-control form-control-lg", @required = "required" })
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please choose a Nationality.
+                </div>
+            </div>
+        </div>
+        <div class="col col-12 col-md-6">
+            <div class="form-group">
+                <label class="col-form-label">Country Of Residence</label>
+                @*<input type="email" id="txtEmail" class="form-control" />*@
+                @Html.DropDownListFor(m => m.CountryofResidence, new SelectList(ViewBag.CountryList, "DisplayText", "DisplayText"), "Country", new { @class = "form-control form-control-lg", @required = "required" })
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please choose a Country of Residence.
+                </div>
+            </div>
+        </div>
+        <div class="col col-12 col-md-6">
+            <div class="form-group">
+                <label class="col-form-label">Passport or Emirates ID number</label>
+                @Html.TextBoxFor(x => x.EmiratesorPassport, new { type = "text", @class = "form-control form-control-lg", @required = "required" })
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please Enter Emirates ID Number or Passport Number.
+                </div>
+            </div>
+        </div>
+        <div class="col col-12 col-md-6">
+            <div class="form-group">
+                <label class="col-form-label">Enquiry</label>
+                @Html.TextAreaFor(x => x.Enquiry, new { @class = "form-control form-control-lg" })
+                @*<textarea cols="10" id="txtEnquiry" class="form-control"></textarea>*@
+            </div>
+        </div>
+        <div class="col-12 text-center"><button type="submit" class="btn btn-danger button" id="sbmtbtn" style="width:330px;"><i class="loading-icon fa fa-spinner fa-spin hide"></i> <span class="btn-txt2">Continue for Payment &nbsp; <i class="fa fa-forward"></i></span></button></div>
+    </div>
+        }
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var form = document.getElementById('signupform');
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            }, false);
+        })();
+    </script>
+ }
+

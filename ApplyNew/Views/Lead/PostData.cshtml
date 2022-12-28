@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "PostData";
+    Layout = "~/Views/Shared/_Layoutpage1.cshtml";
+}
+
+<h2 style="text-align:center;font-weight:bold;color:#d32020;">PostData</h2>
+
+@{ 
+    if (ViewBag.Result == "success")
+    {
+<div style="text-align:center;">
+    <p style="color:black;font-size:18px;">
+        Your Application has been created Successfully.
+    </p>
+    <p style="color:black;font-size:16px;">
+        An Email has been send to ur registered email with the details of registration.Please Login to your Email and proceed the Registration.
+    </p>
+</div>
+    }
+    else
+    {
+        <div>
+            SOmething Went wrong!
+        </div>
+    }
+}

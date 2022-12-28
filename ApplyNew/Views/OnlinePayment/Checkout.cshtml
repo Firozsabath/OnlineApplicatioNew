@@ -1,0 +1,66 @@
+﻿@model ApplyNew.ViewModel.OnlinePaymentViewModel
+@{
+    ViewBag.Title = "Checkout";
+}
+<style type="text/css">
+    .center-block {
+        width: 400px;
+        padding: 10px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+</style>
+@Html.Partial("_ProgressBar", Model.ProfileProgress)<br />
+<h2 style="text-align:center;padding-top:10px;">Online Payment Checkout</h2><br />
+<legend style="text-align:center;padding:10px;"><u>Review Payment Details</u></legend>
+<div class="row">
+    <div id="maincont" class="center-block">
+        <div class="form-group">
+            <label for="bill_to_forename">
+                Payment is for :
+            </label>
+            <input class="form-control" type='text' id="purpose" name='purpose' value="Online payment Transaction" disabled />
+        </div>
+        <div class="form-group">
+            <label for="amount" id="Label5" runat="server">
+                Amount Payable:
+            </label>
+            <div class="input-group-prepend">
+                <span class="input-group-text">AED</span>
+                <input type="text" class="form-control" name="transaction_uuid" value="@Request.Params["amount"]" readonly />
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+@*@using (Html.BeginForm("https://testsecureacceptance.cybersource.com/pay", "", FormMethod.Post, new { id = "signupform" }))
+    {*@
+<form id="payment_confirmation" action="https://testsecureacceptance.cybersource.com/pay" method="post">
+    @{
+        IDictionary<string, string> parameters = new Dictionary<string, string>();
+        foreach (var key in Request.Form.AllKeys)
+        {
+            <div style="display:none;">
+                <span>
+                    @key :
+                </span>
+                <span>
+                    @Request.Params[key]
+                </span>
+            </div>
+            // parameters.Add(key, Request.Params[key]);
+        }
+
+        foreach (var key in Request.Form.AllKeys)
+        {
+            <input type="hidden" id="@key" name="@key" value="@Request.Params[key]" />
+            parameters.Add(key, Request.Params[key]);
+        }
+        <input type="hidden" id="signature" name="signature" value="@Model.Security.sign(parameters)" />
+
+        <div style="text-align:center;">
+            <input type="submit" id="submit" value="verify & continue to secure payment" class="btn btn-danger" />
+        </div>
+    }
+</form>

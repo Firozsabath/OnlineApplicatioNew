@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CAMS_Enterprise_TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CAMS_TestScoresEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="MathApptestscores" ReturnType="Collection(CAMS_Enterprise_TestModel.MathApptestscores_Result)">
+      <Parameter Name="studentid" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="MathApptestscores_Result">
+    <Property Type="Int32" Name="CAMS_TestID" Nullable="false" />
+    <Property Type="Int32" Name="CAMS_TestRefID" Nullable="false" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+    <Property Type="String" Name="TestDate" Nullable="true" MaxLength="30" />
+    <Property Type="Decimal" Name="Score" Nullable="true" Precision="11" Scale="5" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="64" />
+    <Property Type="String" Name="TestName" Nullable="true" MaxLength="50" />
+  </ComplexType>
+</Schema>

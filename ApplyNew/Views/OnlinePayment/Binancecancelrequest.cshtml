@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Binancecancelrequest";
+}
+
+<div class="container">
+    <h2 class="p-3 text-success text-center">Payment was unsuccessful.</h2>
+    <p class="text-center">
+        <input type="button" class="btn btn-primary" value="retry payment" style="width:330px;" onclick="document.location.href='@Url.Action("CudPayment", "OnlinePayment")'" />
+    </p>
+    <p id="p1failure1" style="font-size: 18px; font-weight: bold;" class="text-center">If you continue experiencing difficulty please contact us at +971 4-321-9090 or email at <a href="mailto:apply@cud.ac.a"> apply@cud.ac.a </a></p>
+</div>
+

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CAMS_Enterprise_TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="MathApptestscores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentid" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="CAMS_Enterprise_TestModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CAMS_Enterprise_TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CAMS_TestScoresEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="MathApptestscores" ReturnType="Collection(CAMS_Enterprise_TestModel.MathApptestscores_Result)">
+            <Parameter Name="studentid" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="MathApptestscores_Result">
+          <Property Type="Int32" Name="CAMS_TestID" Nullable="false" />
+          <Property Type="Int32" Name="CAMS_TestRefID" Nullable="false" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+          <Property Type="String" Name="TestDate" Nullable="true" MaxLength="30" />
+          <Property Type="Decimal" Name="Score" Nullable="true" Precision="11" Scale="5" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="TestName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CAMS_Enterprise_TestModelStoreContainer" CdmEntityContainer="CAMS_TestScoresEntities" >
+          <FunctionImportMapping FunctionImportName="MathApptestscores" FunctionName="CAMS_Enterprise_TestModel.Store.MathApptestscores">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CAMS_Enterprise_TestModel.MathApptestscores_Result">
+                <ScalarProperty Name="CAMS_TestID" ColumnName="CAMS_TestID" />
+                <ScalarProperty Name="CAMS_TestRefID" ColumnName="CAMS_TestRefID" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="TestDate" ColumnName="TestDate" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TestName" ColumnName="TestName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

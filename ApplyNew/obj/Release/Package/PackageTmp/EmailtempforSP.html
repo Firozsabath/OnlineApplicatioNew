@@ -1,0 +1,850 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="https://www.cud.ac.ae/themes/indicud/favicon.ico" type="image/vnd.microsoft.icon">
+<title>Canadian University Dubai</title>
+<style type="text/css">
+/* /\/\/\/\/\/\/\/\/ CLIENT-SPECIFIC STYLES /\/\/\/\/\/\/\/\/ */
+
+
+#outlook a {
+	padding: 0;
+} /* Force Outlook to provide a "view in browser" message */
+.ReadMsgBody {
+	width: 100%;
+}
+.ExternalClass {
+	width: 100%;
+} /* Force Hotmail to display emails at full width */
+.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
+	line-height: 100%;
+} /* Force Hotmail to display normal line spacing */
+body, table, td, p, a, li, blockquote {
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%
+} /* Prevent WebKit and Windows mobile changing default text sizes */
+table, td {
+	mso-table-lspace: 0pt;
+	mso-table-rspace: 0pt;
+} /* Remove spacing between tables in Outlook 2007 and up */
+img {
+	-ms-interpolation-mode: bicubic;
+} /* Allow smoother rendering of resized image in Internet Explorer */
+/* /\/\/\/\/\/\/\/\/ RESET STYLES /\/\/\/\/\/\/\/\/ */
+body {
+	margin: 0;
+	padding: 0;
+}
+img {
+	border: 0;
+	height: auto;
+	line-height: 100%;
+	outline: none;
+	text-decoration: none;
+}
+table {
+	border-collapse: collapse !important;
+	color: #455560;
+}
+body, #bodyTable, #bodyCell {
+	height: 100% !important;
+	margin: 0;
+	padding: 0;
+	width: 100% !important;
+}
+/* /\/\/\/\/\/\/\/\/ TEMPLATE STYLES /\/\/\/\/\/\/\/\/ */
+
+			/* ========== Page Styles ========== */
+
+#bodyCell {
+	padding: 60px;
+}
+#templateContainer {
+	width: 600px;
+	max-width:600px;
+}
+/**
+			* @tab Page
+			* @section background style
+			* @tip Set the background color and top border for your email. You may want to choose colors that match your company's branding.
+			* @theme page
+			*/
+body, #bodyTable {
+	background-color: #F4F4F4;
+}
+/**
+			* @tab Page
+			* @section email border
+			* @tip Set the border for your email.
+			*/
+#templateContainer {
+	border: 0;
+}
+/**
+			* @tab Page
+			* @section heading 1
+			* @tip Set the styling for all first-level headings in your emails. These should be the largest of your headings.
+			* @style heading 1
+			*/
+.header-one, h1 {
+	color: #202020;
+	display: block;
+	font-family: Arial;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 100%;
+	letter-spacing: normal;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 10px;
+	margin-left: 0;
+	text-align: left;
+}
+.header-one.big, h1.big {
+	font-size: 23px;
+	line-height: 30px;
+}
+/**
+			* @tab Page
+			* @section heading 2
+			* @tip Set the styling for all second-level headings in your emails.
+			* @style heading 2
+			*/
+.header-two, h2 {
+	color: #404040;
+	display: block;
+	font-family: Arial;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: bold;
+	line-height: 100%;
+	letter-spacing: normal;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 10px;
+	margin-left: 0;
+	text-align: left;
+}
+/**
+			* @tab Page
+			* @section heading 3
+			* @tip Set the styling for all third-level headings in your emails.
+			* @style heading 3
+			*/
+h3 {
+	color: #606060 !important;
+	display: block;
+	font-family: Helvetica;
+	font-size: 14px;
+	font-style: italic;
+	font-weight: normal;
+	line-height: 100%;
+	letter-spacing: normal;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 10px;
+	margin-left: 0;
+	text-align: left;
+}
+/**
+			* @tab Page
+			* @section heading 4
+			* @tip Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
+			* @style heading 4
+			*/
+h4 {
+	color: #808080 !important;
+	display: block;
+	font-family: Helvetica;
+	font-size: 12px;
+	font-style: italic;
+	font-weight: normal;
+	line-height: 100%;
+	letter-spacing: normal;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 10px;
+	margin-left: 0;
+	text-align: left;
+}
+/* ========== Header Styles ========== */
+
+			/**
+			* @tab Header
+			* @section preheader style
+			* @tip Set the background color and bottom border for your email's preheader area.
+			* @theme header
+			*/
+#templatePreheader {
+	border-bottom: 1px solid #B0B0B0;
+}
+/**
+			* @tab Header
+			* @section preheader style
+			* @tip Set the background color and bottom border for your email's preheader area.
+			* @theme header
+			*/
+#templatePreheaderNav {
+	border-bottom: 0;
+}
+/**
+			* @tab Header
+			* @section preheader text
+			* @tip Set the styling for your email's preheader text. Choose a size and color that is easy to read.
+			*/
+.preheaderContentNav, .preheaderContent {
+	color: #808080;
+	font-family: Arial;
+	font-size: 11px;
+	line-height: 125%;
+	text-align: left;
+}
+.preheaderContentNav {
+	font-size: 14px;
+	padding-top: 0;
+	padding-right: 0;
+	padding-bottom: 25px;
+	padding-left: 0;
+}
+.preheaderContentNavItems {
+	padding: 0;
+	margin: 0;
+}
+.preheaderContentNavItem {
+	text-align: center;
+	padding-top: 0;
+	padding-right: 0;
+	padding-left: 0;
+	text-decoration: none !important;
+}
+.preheaderContentNavItemHoverable:hover {
+	color: #d9232e;
+	text-decoration: none !important;
+}
+.preheaderContentNavItemLink {
+	font-family: Arial;
+	font-size: 14px;
+	color: #808080;
+	text-decoration: none;
+	line-height: 14px;
+"
+}
+#templateImageHeader {
+	padding: 0;
+}
+.headerImageContent {
+	width: 600px;
+	height: auto;
+}
+/**
+			* @tab Header
+			* @section preheader link
+			* @tip Set the styling for your email's preheader links. Choose a color that helps them stand out from your text.
+			*/
+.preheaderContent a:link, .preheaderContent a:visited, /* Yahoo! Mail Override */ .preheaderContent a .yshortcuts /* Yahoo! Mail Override */ {
+	color: #606060;
+	font-weight: normal;
+	text-decoration: underline;
+}
+/**
+			* @tab Header
+			* @section header text
+			* @tip Set the styling for your email's header text. Choose a size and color that is easy to read.
+			*/
+.headerContent {
+	color: #505050;
+	font-family: Helvetica;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 100%;
+	padding-right: 0;
+	padding-left: 0;
+	text-align: center;
+	vertical-align: middle;
+	padding-top: 45px;
+	padding-bottom: 30px;
+}
+/**
+			* @tab Header
+			* @section header link
+			* @tip Set the styling for your email's header links. Choose a color that helps them stand out from your text.
+			*/
+.headerContent a:link, .headerContent a:visited, /* Yahoo! Mail Override */ .headerContent a .yshortcuts /* Yahoo! Mail Override */ {
+	color: #EB4102;
+	font-weight: normal;
+	text-decoration: underline;
+}
+#headerImage {
+	height: auto;
+	max-width: 600px;
+}
+/* ========== Body Styles ========== */
+
+			/**
+			* @tab Body
+			* @section body style
+			* @tip Set the background color and borders for your email's body area.
+			*/
+#templateBody {
+	background-color: #ffffff;
+}
+/**
+			* @tab Body
+			* @section body text
+			* @tip Set the styling for your email's main content text. Choose a size and color that is easy to read.
+			* @theme main
+			*/
+.bodyContent {
+	color: #455560;
+	font-family: Arial;
+	font-size: 12px;
+	line-height: 150%;
+	padding-top: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;
+	padding-left: 20px;
+	background: #FFFFFF;
+	text-align: left;
+}
+.bodyContent .red {
+	color: #d9232e;
+}
+.bodyContent .bold {
+	font-weight: bold !important;
+}
+/**
+			* @tab Body
+			* @section body link
+			* @tip Set the styling for your email's main content links. Choose a color that helps them stand out from your text.
+			*/
+.bodyContent a:link, .bodyContent a:visited, /* Yahoo! Mail Override */ .bodyContent a .yshortcuts /* Yahoo! Mail Override */ {
+	color: #EB4102;
+	font-weight: normal;
+	text-decoration: underline;
+}
+.bodyContent img {
+	display: inline;
+	height: auto;
+	max-width: 520px;
+}
+/* ========== Column Styles ========== */
+
+.templateColumnContainer {
+	width: 50%;
+}
+/**
+			* @tab Columns
+			* @section column style
+			* @tip Set the background color and borders for your email's column area.
+			*/
+#templateColumns {
+	/* border-top: 1px solid #FFFFFF; */
+}
+/**
+			* @tab Columns
+			* @section left column text
+			* @tip Set the styling for your email's left column content text. Choose a size and color that is easy to read.
+			*/
+.leftColumnContent {
+	color: #505050;
+	font-family: Helvetica;
+	font-size: 14px;
+	line-height: 150%;
+	padding-top: 0;
+	padding-right: 0;
+	padding-bottom: 20px;
+	padding-left: 0;
+	text-align: center;
+}
+/**
+			* @tab Columns
+			* @section left column link
+			* @tip Set the styling for your email's left column content links. Choose a color that helps them stand out from your text.
+			*/
+.leftColumnContent a:link, .leftColumnContent a:visited, /* Yahoo! Mail Override */ .leftColumnContent a .yshortcuts /* Yahoo! Mail Override */ {
+	color: #EB4102;
+	font-weight: normal;
+	text-decoration: underline;
+}
+/**
+			* @tab Columns
+			* @section right column text
+			* @tip Set the styling for your email's right column content text. Choose a size and color that is easy to read.
+			*/
+.rightColumnContent {
+	color: #505050;
+	font-family: Helvetica;
+	font-size: 14px;
+	line-height: 150%;
+	padding-top: 0;
+	padding-right: 0;
+	padding-bottom: 20px;
+	padding-left: 0;
+	text-align: center;
+}
+/**
+			* @tab Columns
+			* @section right column link
+			* @tip Set the styling for your email's right column content links. Choose a color that helps them stand out from your text.
+			*/
+.rightColumnContent a:link, .rightColumnContent a:visited, /* Yahoo! Mail Override */ .rightColumnContent a .yshortcuts /* Yahoo! Mail Override */ {
+	color: #EB4102;
+	font-weight: normal;
+	text-decoration: underline;
+}
+.leftColumnContent img, .rightColumnContent img {
+	display: inline;
+	height: auto;
+	max-width: 260px;
+}
+/* ========== Footer Styles ========== */
+
+			/**
+			* @tab Footer
+			* @section footer style
+			* @tip Set the background color and borders for your email's footer area.
+			* @theme footer
+			*/
+#templateFooter {
+	background-color: #F4F4F4;
+	border-top: 1px solid #FFFFFF;
+}
+/**
+			* @tab Footer
+			* @section footer text
+			* @tip Set the styling for your email's footer text. Choose a size and color that is easy to read.
+			* @theme footer
+			*/
+.footerContent {
+	color: #808080;
+	font-family: Helvetica;
+	font-size: 10px;
+	line-height: 150%;
+	padding-top: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;
+	padding-left: 20px;
+	text-align: left;
+}
+/**
+			* @tab Footer
+			* @section footer link
+			* @tip Set the styling for your email's footer links. Choose a color that helps them stand out from your text.
+			*/
+.footerContent a:link, .footerContent a:visited, /* Yahoo! Mail Override */ .footerContent a .yshortcuts, .footerContent a span /* Yahoo! Mail Override */ {
+	color: #606060;
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+			/* /\/\/\/\/\/\/\/\/ MOBILE STYLES /\/\/\/\/\/\/\/\/ */
+
+            @media only screen and (max-width: 480px) {
+/* /\/\/\/\/\/\/ CLIENT-SPECIFIC MOBILE STYLES /\/\/\/\/\/\/ */
+body, table, td, p, a, li, blockquote {
+	-webkit-text-size-adjust: none !important;
+} /* Prevent Webkit platforms from changing default text sizes */
+body {
+	width: 100% !important;
+	min-width: 100% !important;
+} /* Prevent iOS Mail from adding padding to the body */
+/* /\/\/\/\/\/\/ MOBILE RESET STYLES /\/\/\/\/\/\/ */
+#bodyCell {
+	padding: 10px !important;
+}
+/* /\/\/\/\/\/\/ MOBILE TEMPLATE STYLES /\/\/\/\/\/\/ */
+
+				/* ======== Page Styles ======== */
+
+				/**
+				* @tab Mobile Styles
+				* @section template width
+				* @tip Make the template fluid for portrait or landscape view adaptability. If a fluid layout doesn't work for you, set the width to 300px instead.
+				*/
+#templateContainer {
+	max-width: 600px !important;
+	width: 100% !important;
+}
+/**
+				* @tab Mobile Styles
+				* @section heading 1
+				* @tip Make the first-level headings larger in size for better readability on small screens.
+				*/
+h1 {
+	font-size: 18px !important;
+	line-height: 100% !important;
+}
+/**
+				* @tab Mobile Styles
+				* @section heading 2
+				* @tip Make the second-level headings larger in size for better readability on small screens.
+				*/
+h2 {
+	font-size: 16px !important;
+	line-height: 100% !important;
+}
+/**
+				* @tab Mobile Styles
+				* @section heading 3
+				* @tip Make the third-level headings larger in size for better readability on small screens.
+				*/
+h3 {
+	font-size: 14px !important;
+	line-height: 100% !important;
+}
+/**
+				* @tab Mobile Styles
+				* @section heading 4
+				* @tip Make the fourth-level headings larger in size for better readability on small screens.
+				*/
+h4 {
+	font-size: 12px !important;
+	line-height: 100% !important;
+}
+/* ======== Header Styles ======== */
+
+#templatePreheader {
+	display: none !important;
+} /* Hide the template preheader to save space */
+/**
+				* @tab Mobile Styles
+				* @section header image
+				* @tip Make the main header image fluid for portrait or landscape view adaptability, and set the image's original width as the max-width. If a fluid setting doesn't work, set the image width to half its original size instead.
+				*/
+#headerImage {
+	height: auto !important;
+	max-height: auto !important;
+	min-height: auto !important;
+	width: 100% !important;
+}
+#headerImage.logo {
+	width: auto !important;
+}
+/**
+				* @tab Mobile Styles
+				* @section header text
+				* @tip Make the header content text larger in size for better readability on small screens. We recommend a font size of at least 16px.
+				*/
+.headerContent {
+	font-size: 20px !important;
+	line-height: 125% !important;
+}
+/* ======== Body Styles ======== */
+
+				/**
+				* @tab Mobile Styles
+				* @section body text
+				* @tip Make the body content text larger in size for better readability on small screens. We recommend a font size of at least 16px.
+				*/
+.bodyContent {
+	font-size: 12px !important;
+	line-height: 125% !important;
+}
+/* ======== Column Styles ======== */
+
+.templateColumnContainer {
+	/* display: block !important;
+	width: 100% !important; */
+}
+.templateColumnContainer.social {
+	/* display: block !important;
+	width: 33.33% !important;
+	float: left; */
+}
+
+/**
+				* @tab Mobile Styles
+				* @section column image
+				* @tip Make the column image fluid for portrait or landscape view adaptability, and set the image's original width as the max-width. If a fluid setting doesn't work, set the image width to half its original size instead.
+				*/
+.columnImage {
+	height: auto !important;
+	max-width: 440px !important;
+	width: 100% !important;
+}
+.columnImage.icon {
+	width: auto !important;
+}
+/**
+				* @tab Mobile Styles
+				* @section left column text
+				* @tip Make the left column content text larger in size for better readability on small screens. We recommend a font size of at least 16px.
+				*/
+.leftColumnContent {
+	font-size: 12px !important;
+	line-height: 125% !important;
+	border-right: none !important;
+}
+/**
+				* @tab Mobile Styles
+				* @section right column text
+				* @tip Make the right column content text larger in size for better readability on small screens. We recommend a font size of at least 16px.
+				*/
+.rightColumnContent {
+	font-size: 12px !important;
+	line-height: 125% !important;
+}
+/* ======== Footer Styles ======== */
+
+				/**
+				* @tab Mobile Styles
+				* @section footer text
+				* @tip Make the body content text larger in size for better readability on small screens.
+				*/
+.footerContent {
+	font-size: 12px !important;
+	line-height: 115% !important;
+}
+.footerContent a {
+	display: block !important;
+} /* Place footer social and utility links on their own lines, for easier access */
+#preheaderContentNavItems.subscribeTermsPrivacy {
+	width: 80% !important;
+}
+}
+</style>
+</head>
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+<center>
+  <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
+    <tr>
+      <td align="center" valign="top" id="bodyCell"><!-- BEGIN TEMPLATE // -->
+        <table border="0" cellpadding="0" cellspacing="0" id="templateContainer">
+		   <tr>
+            <td align="center" valign="top">
+			  <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templatePreheader">
+                <tr>
+                  <td valign="top" class="preheaderContent" style="padding-top:0; padding-right:0; padding-bottom:10px; padding-left:0;"></td>
+                  <!-- *|IFNOT:ARCHIVE_PAGE|* -->
+                  <!--<td valign="top" width="50%" class="preheaderContent" style="text-align:right;padding-top:0; padding-right:0; padding-bottom:10px; padding-left:0;"> Email not displaying correctly? 
+				  <a href="https://www.cud.ac.ae/mailer/2020/09/ryerson-info-session/index.html" target="_blank" style="font-weight:bold;text-decoration:none;color:#d9232e">View in browser</a>.</td>-->
+                  <!-- *|END:IF|* --></tr>
+              </table>
+              <!-- // END PREHEADER --></td>
+          </tr>
+          <!-- :::CUD BLOCK::: BEGIN HERO IMAGE // -->
+          <tr>
+            <td align="center" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateHeader" style="background:#ffffff" bgcolor="#ffffff">
+                <tbody>
+                  <tr>
+                    <td valign="top" align="left" class="headerContent" style="padding:20px;text-align:left;"><img class="logo" src="https://www.cud.ac.ae/themes/indicud/media/logo/bigger/logo-hover.png" style="width:250px;max-width:250px;" id="headerImage"></td>
+                  </tr>
+                </tbody>
+              </table></td>
+          </tr>
+          <!-- // END HERO IMAGE -->
+		 <!--<tr>-->
+		 <!-- BEGIN IMAGE HEADER // -->
+            <!--<td align="center" valign="top">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateImageHeader">
+                <tr>
+                  <td valign="top" class="headerImageContent" style="padding:0;"><a href="https://www.cud.ac.ae/baci"><img src="https://www.cud.ac.ae/mailer/2020/09/ryerson-info-session/mailer-ryerson-info-session.jpg" style="width:600px;max-width:600px;" id="headerImage" /></a></td>
+                </tr>
+              </table>-->
+              <!-- // END IMAGE HEADER -->
+			  <!--</td>
+          </tr>-->
+          <tr>
+            <td align="center" valign="top" style="padding-bottom:10px"><table border="0" cellpadding="0" cellspacing="0" width="600" id="templateBody">
+                <tr>
+                  <td valign="top" class="bodyContent" style="padding:20px 20px 0px 23px;font-size:18px;font-family:Arial;">
+				
+				<h1 class="header-one big" style="font-size:18px;line-height:22px;text-align:left;font-weight:bold;margin-bottom:10px;color:#d5202a;">Dear {Name},</h1>
+				 <p style="padding:0;font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#333333; line-height:18px;font-weight:bold;font-size:16px;">				 
+				 Congratulations on taking the first step!			 
+				 </p>
+                 <p style="padding:0;font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#333333; line-height:18px;">
+                     Your Application/Prospect	ID is {PrID}.
+                 </p>				
+				<p style="padding:0;font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#333333; line-height:18px;">				 
+				Continue your application process today to secure your spot in the upcoming term.	 
+				 </p>
+				 <p style="padding:0;font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#333333; line-height:18px;">				 
+				In order for us to evaluate your profile, you need to complete your application.	 
+				 </p>
+				 </td>				
+</tr>
+ <tr>
+            <td align="center" valign="top" style="padding-bottom:10px">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBody">
+                <tr>
+                  <td valign="top" class="bodyContent" style="font-family:Arial;font-size:12px;color:#808080;padding:20px;padding-bottom:0;" align="center"><h2 class="header-two" align="center"  style="margin:10px;display:block;color:#404040; text-align:center;">Complete your application by clicking on the link below</h2>
+                    <table border="0" cellpadding="6" cellspacing="0" id="templateBody" align="center">
+                      <tr>
+                          <td style="font-family:Arial;font-size:12px;border-top:1px solid #d9232e;border-bottom:1px solid #d9232e;border-right:1px solid #d9232e;border-left:1px solid #d9232e">
+                              <!--<form target="_blank" action="http://10.10.200.104/applynew" method="post" id="Form16">-->
+                                    <!--<input type="hidden" name="prospectid" value={PrID} id="prospectid" />
+                                    <input type="hidden" name="EmailID" value={Email} id="EmailID" />-->
+                              <!--<form target="_blank" action="http://localhost:55888/onlineApply/Index" method="post" id="Form16">
+                                  <input type="hidden" name="x_EmailID" value="Qjamsher@gmail.com" id="EmailID" />
+                                  <input type="hidden" name="x_prospectid" value="46093" id="prospectid" />
+                                  <input type="hidden" name="Origin" value="External" id="Origin" />
+                                  <input type="submit" style="font-size:17px;background-color:red;color:white;padding:10px;" value="Online Application" />                                  
+                              </form>-->
+                              <a style="font-family:Arial;font-size:12px;color:#d5202a;text-decoration:none;display:block;"
+                                 href="http://10.10.200.104/applynew">
+                                  <strong style="text-align:center;font-family:Arial;font-size:14px;color:#d5202a;white-space:nowrap;">
+                                      Online Application
+                                  </strong>
+                              </a>
+                          </td>                       
+                      </tr>					 
+                    </table>
+					</td></tr>									
+              </table></td>
+          </tr>
+		  <tr>
+		  <td align="center">
+			 <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBody">
+			 <tr>
+					  <td>
+					  </td>
+						<p><span style="font-size:18px;font-weight:bold;">Any questions?</p>
+						<p>please contact us by phone 04-321-9090 or email us at apply@cud.ac.ae</p>
+					  </tr>
+					  <tr>
+                  <td valign="top" class="bodyContent" style="padding:0px;padding-top:0;font-size:18px;font-family:Arial;text-align:center;">
+					<p style="padding:0;text-align:justify;font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#333333; line-height:0px;font-style:italic;text-align:center;">&nbsp;</p>
+				  </td>
+                </tr>
+					  </table></td>
+		  </tr>
+  <tr>
+            <td align="center" valign="top">
+            
+            <!-- BEGIN BODY // -->
+               <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateImageHeader">
+                <tbody><tr>
+                  <td valign="top" class="headerImageContent" style="padding:0;"><a style="font-family:Arial;font-size:12px;color:#d9232e;text-decoration:none;display:block;" href="https://www.cud.ac.ae/city-walk"><img src="https://www.cud.ac.ae/mailer/2020/08/creative-industries/front-city-walk-banner-09092020.jpg" style="width:600px;max-width:600px;" id="headerImage"></a></td>
+                </tr>
+              </tbody></table>
+              <!-- // END BODY --></td>
+          </tr>
+
+     <tr>
+            <td align="center" valign="top">
+              <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateBody" style="background:none">
+                <tr>
+                  <td valign="top" class="bodyContent" style="background:#f4f4f4;text-align:center;padding-top:45px;padding-bottom:35px;" align="center"><h1 class="header-one big" style="font-size:23px;line-height:23px;margin-bottom:15px;text-align:center;font-weight:bold;color:#on;">Stay connected.</h1>
+                    <p style="font-family:Arial;margin-top:0;padding-top:0;text-align:center;color:#808080;font-size:12px;line-height:20px;color:#808080">Get the latest news and updates. Connect with CUD on social media.</p></td>
+                </tr>
+              </table>
+              </td>
+          </tr>
+          
+          <tr>
+            <td align="center" valign="top"><!-- BEGIN BODY // -->
+              <table border="0" cellpadding="0" cellspacing="0" width="600" id="templateBody" bgcolor="#FFFFFF">
+                <tr>
+                  <td valign="top" class="bodyContent" style="padding:20px;font-size:18px;font-weight:bold;font-family:Arial;"><!-- BEGIN COLUMNS // -->
+                    <table border="0" cellpadding="0" cellspacing="0" width="560" id="templateColumns" bgcolor="#FFFFFF" style="max-width:560px;border-bottom:0;">
+                      <tr>
+                        <td align="center" valign="top" class="templateColumnContainer social" width="93" style="width:93px;max-width:93px"><table width="93" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td class="leftColumnContent" align="center" style="padding-bottom:0;border-right: 1px dashed #808080;"><a style="font-family:Arial;font-size:10px;line-height:10px;color:#808080;text-decoration:none;display:block;" href="https://www.facebook.com/CanadianUniversityDubai"><img src="https://www.cud.ac.ae/mailer/common/responsive/red-fb.png" width="35" style="width:35px !important;max-width:35px" class="icon columnImage" />
+                                <p  style="font-family:Arial;padding-top:0;font-size:10px;line-height:13px;color:#808080;padding-top:0;">Like us on<br />
+                                  Facebook</p>
+                                </a></td>
+                            </tr>
+                          </table></td>
+                        <td align="center" valign="top" class="templateColumnContainer social" width="93" style="width:93px;max-width:93px"><table width="93"  border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td class="leftColumnContent" align="center" style="padding-bottom:0;border-right: 1px dashed #808080;"><a style="font-family:Arial;font-size:10px;line-height:10px;color:#808080;text-decoration:none;display:block;" href="https://instagram.com/canadianuniversitydubai"><img src="https://www.cud.ac.ae/mailer/common/responsive/red-insta.png"  width="35" style="width:35px !important;max-width:35px" class="icon columnImage" />
+                                <p  style="font-family:Arial;padding-top:0;font-size:10px;line-height:13px;color:#808080;padding-top:0;">Follow us on<br />
+                                  Instagram</p>
+                                </a></td>
+                            </tr>
+                          </table></td>
+                        <td align="center" valign="top" class="templateColumnContainer social" width="93" style="width:93px !important;max-width:93px"><table  width="93" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td class="leftColumnContent" align="center" style="padding-bottom:0;border-right: 1px dashed #808080;"><a style="font-family:Arial;font-size:10px;line-height:10px;color:#808080;text-decoration:none;display:block;" href="https://www.youtube.com/user/webcud"><img src="https://www.cud.ac.ae/mailer/common/responsive/red-youtube.png"  width="35" style="width:35px !important;max-width:35px" class="icon columnImage" />
+                                <p  style="font-family:Arial;padding-top:0;font-size:10px;line-height:13px;color:#808080;padding-top:0;">Subscribe on<br />
+                                  YouTube</p>
+                                </a></td>
+                            </tr>
+                          </table></td>
+                        <td align="center" valign="top" class="templateColumnContainer social" width="93" style="width:93px;max-width:93px"><table width="93"  border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td class="leftColumnContent" align="center" style="padding-bottom:0;border-right: 1px dashed #808080;"><a style="font-family:Arial;font-size:10px;line-height:10px;color:#808080;text-decoration:none;display:block;" href="https://twitter.com/@cuduae"><img src="https://www.cud.ac.ae/mailer/common/responsive/red-twitter.png"  width="35" style="width:35px !important;max-width:35px" class="icon columnImage" />
+                                <p  style="font-family:Arial;padding-top:0;font-size:10px;line-height:13px;color:#808080;padding-top:0;">Follow us on<br />
+                                  Twitter</p>
+                                </a></td>
+                            </tr>
+                          </table></td>
+                        <td align="center" valign="top" class="templateColumnContainer social" width="93" style="width:93px;max-width:93px"><table width="93"  border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td class="leftColumnContent" align="center" style="padding-bottom:0;border-right: 1px dashed #808080;"><a style="font-family:Arial;font-size:10px;line-height:10px;color:#808080;text-decoration:none;display:block;" href="https://www.linkedin.com/school/canadian-university-dubai"><img src="https://www.cud.ac.ae/mailer/common/responsive/red-linkedin.png"  width="35" style="width:35px !important;max-width:35px" class="icon columnImage" />
+                                <p  style="font-family:Arial;padding-top:0;font-size:10px;line-height:13px;color:#808080;padding-top:0;">Follow us on<br />
+                                  LinkedIn</p>
+                                </a></td>
+                            </tr>
+                          </table></td>
+                        <td align="center" valign="top" class="templateColumnContainer social" width="93" style="width:93px;max-width:93px"><table width="93" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td class="leftColumnContent" align="center" style="padding-bottom:0;"><a style="font-family:Arial;font-size:10px;line-height:10px;color:#808080;text-decoration:none;display:block;" href="https://www.cud.ac.ae/contact/connect-with-cud/snapchat"><img src="https://www.cud.ac.ae/mailer/common/responsive/red-snaps.png" width="35" style="width:35px  !important;max-width:35px" class="icon columnImage" />
+                                <p  style="font-family:Arial;padding-top:0;font-size:10px;line-height:13px;color:#808080;padding-top:0;">CUDSnaps on<br />
+                                  Snapchat</p>
+                                </a></td>
+                            </tr>
+                          </table></td>
+                      </tr>
+                    </table>
+                    <!-- // END COLUMNS --></td>
+                </tr>
+                <tr>
+                  <td valign="top" class="bodyContent" style="padding-left:20px; padding-right:20px; padding-top:20px; padding-bottom:0; font-family:Arial;text-align:center"><h1 class="header-two" style="margin-bottom:0;font-size:14px;text-align:center;font-weight:bold;color:#303e48;padding-bottom:10px;">Need More Support?</h1>
+                    <h1 class="header-one big" style="font-weight:bold;margin-bottom:5px;font-size:18px;line-height:18px;text-align:center;font-weight:bold;color:#808080;padding-bottom:10px;">+971 4 321 9090 / +971 58 586 7849</h1>
+                    <p style="margin-top:0;padding-top:0;text-align:center;color:#808080;font-size:12px;color:#808080;text-align:center;">Give us a call or chat with us on WhatsApp</p></td>
+                </tr>
+               <tr>
+                  <td valign="top" class="bodyContent" width="560" style="width:560px !important;font-family:Arial;font-size:12px;color:#808080;padding:20px;"><hr color="#E1E1E1" style="width:560px;max-width:560px;border: 0;padding: 0px;height: 1px;line-height: 1px;font-size: 1px;background: #E1E1E1;" /></td>
+                </tr>
+                <tr>
+                  <td valign="top" class="bodyContent" style="padding:20px;text-align:center;font-family:Arial;font-size:12px;color:#808080;"><p  style="margin:0;padding:0;text-align:center;font-family:Arial;font-size:11px;line-height:19px;color:#808080;">&copy;2020 Canadian University Dubai</p>
+                    <p  style="margin:0;padding:0;text-align:center;font-family:Arial;font-size:11px;line-height:19px;color:#808080;">1st Interchange, Sheikh Zayed Road, Dubai, United Arab Emirates</p>
+                    <p  style="margin:0;padding:0;text-align:center;font-family:Arial;font-size:11px;line-height:19px;color:#808080;padding-bottom:20px;">P.O.Box 117781</p>
+                    <p  style="margin:0;padding:0;text-align:center;font-family:Arial;font-size:11px;line-height:19px;color:#808080;">Please add<span style="font-family:Arial;font-size:11px;line-height:19px;color:#d9232e;text-decoration:none;"> communication@cud.ac.ae</span> to your address book and<span style="font-family:Arial;font-size:11px;line-height:19px;color:#d9232e;text-decoration:none;">*@cud.ac.ae</span> to your white list filters,</p>
+                    <p  style="margin:0;padding:0;text-align:center;font-family:Arial;font-size:11px;line-height:19px;color:#808080;">to make sure you get all future communications from us straight to your inbox.</p></td>
+                </tr>
+                <tr>
+                  <td align="center" valign="top"><!-- BEGIN PREHEADER // -->
+                    <table border="0" cellpadding="0" cellspacing="0" width="560" id="templatePreheaderNav">
+                      <tr>
+                        <td valign="top" class="preheaderContentNav" align="center" style="text-align:center"><table border="0" cellpadding="0" cellspacing="0" width="60%" align="center" style="text-align:center;margin:0 auto;" class="subscribeTermsPrivacy" id="preheaderContentNavItems">
+                            <tr>
+                              <td class="preheaderContentNavItem"><a style="font-family:Arial;font-size:12px;color:#404040;text-decoration:none;" class="preheaderContentNavItemLink preheaderContentNavItemHoverable" href="https://www.cud.ac.ae/unsubscribe">Unsubscribe</a></td>
+                              <td class="preheaderContentNavItem"><span class="preheaderContentNavItemLink">|</span></td>
+                              <td class="preheaderContentNavItem"><a style="font-family:Arial;font-size:12px;color:#404040;text-decoration:none;" class="preheaderContentNavItemLink preheaderContentNavItemHoverable" href="https://www.cud.ac.ae/legal-information">Terms & Conditions</a></td>
+                              <td class="preheaderContentNavItem"><span class="preheaderContentNavItemLink">|</span></td>
+                              <td class="preheaderContentNavItem"><a style="font-family:Arial;font-size:12px;color:#404040;text-decoration:none;" class="preheaderContentNavItemLink preheaderContentNavItemHoverable" href="https://www.cud.ac.ae/legal-information">Privacy Policy</a></td>
+                            </tr>
+                          </table></td>
+                      </tr>
+                    </table>
+                    <!-- // END PREHEADER --></td>
+                </tr>
+                <tr>
+                  <td valign="top" class="bodyContent" width="560" style="width:560px !important;font-family:Arial;font-size:12px;color:#808080;padding:20px;"><hr color="#E1E1E1" style="width:560px;max-width:560px;border: 0;padding: 0px;height: 1px;line-height: 1px;font-size: 1px;background: #E1E1E1;" /></td>
+                </tr>
+                <tr>
+                  <td valign="top" class="bodyContent" style="padding:20px;font-size:18px;font-weight:bold;font-family:Arial;"><table border="0" cellpadding="0" cellspacing="0" width="540" id="templateImageHeader">
+                      <tr>
+                        <td valign="top" class="headerImageContent" align="center"><img src="https://www.cud.ac.ae/mailer/common/responsive/footer-accredited.png" style="width:375px;max-width:375px" id="headerImage" /></td>
+                      </tr>
+                    </table></td>
+                </tr>
+              </table>
+              <!-- // END BODY --></td>
+          </tr>
+        
+        </table>
+        <!-- // END TEMPLATE --></td>
+    </tr>
+  </table>
+</center>
+</body>
+</html>

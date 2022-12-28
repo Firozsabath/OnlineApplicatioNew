@@ -1,0 +1,218 @@
+﻿@model ApplyNew.Models.Checkin
+@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm("Index", "OnlineApply", FormMethod.Post, new { id = "checkin" }))
+{
+    <div class="container body-content">
+        <br />
+        <h3 style="text-align:center;font-weight:bold;color:#d32020;" class="mb-4">@ApplyNew.Resources.Resource.Official_CUD_Online_Application</h3>
+        <div class="jumbotron">
+            <h3 style="font-weight:bold;color:#1c3764;" class="pb-2">@ApplyNew.Resources.Resource.Welcome_sc1</h3>
+            <p class="p-2">
+                @ApplyNew.Resources.Resource.WelcomeMessage1_sc1
+            </p>
+            <p class="p-2">
+                @ApplyNew.Resources.Resource.WelcomeMessage2_sc1
+            </p>
+            <p class="p-2">
+                @ApplyNew.Resources.Resource.WelcomeMessage3_sc1
+            </p>
+            <p class="p-2">
+                @ApplyNew.Resources.Resource.WelcomeMessage4_sc1
+            </p>
+            <p class="p-2">
+                @ApplyNew.Resources.Resource.WelcomeMessage5_sc1
+            </p>
+            <p class="p-2">
+                @ApplyNew.Resources.Resource.WelcomeMessage6_sc1 <a href="mailto:apply@cud.ac.ae">apply@cud.ac.ae</a>.
+            </p>
+            <p class="p-2">
+                @ApplyNew.Resources.Resource.WelcomeMessage7_sc1
+            </p>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-1 col-md-12 col-sm-12"></div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                @*<input type="button" class="btn btn-danger" value="@ApplyNew.Resources.Resource.Create_a_new_Application" style="width:330px;" onclick="document.location.href='@Url.Action("Index", "Lead")'" />*@
+                @if (ViewBag.utms != null && ViewBag.utms != "")
+                {
+                    @*<a href="en-US/Lead/index?@ViewBag.utms" style="width:330px;" class="btn btn-danger">@ApplyNew.Resources.Resource.Create_a_new_Application</a>*@
+                    <input type="button" class="btn btn-danger cudbtnwidth" id="btncreateNew" value="@ApplyNew.Resources.Resource.Create_a_new_Application" />
+
+                }
+                else
+                {<input type="button" class="btn btn-danger cudbtnwidth" id="btncreateNew" value="@ApplyNew.Resources.Resource.Create_a_new_Application"/>}
+
+            </div>
+            <div class="col-lg-2 col-md-12 col-sm-12">
+        </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <input type="button" id="rtrvdata" class="btn btn-danger cudbtnwidth" value="@ApplyNew.Resources.Resource.Continue_an_existing_Application"/>
+            </div>
+            <div class="col-lg-1 col-md-12 col-sm-12"></div>
+        </div>
+
+        <br />
+        <div class="row">
+            <div class="col-lg-1 col-md-1 col-sm-12"></div>
+            <div class="col-lg-10 col-md-10 col-sm-12">
+                <div class="row" id="myAlert"></div>
+            </div>
+        </div>
+        <br />
+        <div class="row pb-3">
+            <div class="col-lg-1 col-md-1 col-sm-12"></div>
+            <div class="col-lg-10 col-md-10 col-sm-12">
+                <div id="Retrievdiv" style="display:none;">
+                    <fieldset>
+                        <legend style="font-size:14px;font-weight:bold;padding:10px;">
+                            @ApplyNew.Resources.Resource.Please_enter_the_below_data_to_retreieve_profile_info
+                        </legend>
+                        <div class="row mb-4" style="padding:10px;">
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <label for="prospectid">
+                                    @ApplyNew.Resources.Resource.Enter_Your_ProspectID
+                                </label>
+                                @Html.TextBoxFor(model => model.ProspectID, new { id = "prospectid", name = "prospectid", @type = "text", @class = "form-control form-control-lg", @value = "", maxlength = "5" })
+                                @Html.ValidationMessageFor(model => model.ProspectID, "", new { @style = "color:red;" })
+                                @*<span class="highlight"></span>*@
+                            </div>
+                            <div class="col-lg-2 col-md-12 col-sm-12"></div>
+                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                <label for="prospectid">
+                                    @ApplyNew.Resources.Resource.Enter_Your_EmailID
+                                </label>
+                                @Html.TextBoxFor(model => model.EmailID, new { id = "EmailID", name = "EmailID", @type = "email", @class = "form-control form-control-lg", @value = "", @maxlength = "40" })
+                                @Html.ValidationMessageFor(model => model.EmailID, "", new { @style = "color:red;" })
+                                @*<span class="highlight"></span>*@
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-11">
+                                <button type="button" id="sbmtbtn1" class="btn btn-danger cudbtnwidth button"><i class="loading-icon fa fa-spinner fa-spin hide"></i> <span class="btn-txt">@ApplyNew.Resources.Resource.Retrieve_Application</span></button>
+                            
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-12"></div>
+            <div id="overlay" style="display: none">              
+            </div>
+        </div>
+        <input type="hidden" id="hdnqs" name="hdnqs" value="@ViewBag.utms" />
+    </div>
+}
+<style>
+    .bs-example {
+        margin: 20px;
+    }
+
+    .accordion .fa {
+        margin-right: 0.5rem;
+    }
+      .hide{
+        display:none;
+    }
+</style>
+@*<link href="~/Content/External.css" rel="stylesheet" />*@
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#btncreateNew").click(function () {
+                 var session = '@Session["ProspectID"]';
+
+                var queryString = "@ViewBag.utms";
+                queryString = queryString.replace(/&amp;/g, '&');
+                   if (session != "") {
+                    if (confirm("You have an active Application Open. To close other session and continue here click ok.") == true) {
+                        //window.location = '@Url.Action("LogOut", "Lead")';
+                        //return false;
+                        window.location = '@Url.Action("Index", "Lead")?'+queryString;
+                    } else { return false; }
+                   } else {
+                       window.location = '@Url.Action("Index", "Lead")?'+queryString;
+                }
+
+            });
+
+
+            function Statuscheck() {
+                var _prospectid = $("#prospectid").val();
+                 $.ajax({
+                url:'@Url.Action("ProspectStatus", "OnlineApply")',
+                     data: { prospectid: _prospectid },
+                cache: false,
+                type: "POST",
+                     success: function (data) {
+                         if (data.Success) {
+
+                         }
+                         else {
+
+                         }
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+                });
+            }
+            $("#sbmtbtn1").click(function () {
+
+                //var session = '<%=Session["username"] != null%>';
+                var session = '@Session["ProspectID"]';
+
+                if (session != "") {
+                    if (confirm("You have an active Application Open. Please close it continue. If you wish to logout, please confrm.") == true) {
+                        //window.location = '@Url.Action("LogOut", "Lead")';
+                        //return false;
+
+                    }
+                    else {
+                        return false;
+                    }
+                }
+
+
+                if (!$("#checkin").valid()) {
+                    return false;
+                }
+                $(".loading-icon").removeClass("hide");
+                $(".button").attr("disabled", true);
+                $(".btn-txt").text("Retrieving Data From Server......");
+                var form = $("#checkin").serialize();
+                $.ajax({
+                url:'@Url.Action("Index", "OnlineApply")',
+                    data: form,
+                    cache: false,
+                    type: "POST",
+                    dataType: 'json',
+                success: function (data) {
+                    if (data.Success) {
+                        //$("#overlay").hide();
+                        window.location = data.newurl;
+                    }
+                    else {
+                        $(".loading-icon").addClass("hide");
+                        $(".button").attr("disabled", false);
+                        $(".btn-txt").text("@ApplyNew.Resources.Resource.Retrieve_Application");
+                        $("#myAlert").html('<div class="alert alert-danger">We couldnt find out the data you are looking for in our Database.Please Reassure you type in the relevent data.</div>');
+                    }
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+                });
+
+            });
+
+            $("#rtrvdata").click(function () {
+                $("#Retrievdiv").show();
+                document.getElementById("prospectid").focus();
+            });
+        });
+    </script>
+}

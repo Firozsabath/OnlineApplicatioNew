@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CAMS_Enterprise_TestModel1StoreContainer" CdmEntityContainer="CAMS_ProfileProgressEntities">
+    <FunctionImportMapping FunctionImportName="Custom_Profileprogress" FunctionName="CAMS_Enterprise_TestModel1.Store.Custom_Profileprogress">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CAMS_Enterprise_TestModel1.Custom_Profileprogress_Result">
+          <ScalarProperty Name="ApplicationComplete" ColumnName="ApplicationComplete" />
+          <ScalarProperty Name="EducationComplete" ColumnName="EducationComplete" />
+          <ScalarProperty Name="ApplicationSubmitted" ColumnName="ApplicationSubmitted" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

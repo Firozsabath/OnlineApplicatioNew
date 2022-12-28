@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CAMS_ExternalModelStoreContainer" CdmEntityContainer="CAMS_CustomTestnames">
+    <EntitySetMapping Name="Custom_DoctNametable">
+      <EntityTypeMapping TypeName="CAMS_ExternalModel.Custom_DoctNametable">
+        <MappingFragment StoreEntitySet="Custom-DoctNametable">
+          <ScalarProperty Name="TransferType" ColumnName="TransferType" />
+          <ScalarProperty Name="DegreeType" ColumnName="DegreeType" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DocNameID" ColumnName="DocNameID" />
+          <ScalarProperty Name="DocName" ColumnName="DocName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

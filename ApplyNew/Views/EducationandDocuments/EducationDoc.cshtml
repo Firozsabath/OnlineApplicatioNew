@@ -1,0 +1,1243 @@
+﻿@model ApplyNew.ViewModel.TestdocViewModel
+@using ApplyNew.Models
+@{
+    ViewBag.Title = "EducationDoc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .iti {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .select2-container {
+        font-size: 1.1rem;
+    }
+
+    .select2-selection__rendered {
+        line-height: 32px !important;
+    }
+
+    .select2-selection {
+        height: 44px !important;
+        padding: 7px;
+    }
+
+    .lblbold {
+        font-weight: bold;
+    }
+
+    em {
+        color: red;
+    }
+
+    .hide {
+        display: none !important;
+    }
+
+    .uploadbuttonst {
+        /*outline: 2px dashed #92b0b3;*/
+        outline-offset: -10px;
+        -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        padding: 25px 5% 25px 5%;
+        text-align: center !important;
+        margin: 0;
+        width: 100% !important;
+    }
+
+    input[type="radio"] {
+        margin: 0 10px 0 10px;
+    }
+</style>
+@Html.Partial("_ProgressBar", Model.ProfileProgress)
+<div class="container body-content">
+    <br />
+    <h4 style="text-align:center;font-weight:bold;color:#d32020;" class="mb-4">@ApplyNew.Resources.Resource.Eanddoc</h4>
+    <div class="initialacc">
+
+        @using (Html.BeginForm("EducationDoc", "EducationandDocuments", FormMethod.Post, new { id = "Edudocform" }))
+        {
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button style="padding:0;color:dodgerblue" type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"><i class="fa fa-plus"></i> @ApplyNew.Resources.Resource.OptionalInformation</button>
+                        </h2>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label>@ApplyNew.Resources.Resource.Transfertocanada</label>
+
+                                </div>
+                                <div class="col-lg-2">
+                                    @if (Model.OptionalData.TransferToCanada == "True")
+                                    {
+                                        <label class="radio-inline radiolabel"><input type="radio" value="Yes" name="IntentToTransferToCanada" checked="checked">@ApplyNew.Resources.Resource.Yes</label>
+                                        <label class="radio-inline radiolabel"><input type="radio" value="No" name="IntentToTransferToCanada">@ApplyNew.Resources.Resource.No</label>
+                                    }
+                                    else
+                                    {
+                                        <label class="radio-inline radiolabel"><input type="radio" value="Yes" name="IntentToTransferToCanada">@ApplyNew.Resources.Resource.Yes</label>
+                                        <label class="radio-inline radiolabel"><input type="radio" value="No" name="IntentToTransferToCanada" checked="checked">@ApplyNew.Resources.Resource.No</label>
+                                    }
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>@ApplyNew.Resources.Resource.housingaccommodation</label>
+                                </div>
+                                <div class="col-lg-2">
+                                    @if (Model.OptionalData.NeededHousing == "True")
+                                    {
+                                        <label class="radio-inline"><input type="radio" value="Yes" name="HousingAccommodation" checked="checked">@ApplyNew.Resources.Resource.Yes</label>
+                                        <label class="radio-inline"><input type="radio" value="No" name="HousingAccommodation">@ApplyNew.Resources.Resource.No</label>
+                                    }
+                                    else
+                                    {
+                                        <label class="radio-inline"><input type="radio" value="Yes" name="HousingAccommodation">@ApplyNew.Resources.Resource.Yes</label>
+                                        <label class="radio-inline"><input type="radio" value="No" name="HousingAccommodation" checked="checked">@ApplyNew.Resources.Resource.No</label>
+                                    }
+                                </div>
+                                <div class="col-lg-4" style="display:none;">
+                                    <label>
+                                        Do you wish to transfer credits? *
+                                    </label>
+                                </div>
+                                <div class="col-lg-2" style="display:none;">
+                                    @if (Model.OptionalData.TransferCredit == "1")
+                                    {
+                                        <label class="radio-inline"><input type="radio" value="Yes" name="TransferFromHigherInstitutionCredit" checked="checked">@ApplyNew.Resources.Resource.Yes</label>
+                                        <label class="radio-inline"><input type="radio" value="No" name="TransferFromHigherInstitutionCredit">@ApplyNew.Resources.Resource.No</label>
+                                    }
+                                    else
+                                    {
+                                        <label class="radio-inline"><input type="radio" value="Yes" name="TransferFromHigherInstitutionCredit">@ApplyNew.Resources.Resource.Yes</label>
+                                        <label class="radio-inline"><input type="radio" value="No" name="TransferFromHigherInstitutionCredit" checked="checked">@ApplyNew.Resources.Resource.No</label>
+                                    }
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label>@ApplyNew.Resources.Resource.Specialneeds.</label>
+                                </div>
+                                <div class="col-lg-2">
+                                    @if (Model.OptionalData.NeededSpecial == "1")
+                                    {
+                                        <label class="radio-inline"><input type="radio" value="Yes" onchange="popuateSPfield(this.value)" name="SpecialNeeds" checked="checked">@ApplyNew.Resources.Resource.Yes</label>
+                                        <label class="radio-inline"><input type="radio" value="No" onchange="popuateSPfield(this.value)" name="SpecialNeeds">@ApplyNew.Resources.Resource.No</label>
+                                    }
+                                    else
+                                    {
+                                        <label class="radio-inline"><input type="radio" value="Yes" onchange="popuateSPfield(this.value)" name="SpecialNeeds">@ApplyNew.Resources.Resource.Yes</label>
+                                        <label class="radio-inline"><input type="radio" value="No" onchange="popuateSPfield(this.value)" name="SpecialNeeds" checked="checked">@ApplyNew.Resources.Resource.No</label>
+                                    }
+
+                                </div>
+                                <div class="col-lg-2" id="spneedlbl" style="display:none">
+                                    <label>@ApplyNew.Resources.Resource.Please_specify_your_special_needs</label>
+                                </div>
+                                <div class="col-lg-4" id="spneedtxt" style="display:none">
+                                    <div>
+                                        @*<textarea id="reasonSpecialNeeds" class="md-textarea form-control" rows="3" value="@Model.OptionalData.NeededSpecialNotes"></textarea>*@
+                                        @Html.TextAreaFor(x => x.OptionalData.NeededSpecialNotes, new { @id = "reasonSpecialNeeds", @class = "textarea form-control", @maxlength = "50", @style = "resize: none;" })
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label>@ApplyNew.Resources.Resource.Needtransportation</label>
+                                </div>
+                                <div class="col-lg-2">
+                                    @if (Model.OptionalData.NeededTransportation == "1")
+                                    {
+                                        <label class="radio-inline"><input type="radio" value="Yes" name="Transportation" checked="checked">@ApplyNew.Resources.Resource.Yes</label>
+                                        <label class="radio-inline"><input type="radio" value="No" name="Transportation">@ApplyNew.Resources.Resource.No</label>
+                                    }
+                                    else
+                                    {
+                                        <label class="radio-inline"><input type="radio" value="Yes" name="Transportation">@ApplyNew.Resources.Resource.Yes</label>
+                                        <label class="radio-inline"><input type="radio" value="No" name="Transportation" checked="checked">@ApplyNew.Resources.Resource.No</label>
+                                    }
+                                </div>
+                            </div>
+                            <br />
+                            <fieldset>
+                                <legend style="color:#1c3764;font-weight: bold; border-bottom: 1px solid #1c3764;">@ApplyNew.Resources.Resource.UAEresidencystatus</legend>
+                                <div class="row">
+                                    <div class="col-lg-4 mt-lg-2">
+                                        <label>@ApplyNew.Resources.Resource.UAEresident</label>
+                                    </div>
+                                    <div class="col-lg-2 mt-lg-2">
+                                        @if (Model.OptionalData.UsCitizen == "Yes")
+                                        {
+                                            <label class="radio-inline"><input type="radio" value="Yes" onchange="populateUAEID(this.value)" name="PermanentUAEResident" checked="checked">@ApplyNew.Resources.Resource.Yes</label>
+                                            <label class="radio-inline"><input type="radio" value="No" onchange="populateUAEID(this.value)" name="PermanentUAEResident">@ApplyNew.Resources.Resource.No</label>
+                                        }
+                                        else
+                                        {
+                                            <label class="radio-inline"><input type="radio" value="Yes" onchange="populateUAEID(this.value)" name="PermanentUAEResident">@ApplyNew.Resources.Resource.Yes</label>
+                                            <label class="radio-inline"><input type="radio" value="No" onchange="populateUAEID(this.value)" name="PermanentUAEResident" checked="checked">@ApplyNew.Resources.Resource.No</label>
+                                        }
+                                    </div>
+                                    <div class="col-lg-3" id="UAEIDtxt" style="display:none">
+                                        <label>
+                                            @ApplyNew.Resources.Resource.UAE_ID
+                                        </label>
+                                        @Html.TextBoxFor(x => x.OptionalData.UAEID, new { @type = "text", @id = "UAEID", @name = "UAEID", @class = "form-control form-control-lg", placeholder = "", @autocpmplete = "off", @maxlength = "15", onkeypress = "return isNumberKey(event)" })
+                                    </div>
+                                    <div class="col-lg-3" id="UAEIDlbl" style="display:none">
+                                        <label>
+                                            @ApplyNew.Resources.Resource.Expiry_Date
+                                        </label>
+                                        <div class="dates" style="color: #2471a3;">
+                                            @Html.TextBoxFor(model => model.OptionalData.UAEIDExpDate, new { @type = "text", @id = "Expdate-input", @name = "Expdate-input", @class = "form-control form-control-lg datepicker", @Value = Model.OptionalData.UAEIDExpDate, @readonly = "readonly", style = "background-color:white;" })
+                                        </div>
+                                    </div>
+                                </div><br />
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label>@ApplyNew.Resources.Resource.needastudentvisa</label>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        @if (Model.OptionalData.NeededVisa == "1")
+                                        {
+                                            <label class="radio-inline"><input type="radio" value="Yes" name="NeedStudentVisa" checked="checked">@ApplyNew.Resources.Resource.Yes</label>
+                                            <label class="radio-inline"><input type="radio" value="No" name="NeedStudentVisa">@ApplyNew.Resources.Resource.No</label>
+                                        }
+                                        else
+                                        {
+                                            <label class="radio-inline"><input type="radio" value="Yes" name="NeedStudentVisa">@ApplyNew.Resources.Resource.Yes</label>
+                                            <label class="radio-inline"><input type="radio" value="No" name="NeedStudentVisa" checked="checked">@ApplyNew.Resources.Resource.No</label>
+                                        }
+
+                                    </div>
+
+                                </div>
+                            </fieldset>
+                            <br />
+                            <fieldset>
+                                <legend style="color:#1c3764;font-weight: bold; border-bottom: 1px solid #1c3764;">@ApplyNew.Resources.Resource.CurrentAddress</legend>
+                                <p style="color:red;font-size:12px;font-weight:bold;">@ApplyNew.Resources.Resource.Guardianrequiredforcompletion.</p>
+                                <div class="row mb-4">
+                                    <div class="col-lg-5">
+                                        <label class="lblbold" for="Address1">Address 1</label>
+                                        @Html.TextBoxFor(x => x.HomeAddressFields.Address1, new { @id = "Address1", @name = "Address1", @class = "form-control form-control-lg", @autocpmplete = "off", @maxlength = "50" })
+                                    </div>
+                                    <div class="col-lg-2">
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <label class="lblbold" for="Address2">Address 2</label>
+                                        @Html.TextBoxFor(x => x.HomeAddressFields.Address2, new { @id = "Address2", @name = "Address2", @class = "form-control form-control-lg", @autocpmplete = "off", @maxlength = "50" })
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-lg-5">
+                                        <label class="lblbold" for="CountryHmadrss">@ApplyNew.Resources.Resource.SelectCountry <em>*</em></label>
+                                        @Html.DropDownListFor(m => m.HomeAddressFields.CountryID, new SelectList(Model.Countrylist.CountryList, "UniqueId", "DisplayText"), "Select Country", new { @style = "font-size: 1.1rem;padding: 7px;", @class = "form-control form-control-lg", @id = "CountryHmadrss", @Name = "CountryHmadrss", @value = Model.HomeAddressFields.CountryID, @onchange = "javascript:populatestate(this.value);" })
+                                    </div>
+                                    <div class="col-lg-2">
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div id="Emirates" style="display:none;">
+                                            <label class="lblbold" for="ddlstate">Emirates <em>*</em></label>
+                                            @Html.DropDownListFor(m => m.HomeAddressFields.StateID, new SelectList(Model.statelst.stateList, "UniqueId", "DisplayText"), "Select Emirates", new { style = "font-size: 1.1rem;padding: 7px;", @class = "form-control form-control-lg", @id = "ddlstate", @Name = "ddlstate" })
+                                        </div>
+                                        <div id="State">
+                                            <label class="lblbold" for="txtstate">@ApplyNew.Resources.Resource.City <em>*</em></label>
+                                            @Html.TextBoxFor(x => x.HomeAddressFields.state, new { @id = "txtstate", @name = "txtstate", @maxlength = "50", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            @if (Model.OptionalData.Gpagroupdid == "1")
+                            {
+                                <fieldset>
+                                    <legend style="color:#1c3764;font-weight: bold; border-bottom: 1px solid #1c3764;">
+                                        @ApplyNew.Resources.Resource.Employer_Details
+                                    </legend>
+                                    <div class="row mb-4">
+                                        <div class="col-lg-5 col-md-5 col-sm-12">
+                                            <label class="lblbold" for="txtstate">@ApplyNew.Resources.Resource.Company</label>
+                                            @Html.TextBoxFor(x => x.GuardianData.Company, new { @id = "txtEmplCompany", @name = "txtEmplCompany", @maxlength = "50", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-sm-12"></div>
+                                        <div class="col-lg-5 col-md-5 col-sm-12">
+                                            <label class="lblbold" for="txtstate">@ApplyNew.Resources.Resource.Position</label>
+                                            @Html.TextBoxFor(x => x.GuardianData.Position, new { @id = "txtEmplPosition", @name = "txtEmplPosition", @maxlength = "50", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            }
+                            @if (Model.HomeAddressFields.age < 21)
+                            {
+                                <fieldset>
+                                    <legend style="color:#1c3764;font-weight: bold; border-bottom: 1px solid #1c3764;">
+                                        @ApplyNew.Resources.Resource.GuardianInfo
+                                    </legend>
+                                    <p style="color:red;font-size:12px;font-weight:bold;">@ApplyNew.Resources.Resource.Guardianrequiredforcompletion.</p>
+                                    <div class="row mb-4">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <label class="lblbold" for="txtstate">@ApplyNew.Resources.Resource.GuardianFirstName <em>*</em></label>
+                                            @Html.TextBoxFor(x => x.GuardianData.FirstName, new { @id = "txtGaudianFname", @name = "txtGaudianFname", @maxlength = "50", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                                        </div>
+                                        @*<div class="col-lg-2 col-md-2 col-sm-12"></div>*@
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <label class="lblbold" for="txtstate">@ApplyNew.Resources.Resource.GuardianLastName <em>*</em></label>
+                                            @Html.TextBoxFor(x => x.GuardianData.LastName, new { @id = "txtGaudianLname", @name = "txtGaudianLname", @maxlength = "50", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <label class="lblbold" for="txtstate">@ApplyNew.Resources.Resource.GuardianPhone <em>*</em></label>
+                                            @Html.TextBoxFor(x => x.GuardianData.Phone, new { type = "tel", @id = "txtGaudianphone", @name = "txtGaudianphone", @maxlength = "50", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                                        </div>
+                                        @*<div class="col-lg-2 col-md-2 col-sm-12"></div>*@
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <label class="lblbold" for="txtstate">@ApplyNew.Resources.Resource.GuardianRelationship <em>*</em></label>
+                                            @* @Html.TextBoxFor(x => x.GuardianData.Relationship, new { @id = "txtEmplRelationship", @name = "txtEmplRelationship", @maxlength = "50", @class = "form-control form-control-lg", @autocpmplete = "off" })*@
+                                            @* @Html.DropDownListFor(m => m.GuardianData.Relationship, new SelectList(Model.GuardianData.Relationships, Model.GuardianData.Relationship), "Choose a Relation", new { @id = "ddRelationship", @name = "ddlRelationship", @class = "form-control form-control-lg" })*@
+                                            @Html.DropDownListFor(m => m.GuardianData.Relationship, Model.GuardianData.Relationships, @ApplyNew.Resources.Resource.Choose_a_relation, new { @id = "ddRelationship", @name = "ddlRelationship", @class = "form-control form-control-lg" })
+                                            @*@Html.ValidationMessageFor(m => m.Datalist.Gender)*@
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <label class="lblbold" for="txtstate">@ApplyNew.Resources.Resource.GuardianEmail <em>*</em></label>
+                                            @Html.TextBoxFor(x => x.GuardianData.Gemail, new { @type = "email", @id = "txtGaudianEmail", @name = "txtGaudianEmail", @maxlength = "50", @class = "form-control form-control-lg", @autocpmplete = "off" })
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h2 class="mb-0">
+                            <button style="padding:0;color:dodgerblue" type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo"><i class="fa fa-plus"></i> @ApplyNew.Resources.Resource.ELR</button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <fieldset class="fieldsetst">
+                                <legend class="legendst">
+                                    @ApplyNew.Resources.Resource.ELR
+                                </legend><br />
+                                @*<table id="myTable" class="table">
+                                        <thead class="thead-light" style="text-align:center;">
+                                            <tr>
+                                                <th scope="col" style="width:30%">Test Selection</th>
+                                                <th scope="col" style="width:30%">Scores</th>
+                                                <th scope="col" style="width:30%">Test Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.TestScoreList.Scorelist.Any())
+                                            {
+                                                var count = 2;
+                                                foreach (var item in Model.TestScoreList.Scorelist)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DropDownList(item.CAMS_TestRefID.ToString(), new SelectList(Model.Examlist.Cams_testlist, "CAMS_TestRefID", "TestName", item.CAMS_TestRefID), "Select Exam", new { @style = "font-size: 1.1rem;padding: 7px;", @class = "form-control form-control-lg", @id = "Searchexam", @Name = "ExamSelection" })
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" value="@item.Score" maxlength="5" class="form-control form-control-lg" />
+                                                        </td>
+                                                        <td>
+                                                            <div class="dates" style="color: #2471a3;">
+                                                                @Html.TextBoxFor(model => model.TestScoreList.TestDate, new { @type = "text", @id = "date-input_" + count + "", @name = "date-input", @class = "form-control form-control-lg datepicker", @Value = @item.TestDate })
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    count = count + 1;
+                                                }
+                                            }
+                                            else
+                                            {<tr>
+                                                 <td colspan="3">
+                                                     <div><p><input type="button" id="engbtn" value="Add New Scores" class="btn btn-primary"></p></div>
+                                                 </td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>*@
+                                @if (Model.TestScoreList.Scorelist.Any())
+                                {
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <label class="lblbold">@ApplyNew.Resources.Resource.TestSelection</label>
+                                            @Html.DropDownList(Model.TestScoreList.Scorelist[0].CAMS_TestRefID.ToString(), new SelectList(Model.Examlist.Cams_testlist, "CAMS_TestRefID", "TestName", Model.TestScoreList.Scorelist[0].CAMS_TestRefID), "Select Exam", new { @style = "font-size: 1.1rem;padding: 7px;", @class = "form-control form-control-lg", @id = "Searchexam", @Name = "ExamSelection" })
+                                            <input type="hidden" name="CAMS_TestID" id="CAMS_TestID" value="@Model.TestScoreList.Scorelist[0].CAMS_TestID" maxlength="5" class="form-control" />
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <label class="lblbold">@ApplyNew.Resources.Resource.TestScore</label>
+                                            <input type="text" id="txttestscore" value="@Model.TestScoreList.Scorelist[0].Score" maxlength="5" class="form-control form-control-lg" />
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <label class="lblbold">@ApplyNew.Resources.Resource.TestDate</label>
+                                            <div class="dates" style="color: #2471a3;">
+                                                @Html.TextBoxFor(model => model.TestScoreList.TestDate, new { @type = "text", @id = "date-input", @name = "date-input", @class = "form-control form-control-lg datepicker", @Value = @Model.TestScoreList.Scorelist[0].TestDate, @readonly = "readonly", style = "background-color:white;" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <label class="lblbold">@ApplyNew.Resources.Resource.TestSelection</label>
+                                            @Html.DropDownList(Model.TestScoreList.CAMS_TestRefID.ToString(), new SelectList(Model.Examlist.Cams_testlist, "CAMS_TestRefID", "TestName"), "Select Exam", new { @style = "font-size: 1.1rem;padding: 7px;", @class = "form-control form-control-lg", @id = "Searchexam", @Name = "ExamSelection" })
+                                            <input type="hidden" name="CAMS_TestID" id="CAMS_TestID" value="" maxlength="5" class="form-control" />
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <label class="lblbold">@ApplyNew.Resources.Resource.TestScore</label>
+                                            <input type="text" id="txttestscore" maxlength="5" class="form-control form-control-lg" />
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <label class="lblbold">@ApplyNew.Resources.Resource.TestDate</label>
+                                            <div class="dates" style="color: #2471a3;">
+                                                @Html.TextBoxFor(model => model.TestScoreList.TestDate, new { @type = "text", @id = "date-input", @name = "date-input", @class = "form-control form-control-lg datepicker", @readonly = "readonly", style = "background-color:white;" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @*<div><p><input type="button" id="engbtn" value="Add New Scores" class="btn btn-primary"></p></div>*@
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button style="padding:0;color:dodgerblue" type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"><i class="fa fa-plus"></i> @ApplyNew.Resources.Resource.EducationInfo</button>
+                        </h2>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="card-body">
+                            @*Collage Section*@
+                            @if (Model.OptionalData.Gpagroupdid == "3")
+                            {
+                                <fieldset class="fieldsetst">
+                                    <legend class="legendst">@ApplyNew.Resources.Resource.HighSchoolInfo</legend>
+                                    <div style="display:none;"><p><input id="Addschool" type="button" value="Add New High School" class="btn btn-primary"></p></div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label class="lblbold">@ApplyNew.Resources.Resource.HighSchoolcountry</label>
+                                            @Html.DropDownListFor(m => m.HighSData.Highschoolcountry, new SelectList(Model.Countrylist.CountryList, "UniqueId", "DisplayText"), "Select Country", new { @class = "form-control", @id = "CountryLst", @Name = "CountryLst", @onchange = "javascript:GetHighSchool(this.value);" })
+                                        </div>
+                                    </div><br />
+                                    <div id="Highschooldiv" class="mb-4" style="display:none;">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label class="lblbold">@ApplyNew.Resources.Resource.Select_High_School</label>
+                                                <select id="ddlHighSchool" name="ddlHighSchool" class="form-control"></select>
+                                            </div>
+                                            <div class="col-lg-1">
+                                            </div>
+                                            <div class="col-lg-4" id="divcustomschool" style="display:none;">
+                                                <label class="lblbold">@ApplyNew.Resources.Resource.Enter_School_Name</label>
+                                                @Html.TextBoxFor(x => x.HighSData.Customhschool, new { @id = "txtCustomHighSchool", @maxlength = "50", @name = "txtCustomHighSchool", @class = "form-control form-control-lg", placeholder = " ", @autocpmplete = "off" })
+                                            </div>
+                                        </div><br />
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label class="lblbold">@ApplyNew.Resources.Resource.Select_curriculum_type_HSsection</label>
+                                                @Html.DropDownListFor(m => m.HighSData.Type, new SelectList(Model.Typelist.TypeList, "UniqueId", "DisplayText"), "Select Type", new { @style = "font-size: 1.1rem;padding: 7px;", @class = "form-control form-control-lg", @id = "HSType", @Name = "HSType" })
+                                            </div>
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-2">
+                                                <label class="lblbold">@ApplyNew.Resources.Resource.Score_HSsection</label>
+                                                @Html.TextBoxFor(x => x.HighSData.Score, new { @id = "Score", @name = "Score", @class = "form-control form-control-lg", @maxlength = "3", placeholder = " ", @autocpmplete = "off", onkeypress = "return isNumberKey(event)" })
+                                            </div>
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-2">
+                                                <label class="lblbold">@ApplyNew.Resources.Resource.Score_out_of_HSsection</label>
+                                                @Html.TextBoxFor(x => x.HighSData.Scoreoutof, new { @id = "Scoreoutof", @name = "Scoreoutof", @class = "form-control form-control-lg", @maxlength = "3", placeholder = " ", @autocpmplete = "off", onkeypress = "return isNumberKey(event)" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            }
+                            else if (Model.OptionalData.Gpagroupdid == "1")
+                            {
+                                <fieldset class="fieldsetst">
+                                    <legend class="legendst">@ApplyNew.Resources.Resource.College_University_Information</legend>
+                                    <p style="color:red;font-size:12px;font-weight:bold;">* @ApplyNew.Resources.Resource.Please_provide_your_bachelor_information</p>
+                                    <div style="display:none;"><p><input id="AddCollege" type="button" value="Add New College" class="btn btn-primary"></p></div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label class="lblbold">@ApplyNew.Resources.Resource.Select_College_country_Collegesection</label>
+                                            @*@Html.DropDownListFor(m => m.CollegeData.CollegeCountry, new SelectList(Model.Countrylist.CountryList, "UniqueId", "DisplayText"), "Select Country", new { @class = "form-control", @id = "CountryLstfrcollege", @Name = "CountryLstfrcollege", @onchange = "javascript:GetCollege(this.value);" })*@
+                                            @Html.DropDownListFor(m => m.CollegeData.CollegeCountry, new SelectList(Model.Countrylist.CountryList, "UniqueId", "DisplayText"), "Select Country", new { @class = "form-control", @id = "CountryLstfrcollege", @Name = "CountryLstfrcollege", @onchange = "javascript:GetCollege(this.value);" })
+                                        </div>
+                                    </div><br />
+                                    <div id="Collegediv" class="mb-4" style="display:none;">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label class="lblbold">@ApplyNew.Resources.Resource.Select_College_Collegesection</label>
+                                                <select id="ddlColleges" name="ddlColleges" class="chosen chzn-select" value="@Model.CollegeData.CollegeID"></select>
+                                            </div>
+                                            <div class="col-lg-4" id="divcustomcollege" style="display:none;">
+                                                <label class="lblbold">@ApplyNew.Resources.Resource.Enter_College_Name</label>
+                                                @Html.TextBoxFor(x => x.CollegeData.Grade, new { @id = "txtCustomCollegeName", @name = "txtCustomCollegeName", @maxlength = "50", @class = "form-control form-control-lg", placeholder = "College Name", @autocpmplete = "off" })
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <label class="lblbold">@ApplyNew.Resources.Resource.GPA_Collegesection</label>
+                                                @Html.TextBoxFor(x => x.CollegeData.Grade, new { @id = "Grade", @name = "Grade", @class = "form-control form-control-lg", @maxlength = "3", placeholder = "Grade", @autocpmplete = "off", onkeypress = "return isNumberKey(event)" })
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <label class="lblbold">@ApplyNew.Resources.Resource.GPA_out_of_Collegesection</label>
+                                                @Html.TextBoxFor(x => x.CollegeData.Gradeoutof, new { @id = "Gradeoutof", @name = "Gradeoutof", @class = "form-control form-control-lg", @maxlength = "3", placeholder = "Grade out of", @autocpmplete = "off", onkeypress = "return isNumberKey(event)" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            }
+                            @if (Model.OptionalData.TransferCredit == "1")
+                            {
+                                <fieldset class="fieldsetst">
+                                    <legend class="legendst">@ApplyNew.Resources.Resource.TransferInfo</legend>
+                                    <p style="color:red;font-size:12px;font-weight:bold;">* @ApplyNew.Resources.Resource.institution_you_are_transferring_from</p>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <label class="lblbold">@ApplyNew.Resources.Resource.TransferInstitution</label>
+                                            @Html.TextBoxFor(x => x.Trdata.TransferInstitute, new { @id = "txttransferinstitute", @maxlength = "50", @name = "txttransferinstitute", @class = "form-control form-control-lg", placeholder = " ", @autocpmplete = "off" })
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <label class="lblbold">@ApplyNew.Resources.Resource.Transfer_Institution_Country</label>
+                                            @Html.DropDownListFor(m => m.Trdata.Trcountry, new SelectList(Model.Countrylist.CountryList, "UniqueId", "DisplayText"), "Select Country", new { @class = "form-control", @id = "CountryLsttransfercollege", @Name = "CountryLsttransfercollege" })
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <label class="lblbold">@ApplyNew.Resources.Resource.Transfer_Program</label>
+                                            @Html.TextBoxFor(x => x.Trdata.TrProgram, new { @id = "txttransferprogram", @maxlength = "50", @name = "txttransferprogram", @class = "form-control form-control-lg", placeholder = " ", @autocpmplete = "off" })
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingfour">
+                        <h2 class="mb-0">
+                            <button style="padding:0;color:dodgerblue" type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapsefour"><i class="fa fa-plus"></i> @ApplyNew.Resources.Resource.DocumentsUploads</button>
+                        </h2>
+                    </div>
+                    <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
+                        <div class="card-body">
+                            @*Docs Section*@
+                            <fieldset class="fieldsetst">
+                                <legend class="legendst">@ApplyNew.Resources.Resource.DocumentsUploads</legend>
+                                <ul style="color:red;">
+                                    <li>@ApplyNew.Resources.Resource.Required_for_docuploads.</li>
+                                    <li>@ApplyNew.Resources.Resource.Acceptedformat_docuploads.</li>
+                                    <li>@ApplyNew.Resources.Resource.Uploadsingledoc_docuuploads.</li>
+                                </ul>
+                                <br />
+                                @foreach (var item in Model.DocumentList.DocNamelst)
+                                {
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <div id="doc_@item.DocNameID" class="row" style="padding-bottom:10px">
+                                                <div class="col-lg-12" style="padding:15px 0px 0px 30px;">
+                                                    <div>
+                                                        @if (@item.DocNameID == 28)
+                                                        {<label>@item.DocName <em style="color:red;">*</em></label>}
+                                                    else
+                                                    {
+                                                        <label>@item.DocName</label>
+                                                    }
+                                                    </div>
+                                                    @{List<Docsaved> Docs = Model.SavedDocList.Where(x => x.DocNameID == item.DocNameID).ToList();
+                                                        if (Docs.Any())
+                                                        {
+                                                            <div class="uploadbuttonst">
+                                                                <input class="form-control" type="file" id="Originalbtn_@item.DocNameID" onchange="FileUploadserver(@item.DocNameID,'@item.DocName')" style="display:none;" />
+                                                                <button id="virtualbtn_@item.DocNameID" type="button" class="btn btn-light" disabled="disabled" style="padding:10px;width:300px;font-size:14px;" onclick="Uploadtrigger(@item.DocNameID)"><i class="fa fa-upload" aria-hidden="true"> &nbsp; Upload  @item.DocName</i> </button>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="uploadbuttonst">
+                                                                <input class="form-control" type="file" id="Originalbtn_@item.DocNameID" onchange="FileUploadserver(@item.DocNameID,'@item.DocName')" style="display:none;" />
+                                                                <button id="virtualbtn_@item.DocNameID" type="button" class="btn btn-light" style="width:300px;padding:10px;font-size:14px;" onclick="Uploadtrigger(@item.DocNameID)"><i class="fa fa-upload" aria-hidden="true"> &nbsp; Upload  @item.DocName</i> </button>
+                                                            </div>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7 col-md-7 col-sm-12">
+                                            @{
+                                                //Docs = Model.SavedDocList.Where(x => x.DocNameID == item.DocNameID).ToList();
+                                                if (Docs.Any())
+                                                {<div class="row" id="myAlert_@item.DocNameID">
+                                                        <div class="row col-lg-12" id="sdoc_@Docs[0].DocNameID">
+                                                            <div class="col-lg-12" style="padding:15px 0px 0px 30px;">
+                                                                <div style="padding-bottom:35px;">
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-12 alert bg-light">
+                                                                        <div>
+                                                                        </div>
+                                                                        <div class="row"><div id="Udoc_@Docs[0].DocNameID" class="col-lg-7" style="padding:18px;">@Docs[0].FIleName</div><div class="col-lg-3"><input type="button" onclick="deletefile(@Docs[0].DocNameID)" value="delete" class="btn btn-danger" style="float:right;"></div></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                { <div class="row" id="myAlert_@item.DocNameID"></div> }
+                                            }
+
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                }
+                                <div style="display:none;"><p><input type="button" value="Add New Scores" class="btn btn-primary"></p></div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="hdntxtGaudianphone" name="hdnPhone1" />
+            @*<input type="hidden" id="hdntxtHighSchoolName" name="hdnHighSchoolName" />
+                <input type="hidden" id="hdntxtHighSchoolCountry" name="hdnHighSchoolCountry" />
+                <input type="hidden" id="hdntxtHighSchoolCurriculum" name="hdnHighSchoolCurriculum" />*@
+            <input type="hidden" id="hdnProspectID" value="@ViewBag.hdnprospectid" name="hdnProspectID" />
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-danger">Save Scores</button>*@
+                @*<input type="button" value="@ApplyNew.Resources.Resource.Proceed_for_Payment" id="savesection" class="btn btn-danger" />*@
+
+                <button type="button" id="savesection" class="btn btn-danger button"><i class="loading-icon fa fa-spinner fa-spin hide"></i> <span class="btn-txt">@ApplyNew.Resources.Resource.Proceed_for_Payment</span></button>
+            </div>
+        }
+
+    </div>
+</div>
+<script type="text/html" id="template">
+    <div class="template-wrapper">
+        @Html.DropDownListFor(m => m.Examlist.CAMS_TestRefID, new SelectList(Model.Examlist.Cams_testlist, "CAMS_TestRefID", "TestName"), "Select Exam", new { @class = "form-control form-control-lg", @id = "Searchexam", @Name = "ExamSelection" })
+    </div>
+</script>
+<link href="~/Scripts/intl-tel-input/css/intlTelInput.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+@section scripts{
+    <script src="~/Scripts/intl-tel-input/js/intlTelInput.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            function noBack() { window.history.forward() }
+            noBack();
+            window.onload = noBack;
+            window.onpageshow = function (evt) { if (evt.persisted) noBack() }
+            window.onunload = function () { void (0) }
+
+            // Add minus icon for collapse element which is open by default
+            $(".collapse.show").each(function () {
+                $(this).prev(".card-header").find(".fa").addClass("fa-minus").removeClass("fa-plus");
+            });
+            // Toggle plus minus icon on show hide of collapse element
+            $(".collapse").on('show.bs.collapse', function () {
+                $(this).prev(".card-header").find(".fa").removeClass("fa-plus").addClass("fa-minus");
+            }).on('hide.bs.collapse', function () {
+                $(this).prev(".card-header").find(".fa").removeClass("fa-minus").addClass("fa-plus");
+                });
+
+            Statuscheck();
+
+            $("#Expdate-input").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '2015:2030'
+            });
+
+            $("#date-input").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                //yearRange: 'c-50:c+0',
+                yearRange: '-30:+0'
+            });
+
+            $("#CountryLst").select2({ width: '100%' });
+            $("#CountryLstfrcollege").select2({ width: '100%'});
+            $("#CountryHmadrss").select2({ width: '100%' });
+            $("#CountryLsttransfercollege").select2({ width: '100%' });
+
+            $('#PermanentUAEResident').change(populateUAEID('@Model.OptionalData.UsCitizen'));
+            $('#SpecialNeeds').change(popuateSPfield(@Model.OptionalData.NeededSpecial));
+            $('#CountryHmadrss').change(populatestate(@Model.HomeAddressFields.CountryID));
+            $('#CountryLst').change(GetHighSchool(@Model.HighSData.Highschoolcountry));
+            $('#CountryLstfrcollege').change(GetCollege(@Model.CollegeData.CollegeCountry));
+
+
+            var btns = $('#reasonSpecialNeeds,#Expdate-input,#txtstate,#txtEmplCompany,#txtEmplPosition,#txtGaudianFname,#txtGaudianLname,#txtCustomHighSchool,#txtCustomCollegeName,#txttransferinstitute,#txttransferprogram');
+            btns.on("keypress", function (event) {
+                var englishAlphabetAndWhiteSpace = /[A-Za-z ]/g;
+                var key = String.fromCharCode(event.which);
+                if (event.keyCode == 8 || event.keyCode == 37 || event.keyCode == 39 || englishAlphabetAndWhiteSpace.test(key)) {
+                    return true;
+                }
+                return false;
+            });
+
+            //showaddscorebtn('@Model.TestScoreList.Scorelist');
+
+            if (@Model.HomeAddressFields.age < 21) {
+            var input = document.querySelector('#txtGaudianphone');
+            var iti = intlTelInput(input, {
+            utilsScript: 'build/js/utils.js',
+            initialCountry: 'ae',
+            preferredCountries: ['ae', 'ca', 'ksa'],
+            autoPlaceholder: false,
+            separateDialCode: true,
+            preventInvalidNumbers: true,
+            autoPlaceholder: true,
+            autoHideDialCode: true,
+            autoFormat: false,
+                });
+            }
+            $("body").on("click", "#savesection", function () {
+            //$("#savesection").click(function () { 
+
+                     const selectedfile = document.getElementById("Originalbtn_28").value;
+                    if (!selectedfile) {
+                        if (!$.trim($('#Udoc_28').html()).length) {
+                            alert("Please upload the passport Copy in the upload document section.")
+                            return false;
+                        }
+                     }
+
+                    if ($("select#CountryHmadrss.form-control option:selected").val() == "") {
+                            alert("Please complete the home address section.")
+                            return false;
+                    } else {
+                    if ($("select#CountryHmadrss.form-control option:selected").val() == "2113") {
+                            if ($("select#ddlstate.form-control option:selected").val() == "") {
+                                alert("Please select an emirates in the home address section.")
+                                return false;
+                            }
+                    }
+                    else {
+                            if ($("#txtstate").val() == "") {
+                                alert("Please enter the state in the home address section.")
+                                return false;
+                            }
+                        }
+                    }
+
+                    if (@Model.HomeAddressFields.age < 21) {
+                        if ($("#txtGaudianFname").val() == "" || $("#txtGaudianLname").val() == "" || $("#txtGaudianphone").val() == "" || $("#txtEmplRelationship").val() == "" || $("#txtGaudianEmail").val() == "") {
+                            erromessage = "Please Fill all the mandatory Fields in Guardian Section";
+                            alert(erromessage);
+                            return false;
+                        }
+                }
+
+                if ($("select#Searchexam.form-control option:selected").val() != "") {
+                    if ($("#txttestscore").val() == "") {
+                        alert("Please fill score for the selected Test in the English Language Requirement section");
+                        return false;
+                    }
+                    else if ($("#date-input").val() == "") {
+                        alert("Please select a date for the selected Test in the English Language Requirement section");
+                        return false;
+                    }
+                }
+
+                $(".loading-icon").removeClass("hide");
+                $(".button").attr("disabled", true);
+                $(".btn-txt").text("Posting Data To Server......");
+
+
+                    var Scoredetails = new Array();
+                     var scores = {};
+                    scores.CAMS_TestID = $("#CAMS_TestID").val();
+                    scores.TestName = $("select#Searchexam.form-control option:selected").text();
+                    scores.CAMS_TestRefID = $("select#Searchexam.form-control option:selected").val();
+                    scores.Score = $("#txttestscore").val();
+                    scores.TestDate = $("#date-input").val();
+                    Scoredetails.push(scores);
+
+                    var Highschooldetails = new Array();
+                     var Highschool = {};
+                    if ($("#ddlHighSchool option:selected").val() == undefined) {
+                        Highschool.HighSchoolID = "";
+                    }
+                    else {
+                    Highschool.HighSchoolID = $("#ddlHighSchool option:selected").val();
+
+                    }
+
+                if ($("#HSType option:selected").val() == undefined)
+                    Highschool.Type = "";
+                else
+                    Highschool.Type = $("#HSType option:selected").val();
+
+
+                if ($("#Score").val() == undefined)
+                Highschool.Score = "";
+            else
+                Highschool.Score = $("#Score").val();
+
+                if ($("#Scoreoutof").val() == undefined)
+                Highschool.Scoreoutof = "";
+            else
+                Highschool.Scoreoutof = $("#Scoreoutof").val();
+
+                if ($("#txtCustomHighSchool").val() == undefined)
+                Highschool.Customhschool = "";
+            else
+                Highschool.Customhschool = $("#txtCustomHighSchool").val();
+
+                if ($("#txttransferinstitute").val() == undefined)
+                Highschool.TransferInstitute = "";
+            else
+                Highschool.TransferInstitute = $("#txttransferinstitute").val();
+
+                Highschooldetails.push(Highschool);
+
+
+                var Collegedetails = new Array();
+                var college = {};
+                //college.CollegeID = $("#ddlColleges option:selected").val();
+                if ($("#ddlColleges option:selected").val() == undefined)
+                college.CollegeID = "";
+            else
+                college.CollegeID = $("#ddlColleges option:selected").val();
+
+                     if ($("#Grade").val() == undefined)
+                         college.Grade = "";
+                    else
+                        college.Grade = $("#Grade").val();
+
+                     if ($("#Grade").val() == undefined)
+                        college.Grade = "";
+                    else
+                        college.Grade = $("#Grade").val();
+
+                     if ($("#Gradeoutof").val() == undefined)
+                        college.Gradeoutof = "";
+                    else
+                    college.Gradeoutof = $("#Gradeoutof").val();
+                    Collegedetails.push(college);
+
+                    var TransferValues = new Array();
+                    var Transferdetails = {};
+                    if ($("#txttransferinstitute").val() == undefined)
+                        Transferdetails.TransferInstitute = "";
+                    else
+                        Transferdetails.TransferInstitute = $("#txttransferinstitute").val();
+                    if ($("#CountryLsttransfercollege").val() == undefined)
+                        Transferdetails.TrProgram = "";
+                    else
+                        Transferdetails.TrProgram = $("#txttransferprogram").val();
+                    if ($("#txttransferprogram").val() == undefined)
+                        Transferdetails.Trcountry = "";
+                    else
+                        Transferdetails.Trcountry = $("#CountryLsttransfercollege").val();
+
+                TransferValues.push(Transferdetails);
+
+                var HomeAddressValues = new Array();
+                     var HomeAddress = {};
+                     HomeAddress.Address1 = $("#Address1").val();
+                     HomeAddress.Address2 = $("#Address2").val();
+                     HomeAddress.Address3 = $("#Address3").val();
+                    HomeAddress.CountryID = $("#CountryHmadrss option:selected").val();
+                     if (HomeAddress.CountryID == "2113") {
+                         HomeAddress.StateID = $("#ddlstate option:selected").val();
+                         HomeAddress.state = "";
+                     } else {
+                         HomeAddress.StateID = 0;
+                         HomeAddress.state = $("#txtstate").val();
+                     }
+                     HomeAddressValues.push(HomeAddress);
+
+                     var OptionalDetails = new Array();
+                     var Optional = {};
+                     Optional.NeededVisa = $("input[name='NeedStudentVisa']:checked").val();
+                     Optional.NeededHousing = $("input[name='HousingAccommodation']:checked").val();
+                     Optional.NeededSpecial = $("input[name='SpecialNeeds']:checked").val();
+                     Optional.NeededSpecialNotes = $("#reasonSpecialNeeds").val();
+                     Optional.NeededTransportation = $("input[name='Transportation']:checked").val();
+                     Optional.TransferFromHigherInstitution = $("input[name='TransferFromHigherInstitutionCredit']:checked").val();
+                     Optional.TransferCredit = $("input[name='TransferFromHigherInstitutionCredit']:checked").val();
+                     Optional.VisaType = $("input[name='NeedStudentVisa']:checked").val();
+                     Optional.TransferToCanada = $("input[name='IntentToTransferToCanada']:checked").val();
+                     Optional.UsCitizen = $("input[name='PermanentUAEResident']:checked").val();
+                     Optional.UAEID = $("#UAEID").val();
+                     Optional.UAEIDExpDate = $("#Expdate-input").val();
+                     OptionalDetails.push(Optional);
+
+                    if ($("#txtGaudianphone").val() != "" && $("#txtGaudianphone").val() != undefined) {
+                         var intlNumber = iti.selectedCountryData.dialCode + $("#txtGaudianphone").val();
+                        document.getElementById("hdntxtGaudianphone").value = intlNumber;
+                     }
+
+                     var Guardian = new Array();
+                     var Guardianary = {};
+                     Guardianary.FirstName = $("#txtGaudianFname").val();
+                     Guardianary.LastName = $("#txtGaudianLname").val();
+                     Guardianary.Phone = $("#hdntxtGaudianphone").val();
+                     Guardianary.Relationship = $("#ddRelationship option:selected").val();
+                    Guardianary.Gemail = $("#txtGaudianEmail").val();
+                    Guardianary.Position = $("#txtEmplPosition").val();
+                    Guardianary.Company = $("#txtEmplCompany").val();
+                Guardian.push(Guardianary);
+
+                var ACEdupageDetails = {}
+                if ($("#ddlHighSchool option:selected").val() == 0) { ACEdupageDetails.HighschoolName = "" } else {
+                    ACEdupageDetails.HighschoolName = $("#ddlHighSchool option:selected").text();
+                }
+                ACEdupageDetails.HighSchoolCountryName = $("#CountryLst option:selected").text();
+                ACEdupageDetails.HighSchoolCurriculum = $("#HSType option:selected").val();
+                if ($("#ddlColleges option:selected").val() == 0) { ACEdupageDetails.CollegeName = "" } else {
+                    ACEdupageDetails.CollegeName = $("#ddlColleges option:selected").text();
+                }
+                ACEdupageDetails.CollegeCountryName = $("#CountryLstfrcollege option:selected").text();
+                ACEdupageDetails.ResidenceCountryName = $("#CountryHmadrss option:selected").text();
+                ACEdupageDetails.TransferCollegeName = $("#txttransferinstitute").val();
+                if ($("#Score").val() == undefined)
+                    ACEdupageDetails.HighSchoolGrade = "";
+                else
+                    ACEdupageDetails.HighSchoolGrade = $("#Score").val();
+
+                if ($("#CountryHmadrss option:selected").val() == "2113") {
+                    ACEdupageDetails.ResdienceStateName = $("#ddlstate option:selected").text();
+                }
+
+
+
+               // var form = document.getElementById("#Edudocform");
+
+                    $.ajax({
+                         type: "post",
+                        url: '@Url.Action("InsertCamstestscores", "EducationandDocuments")',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ 'Scoredetailsed': Scoredetails, 'AcDetails': ACEdupageDetails, 'optional': OptionalDetails, 'Addressfields': HomeAddressValues, 'Highschooldetail': Highschooldetails, 'Collegedetail': Collegedetails, 'Guardiandetail': Guardian, 'TransferDtls': TransferValues }),
+                        //dataType: "json",
+                        traditional: true,
+                        success: function (returndata) {
+                            if (returndata.ok)
+                                window.location = returndata.newurl;
+                            else {
+                                $(".loading-icon").addClass("hide");
+                                $(".button").attr("disabled", false);
+                                $(".btn-txt").text("@ApplyNew.Resources.Resource.Proceed_for_Payment");
+                                window.alert(returndata.message);
+                            }
+
+                         },
+                        failure: function (response) {
+                            $(".loading-icon").addClass("hide");
+                                $(".button").attr("disabled", false);
+                                $(".btn-txt").text("@ApplyNew.Resources.Resource.Proceed_for_Payment");
+                            $.alert('Failed to update!');
+                         },
+
+                    });
+                     //}
+                     //else {
+                     //    alert("Please upload the passport Copy in the upload document section.")
+                     //    return false;
+                     //}
+
+
+                 });
+
+            $("#ddlColleges").on("change", function () {
+                     var slvalue = this.value;
+                     if (slvalue == "Other")
+                    $("#divcustomcollege").show();
+                else
+                    $("#divcustomcollege").hide();
+                 });
+
+            $("#ddlHighSchool").on("change", function () {
+                     var slvalue = this.value;
+                     if (slvalue == "Other")
+                    $("#divcustomschool").show();
+                else
+                    $("#divcustomschool").hide();
+                 });
+
+             });
+
+        function populateUAEID(Para) {
+            if (Para != undefined) {
+                if (Para == "Yes") {
+                    $("#UAEIDlbl").show();
+                    $("#UAEIDtxt").show();
+                }
+                else {
+                    $("#UAEIDlbl").hide();
+                    $("#UAEIDtxt").hide();
+                }
+            }
+
+        }
+        function showaddscorebtn(Info)
+        {
+            if (Info != undefined) {
+                $("#engbtn").hide();
+            }
+        }
+        function popuateSPfield(yes) {
+            //alert(yes);
+            if (yes != undefined) {
+                if (yes == "1") { yes = "Yes";}
+
+            if (yes == "Yes") {
+                $("#spneedlbl").show();
+                $("#spneedtxt").show();
+            }
+            else {
+                $("#spneedlbl").hide();
+                $("#spneedtxt").hide();
+                }
+            }
+        }
+        function populatestate(_CountrID) {
+            if (_CountrID != undefined) {
+            if (_CountrID == "2113") {
+                $("#Emirates").show();
+                $("#State").hide();
+            }
+            else {
+                $("#Emirates").hide();
+                $("#State").show();
+                }
+            }
+        }
+        function GetCollege(_CountryID) {
+            if (_CountryID != undefined && _CountryID != "") {
+                var procemessage = "<option value='0'> Please wait...</option>";
+                //$("#ddlColleges").html(procemessage).show();
+                //$("#ddlColleges").chosen();
+                $.ajax({
+                    url: '@Url.Action("GetCollegeByCountryId", "EducationandDocuments")',
+                    data: { Countryid: _CountryID },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        var markup = "<option value='0'>Select College</option>";
+                        for (var x = 0; x < data.length; x++) {
+                            if (data[x].Value == @Model.CollegeData.CollegeID) {
+                                markup += "<option selected='selected' value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                            } else {
+                                markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                            }
+                        }
+                        markup += "<option value='Other'>Other(Add Custom)</option>";
+                        $("#ddlColleges").html(markup).show();
+                        $("#ddlColleges").select2({ width: '100%'});
+                    },
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
+                $("#Collegediv").show();
+            } else if (_CountryID == "") {
+                $("#Collegediv").hide();
+            }
+        }
+
+        function GetHighSchool(_stateId) {
+            if (_stateId != undefined && _stateId !="") {
+            var procemessage = "<option value='0'> Please wait...</option>";
+            $("#ddlHighSchool").html(procemessage).show();
+
+            $.ajax({
+                url:'@Url.Action("GetHighSchoolByCountryId", "EducationandDocuments")',
+                data: { Countryid: _stateId },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    var markup = "<option value='0'>Select HighSchool</option>";
+                    for (var x = 0; x < data.length; x++) {
+                        if (data[x].Value == @Model.HighSData.HighSchoolID) {
+                            markup += "<option selected='selected' value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                        } else {
+                            markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                        }
+                    }
+                    markup += "<option value='Other'>Other(Add Custom)</option>";
+                    $("#ddlHighSchool").html(markup).show();
+                    $("#ddlHighSchool").select2({ width: '100%'});
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+                });
+                $("#Highschooldiv").show();
+            } else if (_stateId == "") {
+                $("#Highschooldiv").hide();
+            }
+        }
+
+        function Uploadtrigger(docid) {
+            var id = "Originalbtn_" + docid;
+            $("#" + id + "").click();
+        }
+
+        function FileUploadserver(Docid, Docname) {
+            var id = "Originalbtn_" + Docid;
+            const selectedfile = document.getElementById("" + id + "").value;
+
+            if (window.FormData !== undefined) {
+                var fileUpload = $("#" + id + "").get(0);
+                var files = fileUpload.files;
+                var fileData = new FormData();
+                for (var i = 0; i < files.length; i++) {
+                    fileData.append(files[i].name, files[i]);
+                }
+                fileData.append("DocID", Docid);
+                fileData.append("DocName", Docname);
+            }
+
+            var maxFileSize = 4194304; // 4MB -> 4 * 1024 * 1024
+            //var fileUpload = $('#fileUpload');
+                if (files[0].size > maxFileSize) {
+                    alert('File is too big to upload !');
+                    return false;
+                }
+
+            if (selectedfile) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Fileupload", "EducationandDocuments")',
+                    data: fileData,
+                    //dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    cache: false,
+                    success: function (response) {
+                        var myhtml = '';
+                        if (response.success) {
+                            //$("#doc_" + Docid + "").hide();
+
+                            var myhtml = `
+                         <div class="row col-lg-12" id="sdoc_${Docid}">
+                                                <div class="col-lg-12" style="padding:15px 0px 0px 35px;">
+                                                    <div style="padding-bottom:35px;">
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 alert bg-light">
+                                                            <div>
+                                                            </div>
+                                                                <div class="row"><div id="Udoc_${Docid}" class="col-lg-7" style="padding:18px;">${response.Filename}</div><div class="col-lg-4"><input type="button" onclick="deletefile(${Docid})" value="delete" class="btn btn-danger" style="float:right;"></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                        `;
+                            $("#virtualbtn_" + Docid + "").prop('disabled', true);
+                           // myhtml = '<div style="padding-top: 25px;"><div><label>'+ Docname +'</label></div><div class="col-lg-12 alert alert-success">' + response.responseMessage + " - " + response.Filename + ' <button onclick="deletefile(' + Docid + ')" class="btn btn-danger" style="float:right;">delete</button></div><div>';
+                        }
+                        else {
+                            if (response.responseMessage == "sessionexpr") {
+                                window.location = '@Url.Action("index", "OnlineApply")';
+                            }
+                        }
+                        $("#myAlert_" + Docid + "").html(myhtml);
+
+                        // $("#myAlert_" + Docid + "").fadeIn(500).delay(3000).fadeOut(500);
+                    },
+                    error: function (error) {
+                        alert(error);
+                    }
+                });
+                //document.getElementById("custom-text").innerText = selectedfile.replace(/^.*[\\\/]/, '');
+            }
+            else {
+                document.getElementById("custom-text").innerText = "No file chosen yet";
+            }
+        }
+
+        function deletefile(_Docid) {
+             $.ajax({
+                url:'@Url.Action("DeleteUploadedFile", "EducationandDocuments")',
+                 data: { DocNameID: _Docid },
+                cache: false,
+                type: "POST",
+                success: function (response) {
+                    var myhtml = '';
+                    if (response.success) {
+                        //$("#sdoc_" + _Docid + "").hide();
+                        //myhtml = '<div class="col-lg-2"></div><div class="col-lg-8 alert alert-success">' + response.responseMessage + '</div><div class="col-lg-2"></div>';
+                        var myhtml = `
+                         <div class="row col-lg-12">
+                                                <div class="col-lg-12" style="padding:15px 0px 0px 35px;">
+                                                    <div style="padding-bottom:45px;">
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12 alert alert-success">
+                                                            <div>
+
+                                                            </div>
+                                                             <div class="row"><div class="col-lg-10">${response.responseMessage}</div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                        `;
+                    }
+                    else {
+                        myhtml = '<div class="alert alert-danger">' + response.responseMessage + '</div>';
+                    }
+                    $("#myAlert_" + _Docid + "").html(myhtml);
+                    $("#virtualbtn_" + _Docid + "").prop('disabled', false);
+                    //$("#doc_" + _Docid + "").show();
+                    //$("#myAlert_" + _Docid + "").show();
+                },
+                error: function (error) {
+                    $("#myAlert_" + _Docid + "").html('<div class="alert alert-danger">' + error + '</div>');
+                }
+            });
+
+        }
+        function Statuscheck() {
+            var _prospectid = $("#hdnProspectID").val();
+                 $.ajax({
+                url:'@Url.Action("ProspectStatusCheck", "OnlineApply")',
+                     data: { prospectid: _prospectid },
+                cache: false,
+                type: "POST",
+                     success: function (data) {
+                         if (data.Success) {
+                             window.location = '@Url.Action("LeadComplete", "Lead")';
+                         }
+                         else {
+
+                         }
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+                });
+            }
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode != 46 && charCode > 31
+                && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+
+    </script>
+}
+

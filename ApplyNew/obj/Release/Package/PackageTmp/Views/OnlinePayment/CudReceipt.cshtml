@@ -1,0 +1,132 @@
+﻿@model ApplyNew.Models.PayReceipt
+@{
+    ViewBag.Title = "CudReceipt";
+}
+<style>
+    /*.container {
+        padding: 0px !important;
+    }*/
+</style>
+
+<fieldset id="response">
+    <div>
+        <form id="receipt" action="">
+            <div style="display: none;">
+                @{
+
+                    IDictionary<string, string> parameters = new Dictionary<string, string>();
+
+                    foreach (var key in Request.Form.AllKeys)
+                    {
+                        //Response.Write("<span>" + key + "</span><input type=\"text\" name=\"" + key + "\" size=\"50\" value=\"" + Request.Params[key] + "\" readonly=\"true\" /><br />");
+                        //parameters.Add(key, Request.Params[key]);
+                    }
+
+                    //Response.Write("<span>Signature Verified:</span><input type=\"text\" name=\"verified\" size=\"50\" value=\"" + Request.Params["signature"].Equals(Security.sign(parameters, Request.Form["portal"])) + "\" readonly=\"true\" /><br />");
+                }
+            </div>
+
+            <div class="container h-100" id="maincontent" style='font-family:Helvetica, Arial,serif;background-color:white;'>
+                @*<div>
+                        <img src="https://www.cud.ac.ae/newsletters/2020/09/30/header-whats-happening-fall-2020.jpg" style="width:100%;height:320px;">
+                    </div>*@<br />
+                <div class="row align-items-center h-100">
+                    <div class="col-12 mx-auto">
+                        <div id="maincont">
+                            <h3 style="text-align:center;font-weight:bold;color:#d32020;" class="mb-3">@ApplyNew.Resources.Resource.Online_Application_cudreceipt</h3>
+                            <div class="form-group">
+                                @if (Model.response == "00")
+                                {
+                                    <div class="col-8 mx-auto">
+                                        <p id="p1success" style="font-size: 18px; font-weight: bold;text-align:center;color:#007bff;">@ApplyNew.Resources.Resource.Successful_msg_cudreceipt</p>
+                                        <p style="text-align:center;font-size:15px;">@ApplyNew.Resources.Resource.Message1_cudreceipt</p>
+                                        <p style="text-align:center;font-size:15px;">@ApplyNew.Resources.Resource.Message2_cudreceipt</p><br />
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>@ApplyNew.Resources.Resource.Transaction_Date_cudreceipt:</td>
+                                                    <td>@DateTime.Now.ToString()</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>@ApplyNew.Resources.Resource.Transaction_num_cudreceipt:</td>
+                                                    <td>@Model.approvalcode</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>@ApplyNew.Resources.Resource.ProspectID_cudreceipt:</td>
+                                                    <td>@Model.prospectid</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>@ApplyNew.Resources.Resource.Name_cudreceipt:</td>
+                                                    <td>@Model.Name</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>@ApplyNew.Resources.Resource.Email_ID_cudreceipt:</td>
+                                                    <td>@Model.email</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>@ApplyNew.Resources.Resource.Amount_Paid_cudreceipt:</td>
+                                                    <td>@string.Format("{0:#.00}", Convert.ToDecimal(Model.amount)) AED</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>                                       
+                                    </div><br />
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-5 col-sm-12" style="margin-left:40px;">
+                                            @*<h4 style="color:#1c3764;">Next Steps</h4>*@
+                                            <ul class="list-group">
+                                                <li class="list-group-item active" style="background-color:rgb(216, 33, 44);border-color:rgb(216, 33, 44);font-size:18px;">Whats Next?</li>
+                                                <li class="list-group-item">Review the <a style="font-weight:bold" href="http://www.cud.ac.ae/academic-calendar">CUD Academic Calendar</a></li>
+                                                <li class="list-group-item">[<a style="font-weight:bold" href="http://www.cud.ac.ae/downloads/new-student-attestation-information">Attestation Information</a>] | [<a style="font-weight:bold" href="http://www.cud.ac.ae/downloads/new-student-attestation-information-graduate">Attestation Information for Graduate Students</a>]</li>
+                                                <li class="list-group-item">Register for the <a style="font-weight:bold" href="http://www.cud.ac.ae/ielts">IELTS</a> or <a style="font-weight:bold" href="http://www.cud.ac.ae/events/toefl-test-dates">TOEFL</a> exam | <a style="font-weight:bold" href="http://www.cud.ac.ae/events/math-placement-test">Math Placement Test</a></li>
+                                                <li class="list-group-item"><a style="font-weight:bold" href="http://www.cud.ac.ae/prospective-students/transfer-of-credit">Transferring Credits to CUD</a></li>
+                                                <li class="list-group-item"><a style="font-weight:bold" href="http://www.cud.ac.ae/fees">CUD Fees Overview</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-1 col-md-1 col-sm-12"></div>
+                                        <div class="col-lg-5 col-md-5 col-sm-12">
+                                            @*<h4 style="color:#1c3764;">Any questions or concerns?</h4>*@
+                                            <ul class="list-group">
+                                                <li class="list-group-item active" style="background-color:rgb(216, 33, 44);border-color:rgb(216, 33, 44);font-size:18px;"> Any questions or concerns? </li>
+                                                <li class="list-group-item"> You may reach us by phone at +971 4-321-9090 or email at <a href="mailto:apply@cud.ac.ae">apply@cud.ac.ae</a> </li>
+                                                <li class="list-group-item"> To review your application please click <a style="font-weight:bold" href='@Url.Action("Index", "CompletedProfile")'>here </a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div style="text-align:center;" class="col-8 mx-auto">
+                                        <div class="form-group">
+                                            <p id="p2" style="font-size: 20px;">
+                                                Error Message: @Model.responsemessage
+                                            </p>
+                                        </div>
+                                        <p id="p1failure" style="font-size: 18px; font-weight: bold;">
+                                            @ApplyNew.Resources.Resource.Unsuccessful_msg_cudreceipt
+                                        </p>
+                                        <p>
+                                            <input type="button" class="btn btn-primary" value="retry payment" style="width:330px;" onclick="document.location.href='@Url.Action("CudPayment", "OnlinePayment", new { language = Model.locallang})'" />
+                                        </p>
+                                        <p id="p1failure1" style="font-size: 18px; font-weight: bold;">If you continue experiencing difficulty please contact us at +971 4-321-9090 or email at <a href="mailto:apply@cud.ac.a"> apply@cud.ac.a </a></p>
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</fieldset>
+@section scripts{
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#divlanguage").hide();
+    });
+</script>
+
+}
+
+

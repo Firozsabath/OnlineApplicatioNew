@@ -1,0 +1,954 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BF7102CE-BB92-4626-A7E2-687E8798E3F3}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ApplyNew</RootNamespace>
+    <AssemblyName>ApplyNew</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CaptchaMvc, Version=2.5.0.0, Culture=neutral, PublicKeyToken=fe46ad421dd3b0e6, processorArchitecture=MSIL">
+      <HintPath>..\packages\CaptchaMvc.Mvc5.1.5.0\lib\net45-full\CaptchaMvc.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CompletedProfileController.cs" />
+    <Compile Include="Controllers\EducationandDocumentsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LeadController.cs" />
+    <Compile Include="Controllers\OnlineApplyController.cs" />
+    <Compile Include="Controllers\OnlinePaymentController.cs" />
+    <Compile Include="Controllers\ShortCoursesController.cs" />
+    <Compile Include="Custom_DoctNametable.cs">
+      <DependentUpon>DocNames.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Custom_Profileprogress_Result.cs">
+      <DependentUpon>ModelProgress.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocNames.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DocNames.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocNames.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DocNames.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocNames.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DocNames.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="MathApptestscores_Result.cs">
+      <DependentUpon>TestScores.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelProgress.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelProgress.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelProgress.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelProgress.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelProgress.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelProgress.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ACContactFIelds.cs" />
+    <Compile Include="Models\accountdata.cs" />
+    <Compile Include="Models\ActiveCampaignSF.cs" />
+    <Compile Include="Models\Binanceview.cs" />
+    <Compile Include="Models\Cams_test.cs" />
+    <Compile Include="Models\Checkin.cs" />
+    <Compile Include="Models\CollegeDetails.cs" />
+    <Compile Include="Models\ACContacts.cs" />
+    <Compile Include="Models\CTGamedevelopment.cs" />
+    <Compile Include="Models\Docsaved.cs" />
+    <Compile Include="Models\Education.cs" />
+    <Compile Include="Models\Employer.cs" />
+    <Compile Include="Models\Guardian.cs" />
+    <Compile Include="Models\HighSchoolDetails.cs" />
+    <Compile Include="Models\HomeAddress.cs" />
+    <Compile Include="Models\Optional.cs" />
+    <Compile Include="Models\PaymentParameters.cs" />
+    <Compile Include="Models\PayReceipt.cs" />
+    <Compile Include="Models\ProgramList.cs" />
+    <Compile Include="Models\ProspectAgentDetails.cs" />
+    <Compile Include="Models\RemotePost.cs" />
+    <Compile Include="Models\ScoreDetails.cs" />
+    <Compile Include="Models\Security.cs" />
+    <Compile Include="Models\TransferInstitutedtls.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Resource.ar-SA.Designer.cs">
+      <DependentUpon>Resource.ar-SA.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="TestScores.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestScores.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestScores.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestScores.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestScores.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestScores.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ACViewModel.cs" />
+    <Compile Include="ViewModel\Completeprofiledt.cs" />
+    <Compile Include="ViewModel\LeadViewModel.cs" />
+    <Compile Include="ViewModel\OnlinePaymentViewModel.cs" />
+    <Compile Include="ViewModel\TestdocViewModel.cs" />
+    <Compile Include="Web References\SFservicesamp\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-chosen.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen-sprite.png" />
+    <Content Include="Content\chosen.css" />
+    <Content Include="Content\chosen.min.css" />
+    <Content Include="Content\External.css" />
+    <Content Include="Content\Images\bg-main.jpg" />
+    <Content Include="Content\Images\canada-fa.png" />
+    <Content Include="Content\Images\favicon.ico" />
+    <Content Include="Content\Images\front-city-walk-banner.jpg" />
+    <Content Include="Content\Images\imgc.png" />
+    <Content Include="Content\Images\LoadingN.gif" />
+    <Content Include="Content\Images\logo-sticky.png" />
+    <Content Include="Content\Images\Logo.png" />
+    <Content Include="Content\Images\logo.svg" />
+    <Content Include="Content\Images\uae-fa.png" />
+    <Content Include="Content\Mdb\css\addons\datatables-select.min.css" />
+    <Content Include="Content\Mdb\css\addons\datatables-select2.min.css" />
+    <Content Include="Content\Mdb\css\addons\datatables.min.css" />
+    <Content Include="Content\Mdb\css\addons\datatables2.min.css" />
+    <Content Include="Content\Mdb\css\addons\directives.min.css" />
+    <Content Include="Content\Mdb\css\addons\flag.min.css" />
+    <Content Include="Content\Mdb\css\addons\jquery.zmd.hierarchical-display.min.css" />
+    <Content Include="Content\Mdb\css\addons\rating.min.css" />
+    <Content Include="Content\Mdb\css\bootstrap.css" />
+    <Content Include="Content\Mdb\css\bootstrap.min.css" />
+    <Content Include="Content\Mdb\css\mdb.css" />
+    <Content Include="Content\Mdb\css\mdb.lite.css" />
+    <Content Include="Content\Mdb\css\mdb.lite.min.css" />
+    <Content Include="Content\Mdb\css\mdb.min.css" />
+    <Content Include="Content\Mdb\css\modules\animations-extended.min.css" />
+    <Content Include="Content\Mdb\css\style.css" />
+    <Content Include="Content\Mdb\exclusive-templates\unlock-exclusive-freebies.html" />
+    <Content Include="Content\Mdb\img\mdb-favicon.ico" />
+    <Content Include="Content\Mdb\img\overlays\01.png" />
+    <Content Include="Content\Mdb\img\overlays\02.png" />
+    <Content Include="Content\Mdb\img\overlays\03.png" />
+    <Content Include="Content\Mdb\img\overlays\04.png" />
+    <Content Include="Content\Mdb\img\overlays\05.png" />
+    <Content Include="Content\Mdb\img\overlays\06.png" />
+    <Content Include="Content\Mdb\img\overlays\07.png" />
+    <Content Include="Content\Mdb\img\overlays\08.png" />
+    <Content Include="Content\Mdb\img\overlays\09.png" />
+    <Content Include="Content\Mdb\img\svg\arrow_left.svg" />
+    <Content Include="Content\Mdb\img\svg\arrow_right.svg" />
+    <Content Include="Content\Mdb\js\addons\datatables-select.min.js" />
+    <Content Include="Content\Mdb\js\addons\datatables-select2.min.js" />
+    <Content Include="Content\Mdb\js\addons\datatables.min.js" />
+    <Content Include="Content\Mdb\js\addons\datatables2.min.js" />
+    <Content Include="Content\Mdb\js\addons\directives.min.js" />
+    <Content Include="Content\Mdb\js\addons\flag.min.js" />
+    <Content Include="Content\Mdb\js\addons\imagesloaded.pkgd.min.js" />
+    <Content Include="Content\Mdb\js\addons\jquery.zmd.hierarchical-display.min.js" />
+    <Content Include="Content\Mdb\js\addons\masonry.pkgd.min.js" />
+    <Content Include="Content\Mdb\js\addons\rating.min.js" />
+    <Content Include="Content\Mdb\js\bootstrap.js" />
+    <Content Include="Content\Mdb\js\bootstrap.min.js" />
+    <Content Include="Content\Mdb\js\jquery.js" />
+    <Content Include="Content\Mdb\js\jquery.min.js" />
+    <Content Include="Content\Mdb\js\mdb.js" />
+    <Content Include="Content\Mdb\js\mdb.min.js" />
+    <Content Include="Content\Mdb\js\modules\animations-extended.min.js" />
+    <Content Include="Content\Mdb\js\modules\forms-free.min.js" />
+    <Content Include="Content\Mdb\js\modules\scrolling-navbar.min.js" />
+    <Content Include="Content\Mdb\js\modules\treeview.min.js" />
+    <Content Include="Content\Mdb\js\modules\wow.min.js" />
+    <Content Include="Content\Mdb\js\popper.js" />
+    <Content Include="Content\Mdb\js\popper.min.js" />
+    <Content Include="Content\Mdb\src\js\free\forms-free.js" />
+    <Content Include="Content\Mdb\src\js\free\scrolling-navbar.js" />
+    <Content Include="Content\Mdb\src\js\free\treeview.js" />
+    <Content Include="Content\Mdb\src\js\free\wow.js" />
+    <Content Include="Content\Mdb\src\js\vendor\addons\datatables-select.js" />
+    <Content Include="Content\Mdb\src\js\vendor\addons\datatables-select2.js" />
+    <Content Include="Content\Mdb\src\js\vendor\addons\datatables.js" />
+    <Content Include="Content\Mdb\src\js\vendor\addons\datatables2.js" />
+    <Content Include="Content\Mdb\src\js\vendor\addons\imagesloaded.pkgd.min.js" />
+    <Content Include="Content\Mdb\src\js\vendor\addons\jquery.zmd.hierarchical-display.js" />
+    <Content Include="Content\Mdb\src\js\vendor\addons\masonry.pkgd.min.js" />
+    <Content Include="Content\Mdb\src\js\vendor\addons\rating.js" />
+    <Content Include="Content\Mdb\src\js\vendor\free\bs-custom-file-input.js" />
+    <Content Include="Content\Mdb\src\js\vendor\free\chart.js" />
+    <Content Include="Content\Mdb\src\js\vendor\free\chartjs-datalabels.js" />
+    <Content Include="Content\Mdb\src\js\vendor\free\enhanced-modals.js" />
+    <Content Include="Content\Mdb\src\js\vendor\free\jquery.easing.js" />
+    <Content Include="Content\Mdb\src\js\vendor\free\velocity.js" />
+    <Content Include="Content\Mdb\src\js\vendor\free\waves.js" />
+    <Content Include="Content\progress-wizard.min.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="DocNames.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DocNames.Context.cs</LastGenOutput>
+      <DependentUpon>DocNames.edmx</DependentUpon>
+    </Content>
+    <Content Include="DocNames.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DocNames.edmx</DependentUpon>
+      <LastGenOutput>DocNames.cs</LastGenOutput>
+    </Content>
+    <Content Include="Emailtempfor_prospectRecovery.html" />
+    <Content Include="Emailtempfor_Agent.html" />
+    <Content Include="EmailtempforSP.html" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="ModelProgress.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelProgress.edmx</DependentUpon>
+      <LastGenOutput>ModelProgress.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelProgress.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelProgress.edmx</DependentUpon>
+      <LastGenOutput>ModelProgress.cs</LastGenOutput>
+    </Content>
+    <Content Include="ReceiptTemp.html" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <EntityDeploy Include="DocNames.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DocNames.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DocNames.edmx.diagram">
+      <DependentUpon>DocNames.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-chosen.scss" />
+    <Content Include="Content\bootstrap-chosen.less" />
+    <EntityDeploy Include="ModelProgress.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelProgress.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ModelProgress.edmx.diagram">
+      <DependentUpon>ModelProgress.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\Mdb\css\addons\datatables-select.min.css.map" />
+    <Content Include="Content\Mdb\css\addons\datatables-select2.min.css.map" />
+    <Content Include="Content\Mdb\css\addons\datatables.min.css.map" />
+    <Content Include="Content\Mdb\css\addons\datatables2.min.css.map" />
+    <Content Include="Content\Mdb\css\addons\directives.min.css.map" />
+    <Content Include="Content\Mdb\css\addons\flag.min.css.map" />
+    <Content Include="Content\Mdb\css\addons\jquery.zmd.hierarchical-display.min.css.map" />
+    <Content Include="Content\Mdb\css\addons\rating.min.css.map" />
+    <Content Include="Content\Mdb\css\mdb.lite.min.css.map" />
+    <Content Include="Content\Mdb\css\mdb.min.css.map" />
+    <Content Include="Content\Mdb\css\modules\animations-extended.min.css.map" />
+    <Content Include="Content\Mdb\js\addons\datatables-select.min.js.map" />
+    <Content Include="Content\Mdb\js\addons\datatables-select2.min.js.map" />
+    <Content Include="Content\Mdb\js\addons\datatables.min.js.map" />
+    <Content Include="Content\Mdb\js\addons\datatables2.min.js.map" />
+    <Content Include="Content\Mdb\js\addons\directives.min.js.map" />
+    <Content Include="Content\Mdb\js\addons\flag.min.js.map" />
+    <Content Include="Content\Mdb\js\addons\imagesloaded.pkgd.min.js.map" />
+    <Content Include="Content\Mdb\js\addons\jquery.zmd.hierarchical-display.min.js.map" />
+    <Content Include="Content\Mdb\js\addons\masonry.pkgd.min.js.map" />
+    <Content Include="Content\Mdb\js\addons\rating.min.js.map" />
+    <Content Include="Content\Mdb\js\mdb.lite.min.js.map" />
+    <Content Include="Content\Mdb\js\mdb.min.js.map" />
+    <Content Include="Content\Mdb\js\modules\animations-extended.min.js.map" />
+    <Content Include="Content\Mdb\js\modules\forms-free.min.js.map" />
+    <Content Include="Content\Mdb\js\modules\scrolling-navbar.min.js.map" />
+    <Content Include="Content\Mdb\js\modules\treeview.min.js.map" />
+    <Content Include="Content\Mdb\js\modules\wow.min.js.map" />
+    <Content Include="Content\Mdb\scss\addons\_datatables-select.scss" />
+    <Content Include="Content\Mdb\scss\addons\_datatables-select2.scss" />
+    <Content Include="Content\Mdb\scss\addons\_datatables.scss" />
+    <Content Include="Content\Mdb\scss\addons\_datatables2.scss" />
+    <Content Include="Content\Mdb\scss\addons\_directives.scss" />
+    <Content Include="Content\Mdb\scss\addons\_flag.scss" />
+    <Content Include="Content\Mdb\scss\addons\_hierarchical-display.scss" />
+    <Content Include="Content\Mdb\scss\addons\_rating.scss" />
+    <Content Include="Content\Mdb\scss\core\bootstrap\_functions.scss" />
+    <Content Include="Content\Mdb\scss\core\bootstrap\_rfs.scss" />
+    <Content Include="Content\Mdb\scss\core\bootstrap\_variables.scss" />
+    <Content Include="Content\Mdb\scss\core\_colors.scss" />
+    <Content Include="Content\Mdb\scss\core\_global.scss" />
+    <Content Include="Content\Mdb\scss\core\_helpers.scss" />
+    <Content Include="Content\Mdb\scss\core\_masks.scss" />
+    <Content Include="Content\Mdb\scss\core\_mixins.scss" />
+    <Content Include="Content\Mdb\scss\core\_typography.scss" />
+    <Content Include="Content\Mdb\scss\core\_variables.scss" />
+    <Content Include="Content\Mdb\scss\core\_waves.scss" />
+    <Content Include="Content\Mdb\scss\free\modules\animations-extended\animations-extended.scss" />
+    <Content Include="Content\Mdb\scss\free\modules\animations-extended\_module.scss" />
+    <Content Include="Content\Mdb\scss\free\_animations-basic.scss" />
+    <Content Include="Content\Mdb\scss\free\_badges.scss" />
+    <Content Include="Content\Mdb\scss\free\_buttons.scss" />
+    <Content Include="Content\Mdb\scss\free\_cards.scss" />
+    <Content Include="Content\Mdb\scss\free\_carousels.scss" />
+    <Content Include="Content\Mdb\scss\free\_depreciated.scss" />
+    <Content Include="Content\Mdb\scss\free\_dropdowns.scss" />
+    <Content Include="Content\Mdb\scss\free\_footers.scss" />
+    <Content Include="Content\Mdb\scss\free\_forms.scss" />
+    <Content Include="Content\Mdb\scss\free\_input-group.scss" />
+    <Content Include="Content\Mdb\scss\free\_list-group.scss" />
+    <Content Include="Content\Mdb\scss\free\_loader.scss" />
+    <Content Include="Content\Mdb\scss\free\_modals.scss" />
+    <Content Include="Content\Mdb\scss\free\_msc.scss" />
+    <Content Include="Content\Mdb\scss\free\_navbars.scss" />
+    <Content Include="Content\Mdb\scss\free\_pagination.scss" />
+    <Content Include="Content\Mdb\scss\free\_steppers.scss" />
+    <Content Include="Content\Mdb\scss\free\_tables.scss" />
+    <Content Include="Content\Mdb\scss\free\_treeview.scss" />
+    <Content Include="Content\Mdb\scss\mdb-free.scss" />
+    <Content Include="Content\Mdb\scss\mdb-lite-free.scss" />
+    <Content Include="Content\Mdb\scss\_custom-styles.scss" />
+    <Content Include="Content\Mdb\scss\_custom-variables.scss" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\intl-tel-input\img\Thumbs.db" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\chosen.jquery.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
+    <Content Include="Scripts\intl-tel-input\css\demo.css" />
+    <Content Include="Scripts\intl-tel-input\css\intlTelInput.css" />
+    <Content Include="Scripts\intl-tel-input\css\intlTelInput.min.css" />
+    <Content Include="Scripts\intl-tel-input\img\flags%402x.png" />
+    <Content Include="Scripts\intl-tel-input\img\flags.png" />
+    <Content Include="Scripts\intl-tel-input\js\data.js" />
+    <Content Include="Scripts\intl-tel-input\js\data.min.js" />
+    <Content Include="Scripts\intl-tel-input\js\intlTelInput-jquery.js" />
+    <Content Include="Scripts\intl-tel-input\js\intlTelInput-jquery.min.js" />
+    <Content Include="Scripts\intl-tel-input\js\intlTelInput.js" />
+    <Content Include="Scripts\intl-tel-input\js\intlTelInput.min.js" />
+    <Content Include="Scripts\intl-tel-input\js\intro-data.js" />
+    <Content Include="Scripts\intl-tel-input\js\intro-jquery.js" />
+    <Content Include="Scripts\intl-tel-input\js\intro.js" />
+    <Content Include="Scripts\intl-tel-input\js\outro-data.js" />
+    <Content Include="Scripts\intl-tel-input\js\outro-jquery.js" />
+    <Content Include="Scripts\intl-tel-input\js\outro.js" />
+    <Content Include="Scripts\intl-tel-input\js\utils.js" />
+    <Content Include="Scripts\intl-tel-input\lib\libphonenumber\build\utils.js" />
+    <Content Include="Scripts\intl-tel-input\lib\libphonenumber\src\utils.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.filedrop.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="TestScores.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TestScores.edmx</DependentUpon>
+      <LastGenOutput>TestScores.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="TestScores.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TestScores.edmx</DependentUpon>
+      <LastGenOutput>TestScores.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\EducationandDocuments\EducationDoc.cshtml" />
+    <Content Include="Views\Lead\Index.cshtml" />
+    <Content Include="Views\Lead\PostData.cshtml" />
+    <Content Include="Web References\SFservicesamp\ChangeOwnPasswordResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DeleteByExampleResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DeleteResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeAppMenuItem.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeApprovalLayout.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeAvailableQuickActionResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeCompactLayout.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeCompactLayoutsResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeDataCategoryGroupResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeDataCategoryGroupStructureResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeDataCategoryMappingResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeGlobalResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeGlobalTheme.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeLayoutResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeNounResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribePathAssistant.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeQuickActionResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeSearchableEntityResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeSearchLayoutResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeSearchScopeOrderResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeSObjectResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeSoftphoneLayoutResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeSoqlListView.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeTab.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeTabSetResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeThemeItem.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\DescribeVisualForceResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\EmptyRecycleBinResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\ExecuteListViewResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\FindDuplicatesResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\GetDeletedResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\GetServerTimestampResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\GetUpdatedResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\GetUserInfoResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\InvalidateSessionsResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\KnowledgeSettings.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\LeadConvertResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\LoginResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\MergeResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\PerformQuickActionResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\ProcessResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\QueryResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\QuickActionTemplateResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Views\CompletedProfile\StudentAgentInfo.cshtml" />
+    <Content Include="Views\ShortCourses\Index.cshtml" />
+    <Content Include="Views\OnlinePayment\CudPaymentCorporateTraning.cshtml" />
+    <Content Include="Views\OnlinePayment\CudReceiptCorporateTraining.cshtml" />
+    <Content Include="Views\Shared\_LayoutExternal.cshtml" />
+    <Content Include="Views\OnlinePayment\Binancesuccessrequest.cshtml" />
+    <Content Include="Views\OnlinePayment\Binancecancelrequest.cshtml" />
+    <None Include="Web References\SFservicesamp\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\SFservicesamp\RenderEmailTemplateResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\RenderStoredEmailTemplateResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\ResetPasswordResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\SaveResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\SearchResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\SendEmailResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\SetPasswordResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\sObject.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\UndeleteResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\SFservicesamp\UpsertResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <EntityDeploy Include="TestScores.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TestScores.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="TestScores.edmx.diagram">
+      <DependentUpon>TestScores.edmx</DependentUpon>
+    </Content>
+    <Content Include="Views\OnlinePayment\CudPayment.cshtml" />
+    <Content Include="Views\OnlinePayment\Checkout.cshtml" />
+    <Content Include="Views\Shared\_ProgressBar.cshtml" />
+    <Content Include="Views\Shared\_Captcha.cshtml" />
+    <Content Include="Views\OnlinePayment\CudReceipt.cshtml" />
+    <Content Include="Views\Lead\SaveAndExit.cshtml" />
+    <Content Include="Views\Lead\LeadUpdate.cshtml" />
+    <Content Include="Views\OnlineApply\Index.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Lead\LeadComplete.cshtml" />
+    <Content Include="Views\CompletedProfile\Index.cshtml" />
+    <Content Include="Views\Shared\ErrorSession.cshtml" />
+    <None Include="Web References\SFservicesamp\wsdl.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="C:\Users\firoz.sabath\Desktop\wsdl.xml">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\SFservicesamp\</RelPath>
+      <UpdateFromURL>C:\Users\firoz.sabath\Desktop\wsdl.xml</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>ApplyNew_SFservicesamp_SforceService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Resource.ar-SA.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.ar-SA.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55888</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55888/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
