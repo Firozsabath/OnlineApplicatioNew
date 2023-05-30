@@ -157,7 +157,7 @@
     <value>Continue an existing Application</value>
   </data>
   <data name="Continue_to_make_Payment" xml:space="preserve">
-    <value>Continue to make Payment</value>
+    <value>Pay by card</value>
   </data>
   <data name="Create_a_new_Application" xml:space="preserve">
     <value>Create a new Application</value>

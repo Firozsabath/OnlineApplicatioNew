@@ -43,13 +43,13 @@
 
                 }
                 else
-                {<input type="button" class="btn btn-danger cudbtnwidth" id="btncreateNew" value="@ApplyNew.Resources.Resource.Create_a_new_Application"/>}
+                {<input type="button" class="btn btn-danger cudbtnwidth" id="btncreateNew" value="@ApplyNew.Resources.Resource.Create_a_new_Application" />}
 
             </div>
             <div class="col-lg-2 col-md-12 col-sm-12">
-        </div>
+            </div>
             <div class="col-lg-4 col-md-12 col-sm-12">
-                <input type="button" id="rtrvdata" class="btn btn-danger cudbtnwidth" value="@ApplyNew.Resources.Resource.Continue_an_existing_Application"/>
+                <input type="button" id="rtrvdata" class="btn btn-danger cudbtnwidth" value="@ApplyNew.Resources.Resource.Continue_an_existing_Application" />
             </div>
             <div class="col-lg-1 col-md-12 col-sm-12"></div>
         </div>
@@ -92,17 +92,18 @@
                         <div class="row">
                             <div class="col-lg-11">
                                 <button type="button" id="sbmtbtn1" class="btn btn-danger cudbtnwidth button"><i class="loading-icon fa fa-spinner fa-spin hide"></i> <span class="btn-txt">@ApplyNew.Resources.Resource.Retrieve_Application</span></button>
-                            
+
                             </div>
                         </div>
                     </fieldset>
                 </div>
             </div>
             <div class="col-lg-1 col-md-1 col-sm-12"></div>
-            <div id="overlay" style="display: none">              
+            <div id="overlay" style="display: none">
             </div>
         </div>
         <input type="hidden" id="hdnqs" name="hdnqs" value="@ViewBag.utms" />
+        <input type="hidden" id="hdnTocken" name="hdnTocken" />
     </div>
 }
 <style>
@@ -113,14 +114,30 @@
     .accordion .fa {
         margin-right: 0.5rem;
     }
-      .hide{
-        display:none;
+
+    .hide {
+        display: none;
     }
 </style>
 @*<link href="~/Content/External.css" rel="stylesheet" />*@
 @section scripts{
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcRmT8lAAAAAAxFyZNdHHdBQCN-3ImPd9RkKBTI"></script>
     <script type="text/javascript">
+
+        function getToken() {
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6LcRmT8lAAAAAAxFyZNdHHdBQCN-3ImPd9RkKBTI', { action: 'submit' }).then(function (token) {
+                    console.log(token)
+                    $("#hdnTocken").val(token);
+                });
+            });
+        }
+
+        setInterval(getToken(), 115000);
+
         $(document).ready(function () {
+
+            getToken();
 
             $("#btncreateNew").click(function () {
                  var session = '@Session["ProspectID"]';
@@ -131,10 +148,10 @@
                     if (confirm("You have an active Application Open. To close other session and continue here click ok.") == true) {
                         //window.location = '@Url.Action("LogOut", "Lead")';
                         //return false;
-                        window.location = '@Url.Action("Index", "Lead")?'+queryString;
+                        window.location = '@Url.Action("Verify", "Lead")?'+queryString;
                     } else { return false; }
                    } else {
-                       window.location = '@Url.Action("Index", "Lead")?'+queryString;
+                       window.location = '@Url.Action("Verify", "Lead")?'+queryString;
                 }
 
             });
@@ -199,7 +216,13 @@
                         $(".loading-icon").addClass("hide");
                         $(".button").attr("disabled", false);
                         $(".btn-txt").text("@ApplyNew.Resources.Resource.Retrieve_Application");
-                        $("#myAlert").html('<div class="alert alert-danger">We couldnt find out the data you are looking for in our Database.Please Reassure you type in the relevent data.</div>');
+                        if (data.newurl == "token invalid") {
+                            $("#myAlert").html('<div class="alert alert-danger">Invalid Token.</div>');
+                        }
+                        else {
+                            $("#myAlert").html('<div class="alert alert-danger">We couldnt find out the data you are looking for in our Database.Please Reassure you type in the relevent data.</div>');
+                        }
+                        
                     }
                 },
                 error: function (reponse) {

@@ -1,0 +1,182 @@
+﻿@using CaptchaMvc.HtmlHelpers
+@{
+    ViewBag.Title = "Verify";
+}
+<style>
+    .hide {
+        display: none;
+    }
+</style>
+
+@Html.Partial("_ProgressBar", (List<Custom_Profileprogress_Result>)ViewBag.ProfilProgress)
+<div class="container body-content">
+    <fieldset>
+        <legend style="color:#1c3764;font-weight: bold; border-bottom: 1px solid #1c3764;">Email Verification</legend>
+        <br />
+        <div class="card" style="margin:auto;width:50%;padding:20px;">
+            <div class="row mb-4 emailchk">
+                <div class="col col-12">
+                    <label for="Fprogram">
+                        @ApplyNew.Resources.Resource.Email <em>*</em>
+                    </label>
+                    <input type="email" class="form-control form-control-lg" id="emailID" maxlength="60" required />
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please provide a valid email.
+                    </div>
+                </div>
+                <div class="col col-12 my-2">
+                    <button class="btn btn-danger" id="btn_emailverify">Verify Email</button>
+                </div>
+            </div>
+
+            <div class="row mb-4 hide" id="authOTP">
+                <div class="col col-12">
+                    <label for="Fprogram">
+                        Enter Your OTP <em>*</em>
+                    </label>
+                    <input type="text" class="form-control form-control-lg" id="Otp" maxlength="5" required />
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please provide a valid email.
+                    </div>
+                </div>
+                <div class="col col-12 my-2">
+                    <button class="btn btn-danger" id="btn_authotp">Authenticate OTP</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="text-center">
+                    <img class="email-check-ld hide" src="~/Content/Images/LoadingN.gif" style="width:25%;" alt="Loading img" />
+                </div>
+
+                <div class="col-12 text-center" id="emailrs">
+                    <p></p>
+
+                </div>
+
+            </div>
+            <input type="hidden" id="hdnTocken" />
+        </div>
+    </fieldset>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcRmT8lAAAAAAxFyZNdHHdBQCN-3ImPd9RkKBTI"></script>
+    <script type="text/javascript">
+        //grecaptcha.ready(function () {
+        //    grecaptcha.execute('reCAPTCHA_site_key', { action: 'submit' }).then(function (token) {
+        //        console.log(token)
+        //    });
+        //});
+
+        function getToken() {
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6LcRmT8lAAAAAAxFyZNdHHdBQCN-3ImPd9RkKBTI', { action: 'submit' }).then(function (token) {
+                    console.log(token)
+                    $("#hdnTocken").val(token);
+                });
+            });
+        }
+
+        setInterval(getToken(), 115000);
+
+        $(document).ready(function () {
+
+            getToken();
+
+            $("#btn_emailverify").click(function () {
+                if ($("#emailID").val() == "") {
+                    alert("Please enter a valid e-mail before proceed!");
+                    return false;
+                }
+                var Emailid = $("#emailID").val();
+                var Token = $("#hdnTocken").val();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GenerateOTP", "Lead")',
+                    data: "{ emailID: '" + Emailid + "', token: '" + Token + "' }",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r) {
+                        var dt = r.result;
+                        if (dt) {
+                            $('#btn_emailverify').addClass('hide');
+                            $('.email-check-ld').addClass('hide');
+                            $('#authOTP').removeClass('hide');
+                            $('#emailrs').find('h5').remove();
+                            $('#emailrs').find('p').remove();
+                        }
+                        else {
+                            $('.email-check-ld').addClass('hide');
+                            $('#emailrs').find('h5').remove();
+                            $('#emailrs').find('p').remove();
+                            if (r.prospectid == "Invalid") {
+                                $("#emailrs").append("<h5 style='color:red;font-weight:bold;'></h5><p style='color:red;font-weight:bold;'>Invalid Token.</p>");
+                            } else if (r.prospectid == "Otplimit") {
+                                $("#emailrs").append("<h5 style='color:red;font-weight:bold;'></h5><p style='color:red;font-weight:bold;'>Otp Generation process exceeded the limit. Please try after 15 minutes.</p>");
+                            }
+                            else {
+                                $("#emailrs").append("<h5 style='color:red;font-weight:bold;'>An open application already exists with this email address.</h5><p style='color:red;font-weight:bold;'>An email has been sent to your email address with instructions on how to continue your existing application.</p>");
+                            }
+
+                        }
+                    }
+                });
+             });
+
+            $("#btn_authotp").click(function () {
+                if ($("#Otp").val() == "") {
+                        alert("Please enter an Otp!");
+                        return false;
+                }
+                var Emailid = $("#emailID").val();
+                //var Token = $("#hdnTocken").val();
+                    var queryString = "@ViewBag.utms";
+                     $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("AuthenticateOTP", "Lead")',
+                         data: "{ otp: '" + $("#Otp").val() + "', email: '" + Emailid + "' }",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (r) {
+                            var dt = r.result;
+                            var errMessage = r.errMsg
+                            if (dt){
+                                if (errMessage == "OtpExpired") {
+                                    $('.email-check-ld').addClass('hide');
+                                    $('#authOTP').removeClass('hide');
+                                    $('#emailrs').find('h5').remove();
+                                    $('#emailrs').find('p').remove();
+                                    $('#emailrs').find('div').remove();
+                                    $("#emailrs").append("<h5 style='color:red;font-weight:bold;'>Your OTP is expired. </h5><p style='color:red;font-weight:bold;'>Please press the below button to resend an otp.</p><div><button class='btn btn-danger' id='btn_emailverify'>Send New Otp</button></div>");
+                                }
+                                else {
+                                    window.location = '@Url.Action("Index", "Lead")?' + queryString;
+                                }
+                            }
+                            else {
+                                $('.email-check-ld').addClass('hide');
+                                $('#emailrs').find('h5').remove();
+                                $('#emailrs').find('p').remove();
+                                $('#emailrs').find('div').remove();
+                                //if (errMessage == "Invalid") {
+                                   // $("#emailrs").append("<h5 style='color:red;font-weight:bold;'></h5><p style='color:red;font-weight:bold;'>Invalid Token.</p>");
+                                //} else {
+                                $("#emailrs").append("<h5 style='color:red;font-weight:bold;'>Entered OTP is Wrong.</h5><p style='color:red;font-weight:bold;'>Please press the below button to resend an otp.</p><div><button class='btn btn-danger' id='btn_emailverify'>Send New Otp</button></div>");
+                                //}
+                            }
+                        }
+                    });
+
+            });
+
+        });
+    </script>
+
+}

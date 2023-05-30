@@ -194,10 +194,13 @@
     <Compile Include="Models\CTGamedevelopment.cs" />
     <Compile Include="Models\Docsaved.cs" />
     <Compile Include="Models\Education.cs" />
+    <Compile Include="Models\EmailConfig.cs" />
     <Compile Include="Models\Employer.cs" />
+    <Compile Include="Models\GoogleCaptchaService.cs" />
     <Compile Include="Models\Guardian.cs" />
     <Compile Include="Models\HighSchoolDetails.cs" />
     <Compile Include="Models\HomeAddress.cs" />
+    <Compile Include="Models\OnlineApp_Otp.cs" />
     <Compile Include="Models\Optional.cs" />
     <Compile Include="Models\PaymentParameters.cs" />
     <Compile Include="Models\PayReceipt.cs" />
@@ -802,6 +805,7 @@
     <Content Include="Views\Shared\_LayoutExternal.cshtml" />
     <Content Include="Views\OnlinePayment\Binancesuccessrequest.cshtml" />
     <Content Include="Views\OnlinePayment\Binancecancelrequest.cshtml" />
+    <Content Include="Views\Lead\Verify.cshtml" />
     <None Include="Web References\SFservicesamp\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

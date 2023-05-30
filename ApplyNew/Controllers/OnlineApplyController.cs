@@ -1,11 +1,13 @@
 ﻿using ApplyNew.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -18,7 +20,7 @@ namespace ApplyNew.Controllers
         DataSet ds = new DataSet();
         RemotePost Postdata = new RemotePost();        
         private CultureInfo cultureInfo;
-
+        GoogleCaptchaService gcs = new GoogleCaptchaService();
         // GET: OnlineApply
         public ActionResult Index(string language)
         {
@@ -61,13 +63,22 @@ namespace ApplyNew.Controllers
             }
             ViewBag.utms = qs;
             ACContactFIelds AC = new ACContactFIelds();
-            AC.ScriptToWriteInCRM();
+            //AC.ScriptToWriteInCRM();
             return View();
         }
 
         [HttpPost]
-        public ActionResult Index(FormCollection fm)
+        public async Task<ActionResult> Index(FormCollection fm)
         {
+
+            var token = fm["hdnTocken"].ToString();
+
+            var isValid = await gcs.VerifyToken(token);
+            if (!isValid)
+            {
+               return Json(new { Success = false, newurl = "token invalid" }, JsonRequestBehavior.AllowGet);
+            }
+
             //System.Threading.Thread.Sleep(5000*2);
             bool Status = true;
             string Origin = string.Empty;

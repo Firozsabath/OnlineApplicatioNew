@@ -37,13 +37,15 @@ namespace ApplyNew.Controllers
         ActiveCampaignSF ActiveCampaign = new ActiveCampaignSF();
         ACContactFIelds AC = new ACContactFIelds();
         RemotePost Postdata = new RemotePost();
+        EmailConfig emailConfig = new EmailConfig();
+        GoogleCaptchaService gcs = new GoogleCaptchaService();
         // GET: Lead
         public ActionResult Index(string language)
         {
             //var res = AC.FormFields();
             // var ct = AC.ScriptformissingApplicationtoAC();
             Session["ProspectID"] = null;
-            Session["EmailID"] = null;
+            //Session["EmailID"] = null;
             Session["Camsinserted"] = true;
             Session["SFinserted"] = true;
 
@@ -138,6 +140,12 @@ namespace ApplyNew.Controllers
             List<Custom_Profileprogress_Result> ProfileProgress = Progress.Custom_Profileprogress(prospectid.ToString()).ToList();
             accountdata data = new accountdata();
 
+            if(Session["EmailID"] != null)
+            {
+                data.Email = Session["EmailID"].ToString();
+                data.verifyEmail = Session["EmailID"].ToString();
+            }
+
             var viewmodel = new LeadViewModel
             {
                 Programex = Program,
@@ -159,24 +167,24 @@ namespace ApplyNew.Controllers
             string URL = string.Empty;
             //if (this.IsCaptchaValid("Captcha is not valid"))
             //{
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                string camsresult = CamsDataInsert(Data, fm, "Update");
+                var ACresponse = OraclePost(Data, fm);
+                //string camsresult = "success";
+                string SaveType = fm["hdnSaveandExit"].ToString();
+                if (camsresult == "success")
                 {
-                    string camsresult = CamsDataInsert(Data, fm, "Update");
-                    var ACresponse = OraclePost(Data, fm);
-                    //string camsresult = "success";
-                    string SaveType = fm["hdnSaveandExit"].ToString();
-                    if (camsresult == "success")
-                    {
-                        Status = true;
-                        ViewBag.Result = "success";
-                        if (SaveType == "SaveandExit")
-                            URL = Url.Action("SaveAndExit", "Lead");
-                        else
-                            URL = Url.Action("EducationDoc", "EducationandDocuments");
-                    }
+                    Status = true;
+                    ViewBag.Result = "success";
+                    if (SaveType == "SaveandExit")
+                        URL = Url.Action("SaveAndExit", "Lead");
                     else
-                        Status = false;
+                        URL = Url.Action("EducationDoc", "EducationandDocuments");
                 }
+                else
+                    Status = false;
+            }
             //}
             //else
             //{                
@@ -184,6 +192,17 @@ namespace ApplyNew.Controllers
             //}
             return Json(new { Success = Status, Captcha = Cstatus, newurl = URL }, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Verify()
+        {
+            List<Custom_Profileprogress_Result> ProfileProgress = Progress.Custom_Profileprogress(prospectid.ToString()).ToList();
+            string qs = Request.ServerVariables["QUERY_STRING"];
+            ViewBag.utms = qs;
+            ViewBag.ProfilProgress = ProfileProgress;
+            return View();
+        }
+
+
         [Authorize]
         public ActionResult SaveAndExit(string language)
         {
@@ -238,7 +257,8 @@ namespace ApplyNew.Controllers
                 prospectid = Convert.ToInt32(Session["ProspectID"].ToString());
                 ViewBag.hdnprospectid = prospectid;
             }
-            else {
+            else
+            {
                 return RedirectToAction("Index", "OnlineApply", new { language = "en-US" });
             }
 
@@ -457,7 +477,7 @@ namespace ApplyNew.Controllers
                         cmd.Parameters.Add(new SqlParameter("@source", SqlDbType.VarChar)).Value = sourcetext;
                         cmd.Parameters.Add(new SqlParameter("@program", SqlDbType.VarChar)).Value = program;
                         cmd.Parameters.Add(new SqlParameter("@eventid", SqlDbType.VarChar)).Value = source;
-                        cmd.Parameters.Add(new SqlParameter("@phone1", SqlDbType.VarChar)).Value = "+"+fm["hdnPhone1"].ToString();
+                        cmd.Parameters.Add(new SqlParameter("@phone1", SqlDbType.VarChar)).Value = "+" + fm["hdnPhone1"].ToString();
                         cmd.Parameters.Add(new SqlParameter("@phone2", SqlDbType.VarChar)).Value = Data.Datalist.phone2 == null ? string.Empty : Data.Datalist.phone2;
                         cmd.Parameters.Add(new SqlParameter("@email1", SqlDbType.VarChar)).Value = Data.Datalist.Email;
                         cmd.Parameters.Add(new SqlParameter("@prospectid", SqlDbType.Int)).Value = prospectid;
@@ -476,7 +496,7 @@ namespace ApplyNew.Controllers
                         output = "success";
                         Session["Camsinserted"] = false;
                         Session["ProspectID"] = prospectid;
-                        Session["EmailID"] = Data.Datalist.Email;                        
+                        Session["EmailID"] = Data.Datalist.Email;
 
                         if (prospectType == "NewID")
                         {
@@ -491,9 +511,9 @@ namespace ApplyNew.Controllers
                             //    var filename = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\" + "log\\" + "logErrors.txt";
                             //    var sw = new System.IO.StreamWriter(filename, true);
                             //    sw.WriteLine(DateTime.Now.ToString() + " " + recepient + " " + Subject + " ");                                
-                                                             
+
                             //    var emstatus = External.SendEmail(recepient, Subject, Data.Datalist.Firstname, prospectid.ToString(), password, "", "");
-                               
+
                             //    sw.WriteLine(DateTime.Now.ToString() + " " + recepient + " " + Subject+" " + emstatus);
                             //    sw.Close();
                             //}
@@ -536,7 +556,101 @@ namespace ApplyNew.Controllers
             return Json(Colleges, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Checkprospectbyemail(string Emailid, string Termid)
+        public async Task<JsonResult> GenerateOTP(string emailID, string token)
+        {
+            var isValid = await gcs.VerifyToken(token);
+            if (isValid)
+            {
+                if (!AC.isOtpLocked(emailID)) {
+                    string returndata = string.Empty;
+                    string result = string.Empty;
+                    var emailIDExists = Checkprospectbyemail(emailID, "");
+                    if (string.IsNullOrEmpty(emailIDExists))
+                    {
+                        var otp = AC.OTPGeneration();
+                        var emailBody = emailConfig.CreatebodyforOTP(otp);
+                        var emailSend = emailConfig.SendEmail_new(emailID, "OTP for Admissions", emailBody);
+                        //var emailSend = emailConfig.SendEmail_new("firoz.sabath@cud.ac.ae", "OTP for Admissions", emailBody);
+                        //var emailSend = true;
+                        if (emailSend)
+                        {
+                            OnlineApp_Otp OtpData = new OnlineApp_Otp
+                            {
+                                Email = emailID,
+                                OTP = Convert.ToInt32(otp),
+                                SendDate = DateTime.Now,
+                                Verified = false,
+                            };
+
+                            AC.ManipulateOtpLog(OtpData, "Insert");
+                        }
+                        return Json(new { result = true, prospectid = "" }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(new { result = false, prospectid = emailIDExists }, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                {
+                    return Json(new { result = false, prospectid = "Otplimit" }, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            else
+            {
+                return Json(new { result = false, prospectid = "Invalid" }, JsonRequestBehavior.AllowGet);
+            }          
+
+        }       
+
+        public JsonResult AuthenticateOTP(string otp, string email, string token)
+        {
+            //var isValid = await gcs.VerifyToken(token);
+            //if (isValid)
+            //{
+                int receivedOTP = Convert.ToInt32(otp);
+                bool result = false;
+                string erroMessage = string.Empty;
+                string[] optDetails = AC.RetrieveOTP(otp, email);
+                int generatedOTP = Convert.ToInt32(optDetails[0]);
+                var genretedTime = Convert.ToDateTime(optDetails[1]);
+
+                if (!String.IsNullOrEmpty(optDetails[0]))
+                {
+                    if (DateTime.UtcNow > genretedTime.AddMinutes(15))
+                    {
+                        result = true;
+                        erroMessage = "OtpExpired";
+                    }
+                    else if (receivedOTP == generatedOTP)
+                    {
+                        result = true;
+                        OnlineApp_Otp OtpData = new OnlineApp_Otp
+                        {
+                            Email = email,
+                            OTP = Convert.ToInt32(otp),
+                            VerifyDate = DateTime.Now
+                        };
+                        AC.ManipulateOtpLog(OtpData, "Update");
+                        Session["EmailID"] = email;
+                    }
+                }
+                else
+                {
+                    result = false;
+                    erroMessage = "OtpMismatch";
+                }
+                return Json(new { result = result, errMsg = erroMessage }, JsonRequestBehavior.AllowGet);
+           // }
+            //else
+            //{
+            //    return Json(new { result = false, errMsg = "Invalid" }, JsonRequestBehavior.AllowGet);
+            //}
+        }
+
+        //public JsonResult Checkprospectbyemail(string Emailid, string Termid)
+        public string Checkprospectbyemail(string Emailid, string Termid)
         {
             string ProspectID = string.Empty;
             string Email = string.Empty;
@@ -556,16 +670,16 @@ namespace ApplyNew.Controllers
                     FirstName = dshs.Tables[0].Rows[0]["FullName"].ToString();
                 }
 
-                if(!String.IsNullOrEmpty(ProspectID))
+                if (!String.IsNullOrEmpty(ProspectID))
                 {
-                    if(!Postdata.prospectApplicationstatus(ProspectID))
-                    {                        
+                    if (!Postdata.prospectApplicationstatus(ProspectID))
+                    {
                         //string s = Server.UrlEncode("1254654");
                         string encryptEmail = Postdata.Encode(Email);
-                        string encryptprospectid = Postdata.Encode(ProspectID);                       
+                        string encryptprospectid = Postdata.Encode(ProspectID);
                         string encryptIncomsource = Postdata.Encode("EmailFromExisting");
                         string Url = "https://cudportal.cud.ac.ae/apply/en-US/Lead/LeadUpdate?Incoming_source=" + encryptIncomsource + "&v=" + encryptprospectid + "&x=" + encryptEmail;
-                        
+
                         External.SendEmailRecovery(Email, "Welcome to CUD", FirstName, prospectid.ToString(), Url);
                     }
                     else
@@ -575,7 +689,8 @@ namespace ApplyNew.Controllers
                 }
 
             }
-            return Json(ProspectID, JsonRequestBehavior.AllowGet);
+            //return Json(ProspectID, JsonRequestBehavior.AllowGet);
+            return ProspectID;
         }
 
         public string Passwordformation(string em, string ph)
@@ -592,7 +707,7 @@ namespace ApplyNew.Controllers
                 string Lead_source = string.Empty;
                 string Marketing_channel = string.Empty;
                 string Communication_channel = string.Empty;
-                string Campaig_name = string.Empty;                
+                string Campaig_name = string.Empty;
                 var mapprogram = AC.GetFieldNameForOracle("Program", fm["selectedprogramID"].ToString()).Trim();
                 var mapTerm = AC.GetFieldNameForOracle("Term", fm["ETerm"].ToString()).Trim();
                 var mapDGtype = AC.GetFieldNameForOracle("DGType", fm["ddlgpatype"].ToString()).Trim();
@@ -600,7 +715,7 @@ namespace ApplyNew.Controllers
                 string qs = fm["hdnqs"].ToString();
                 accountdata acdata = new accountdata();
                 var token = ConfigurationManager.AppSettings["ActiveCampaignToken"];
-                
+
                 if (qs != null && qs != "")
                 {
                     if (!string.IsNullOrWhiteSpace(fm["hdnSource_type"]))
@@ -614,7 +729,7 @@ namespace ApplyNew.Controllers
                     if (!string.IsNullOrWhiteSpace(fm["hdnmedium"]))
                     {
                         Communication_channel = fm["hdnmedium"].ToString();
-                    }                  
+                    }
                     if (!string.IsNullOrWhiteSpace(fm["hdnCampaig_name"]))
                     {
                         Campaig_name = fm["hdnCampaig_name"].ToString();
@@ -627,14 +742,15 @@ namespace ApplyNew.Controllers
 
                 Eloquacontact Contacttoeloqua = new Eloquacontact
                 {
-                    contact = new ACContactsample {
+                    contact = new ACContactsample
+                    {
 
                         ID = AC.RetrieveEloquaID(ProspectID),
                         FirstName = data.Datalist.Firstname,
                         Email = data.Datalist.Email,
                         LastName = data.Datalist.Lastname,
                         Phone = fm["hdnPhone1"].ToString(),
-                        Program = mapprogram,                       
+                        Program = mapprogram,
                         Enrollement_Term = mapTerm,
                         Nationality = fm["selectedcountryname"].ToString(),
                         ProspectID = ProspectID,
@@ -642,7 +758,7 @@ namespace ApplyNew.Controllers
                         Transfer_from_another_institution = fm["ddltransferstatus"].ToString(),
                         Hear_about_us = fm["selectedsource"].ToString(),
                         Date_of_Birth = Convert.ToDateTime(data.Datalist.Birdthdate).ToString("MM/dd/yyyy"),
-                        Gender = fm["hdngender"].ToString(),                        
+                        Gender = fm["hdngender"].ToString(),
                         I_am_applying_for = mapDGtype,
                         Application_Status = "~Step 3",
                         Utm_Campaign_Name = Campaig_name,
@@ -651,7 +767,7 @@ namespace ApplyNew.Controllers
                         Online_Application = "Yes",
                         AgentOrganization = AC.RetrieveAgentName(data.Datalist.AgentCode)
                     },
-                    
+
                 };
 
                 string responseCode = string.Empty;
@@ -660,9 +776,9 @@ namespace ApplyNew.Controllers
                     using (var httpClient = new HttpClient())
                     {
                         string sampleeloqua = JsonConvert.SerializeObject(Contacttoeloqua).ToString();
-                        string eloquaInsert = AC.HttpPost("https://cudint-fryxusjfwk20-fr.integration.ocp.oraclecloud.com:443/ic/api/integration/v1/flows/rest/SYNCHONLINEDATATOELOQUA/2.0/student", sampleeloqua, "first");                        
-                        string eloquaInsertAC = AC.HttpPost("https://cudint-fryxusjfwk20-fr.integration.ocp.oraclecloud.com/ic/api/integration/v1/flows/rest/SYNCHONLINEDATATOACTIVECAMPAIGN/1.0/student", sampleeloqua, "first");                       
-                                                
+                        string eloquaInsert = AC.HttpPost("https://cudint-fryxusjfwk20-fr.integration.ocp.oraclecloud.com:443/ic/api/integration/v1/flows/rest/SYNCHONLINEDATATOELOQUA/2.0/student", sampleeloqua, "first");
+                        string eloquaInsertAC = AC.HttpPost("https://cudint-fryxusjfwk20-fr.integration.ocp.oraclecloud.com/ic/api/integration/v1/flows/rest/SYNCHONLINEDATATOACTIVECAMPAIGN/1.0/student", sampleeloqua, "first");
+
                         if (!String.IsNullOrWhiteSpace(eloquaInsert) && eloquaInsert != "")
                         {
                             var eloquaResponse = JsonConvert.DeserializeObject<JObject>(eloquaInsert);
@@ -694,7 +810,7 @@ namespace ApplyNew.Controllers
                 sw.Close();
                 throw;
             }
-        }      
+        }
 
         //[HttpPost]
 

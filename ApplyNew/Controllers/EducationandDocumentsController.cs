@@ -547,7 +547,6 @@ namespace ApplyNew.Controllers
                         flag = false;
                         responseMessage = "Upload Failed with error: " + ex.Message;
                     }
-
                 }
                 else
                 {

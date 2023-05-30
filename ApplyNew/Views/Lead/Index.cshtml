@@ -69,7 +69,7 @@
                                 <label for="Fprogram">
                                     @ApplyNew.Resources.Resource.Email <em>*</em>
                                 </label>
-                                @Html.TextBoxFor(x => x.Datalist.Email, new { type = "email", id = "Email", @class = "form-control form-control-lg", required = "required" })
+                                @Html.TextBoxFor(x => x.Datalist.Email, new { type = "email", id = "Email", @class = "form-control form-control-lg", required = "required", @readonly = "readonly" })
                                 <div class="valid-feedback">
                                     Looks good!
                                 </div>
@@ -82,13 +82,13 @@
                                 <label for="Email1">
                                     @ApplyNew.Resources.Resource.vemail <em>*</em>
                                 </label>
-                                @Html.TextBoxFor(x => x.Datalist.verifyEmail, new { type = "email", id = "Email1", @class = "form-control form-control-lg", required = "required" })
+                                @Html.TextBoxFor(x => x.Datalist.verifyEmail, new { type = "email", id = "Email1", @class = "form-control form-control-lg", required = "required", @readonly = "readonly" })
                                 @Html.ValidationMessageFor(model => model.Datalist.verifyEmail, "", new { @style = "color:red;" })
                                 <div class="valid-feedback">
                                     Looks good!
                                 </div>
                             </div>
-                            <div class="col-12 emailchk my-2">
+                            <div class="col-12 emailchk hide my-2">
                                 <button class="btn btn-danger" id="btn_emailcheck">Continue</button>
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                             <div class="col-lg-12 col-md-10 col-sm-12 text-center" id="emailrs"><p></p></div>
                         </div>
 
-                        <div class="hide prsnldetailsdiv">
+                        <div class="prsnldetailsdiv">
                             <div class="row mb-4">
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <label for="Fprogram">
@@ -111,7 +111,7 @@
                                         <option value="">@ApplyNew.Resources.Resource.ApplicantType</option>
                                         <option value="3"> @ApplyNew.Resources.Resource.Bachelors</option>
                                         <option value="1"> @ApplyNew.Resources.Resource.Masters</option>
-                                        <!--<option value="11">Short courses</option>-->
+                                        <option value="11">Short courses (Non Credited)</option>
                                     </select>
                                     <div class="valid-feedback">
                                         Looks good!
@@ -659,7 +659,7 @@
 
         function ShowagentField(status) {
             if (status == "Yes") {
-                $("#AgentCode").attr("required",true);
+                $("#AgentCode").attr("required", true);
                 $(".agentcodediv").show();
             }
             else {

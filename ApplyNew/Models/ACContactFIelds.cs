@@ -357,6 +357,92 @@ namespace ApplyNew.Models
             return true;
         }
 
+        public string OTPGeneration()
+        {
+            Random rnd = new Random();
+            var str = (rnd.Next(10000,99999)).ToString();
+            return str;
+        }
+
+        public string[] RetrieveOTP(string otp, string email)
+        {
+            string sqlQry = string.Empty;
+            string[] generatedOtp = new string[2];
+            using (SqlConnection con = new SqlConnection(connectionstringex))
+            {
+                con.Open();               
+                DataSet ds = new DataSet();
+                sqlQry = "select * from OnlineApp_Otp where  Email = '" +email + "' and OTP = '" + otp + "'";
+                SqlCommand sqlcmd = new SqlCommand(sqlQry,con);
+                sqlcmd.CommandType = CommandType.Text;
+                SqlDataAdapter sqladapeter = new SqlDataAdapter(sqlcmd);
+                sqladapeter.Fill(ds);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    generatedOtp[0] = ds.Tables[0].Rows[0]["OTP"].ToString();
+                    generatedOtp[1] = ds.Tables[0].Rows[0]["SendDate"].ToString();
+                }
+            }
+            return generatedOtp;
+        }
+
+        public bool isOtpLocked(string email)
+        {
+            bool islocked = false;
+
+            using (SqlConnection sqlcon = new SqlConnection(connectionstringex))
+            {
+                DataSet dshs = new DataSet();
+                string SqlQuery = "select COUNT(*) as otpcount from OnlineApp_Otp where SendDate >= DATEADD(MI,-15,GETDATE()) and Email = '" + email + "' ";
+                SqlCommand cmd = new SqlCommand(SqlQuery, sqlcon);
+                SqlDataAdapter sqldata = new SqlDataAdapter(cmd);
+                sqldata.Fill(dshs);
+                for (int i = 0; i < dshs.Tables[0].Rows.Count; i++)
+                {
+                    var recordCount = Convert.ToInt16(dshs.Tables[0].Rows[i]["otpcount"].ToString());
+
+                    if (recordCount > 3) return islocked = true;
+                }
+
+            }
+
+            return islocked;
+
+        }
+
+
+        public bool ManipulateOtpLog(OnlineApp_Otp data, string type)
+        {
+            using (SqlConnection sqlcon = new SqlConnection(connectionstringex))
+            {
+                sqlcon.Open();
+                string sqry = string.Empty;
+                if (type == "Insert")
+                    sqry = "insert into OnlineApp_Otp(Email,OTP,SendDate,Verified) values('"+data.Email+"','"+data.OTP+"','"+data.SendDate+"',0)";
+                else if(type == "Update")
+                    sqry = "update OnlineApp_Otp set Verified = 1, VerifyDate = '" + data.VerifyDate + "' where Email = '" + data.Email + "' and OTP = '" + data.OTP + "'";
+
+                SqlCommand cmd1 = new SqlCommand(sqry, sqlcon);
+                try
+                {
+                    cmd1.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    var filename = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\" + "log\\" + "logErrors.txt";
+                    var sw = new System.IO.StreamWriter(filename, true);
+                    sw.WriteLine(DateTime.Now.ToString() + " " + ex.Message + " " + ex.InnerException);
+                    sw.Close();
+                    return false;
+                }
+                finally
+                {
+                    sqlcon.Close();
+                }
+            }            
+        }
+
         //public string ScriptformissingApplicationtoAC()
         //{
         //    ActiveCampaignSF ActiveCampaign = new ActiveCampaignSF();

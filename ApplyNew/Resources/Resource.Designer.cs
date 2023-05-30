@@ -241,7 +241,7 @@ namespace ApplyNew.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Continue to make Payment.
+        ///   Looks up a localized string similar to Pay by card.
         /// </summary>
         public static string Continue_to_make_Payment {
             get {
